@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Patrick Flynn's Website | Projects</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="Patrick Flynn" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/contact-me.html">Contact Me</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
+                <li><a href="/blog_index.html">Blog</a></li>
+                <li><a href="/categories">Categories</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="/">Patrick Flynn's Website</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">
+            <div class="page">
+                <h1>Projects</h1>
+                <p>I do most of my learning through interesting side projects. Some of them are only that, but a few have grown up to become useful tools (to me at least...). This is not an all-inclusive list, these are just my best and favorite projects.</p>
+<h2>Dash</h2>
+<p>Dash is a compiler and programming language. The language is a descedent of my Quik language. I actually considered keeping that name because I like it so much, but it was starting to get over used.</p>
+<p>The compiler is written completely in Rust, and only uses the standard library. Currently, it only supports the x86-64 architecture, but it is ready for other architectures. At the time of writing (December 2020), I'm porting another project, a custom assembler, to it. There's also a very, very experimental LLVM backend.</p>
+<p>Here's a screenshot of the language:</p>
+<p><img alt="Photo" src="/pages/images/dash.png"></p>
+<h2>AS</h2>
+<p>A simple assembler for the x86-64 architecture. It is capable of generating relocatable ELF objects, which can be linked (using the system linker) as an executable or a library. You can also link it to other libraries, including the C library. It supports a number of instructions and uses the Intel syntax (the AT&amp;T syntax is a horror).</p>
+<p>The primary purpose (other than being a great learning experience) is to be the assembler for my Dash compiler.</p>
+<h2>Quik</h2>
+<p>This was my original programming language and compiler. There are- yes- three versions on Github. The oldest was actually an interpreter; it was my first major language tool. The second was my first attempt at an actual compiler. The third was also a compiler. The different between the two compilers is the third was done relatively more correctly; it had an abstract syntax tree and an intermediate layer for generating assembly. The original compiler used a rough AST and went straight to 32-bit assembly code.</p>
+<p>I'm proud of these projects, even though they represent a different time and place.</p>
+<h2>Extcc</h2>
+<p>This was fork of Quik 3 that I briefly worked on. Its honestly a mess, and I don't touch it anymore. Extcc was meant to be an easy-to-extend C compiler. I will say though, I am happy with how far it did get.</p>
+<h2>Javac</h2>
+<p>Despite its name, its not an actual Java compiler. This was a fun learning experiment to generate JVM-compatible code. This was one of my favorite projects just because it was so thrilling when I finally got it to work. And yes, it has awful code. I wrote this before I learned you can serialize structures and output them straight to binary.</p>
+<p>I will eventually have to do another JVM-related project...</p>
+<h2>QuikVM</h2>
+<p>There are actually two QuikVMs- one written in C++, and the other written in Haskell. These were my first attempts at writing application-level virtual machines- kind of like the Java VM.</p>
+<h2>CppEditor</h2>
+<p>My personal text and code editor. Okay, actually it is on and off depending on the distro I'm using. I started this project back in either 2016 or 2017- I think early 2017. Originally, it was a learning experience and a fun project. I ended up going down the feature-creep path, so in 2018, I forked it and cleaned up a lot of crap out of it. I also ended up changing the license, which is why the Git history and the license only goes back to 2018. Over this past summer, I began working on it again so I could have a text editor like the old Gedit I could use anywhere.</p>
+<p>Here's an older screenshot. Actually, its really not much different now. The only thing you can't see is the explorer panel to the side:
+<img alt="Photo" src="/pages/images/cppeditor.png"></p>
+<h2>CppSheets</h2>
+<p>This honestly is one of my favorite projects of all time. Its my spreadsheet program which I worked on and off for over a year. Some of the features:</p>
+<ul>
+<li>Multi-document interface, with multiple pages per workbook   </li>
+<li>Cell and text formatting   </li>
+<li>Custom file format and basic MS Excel (xlsx) support   </li>
+<li>Excel-like formulas</li>
+<li>Basic graphing</li>
+</ul>
+<p>Here's a screenshot:
+<img alt="Photo" src="/pages/images/CppSheets_linux.png"></p>
+<h2>CppExplorer</h2>
+<p>For some reason- and I do not know why- in terms of views and stars, this is my most popular project, even though I haven't worked on it in two years. This is a Linux file explorer; its very similar to modern file explorers you find on Linux. It has a side pane with places and mounted drives, icon and list views, tabs, and a lot more. This was a really fun project back in the day.</p>
+<p>Here's a screenshot:
+<img alt="Photo" src="/pages/images/cppexplorer_base.png"></p>
+<h2>CppMediaPlayer</h2>
+<p>Another personal program of mine; I use this on and off depending on the distribution. This is a simple video/music player.</p>
+<p><img alt="Photo" src="/pages/images/cppmediaplayer.png"></p>
+<h2>Notepad</h2>
+<p>A simple, ad-free Android notepad. I wrote this a few days after I got my Android smartphone a few years back, and I've been using it ever since.</p>
+<p><img alt="Photo" src="/pages/images/notepad.jpg"></p>
+<h2>Other</h2>
+<p>There's a lot of other stuff, both on Github and unpublished. Some of the other things I've written are:</p>
+<ul>
+<li>A simple HTTP web server</li>
+<li>A graphical backup program</li>
+<li>A simple web browser (uses the Qt webengine)</li>
+<li>A Linux log file viewer</li>
+<li>A PyQt text editor</li>
+<li>A cparser written in Ada</li>
+<li>A few smaller compilers</li>
+</ul>
+            </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-G-5NP3VXCK9F-Y");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
+</html>
