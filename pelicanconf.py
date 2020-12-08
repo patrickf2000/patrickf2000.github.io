@@ -37,7 +37,6 @@ MENU_INTERNAL_PAGES = (
 # additional menu items
 MENUITEMS = (
     ('GitHub', 'https://github.com/patrickf2000'),
-    ('LinkedIn', 'https://www.linkedin.com/in/patrick-flynn4664/'),
 )
 
 FEED_ALL_ATOM = None

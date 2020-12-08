@@ -5,10 +5,6 @@ status: hidden
 
 Hello, I am Patrick Flynn; I am a computer science student at the University of North Carolina Charlotte. I am interested in compilers, programming languages, computer architecture, and high-performance computing.
 
-**Email**: pflynn5@uncc.edu   
-**LinkedIn**: patrick-flynn-4664 (link above)   
-**Github**: @patrickf2000 (link above)   
-
 ### Experience
 
 * *Research Assistant- UNC Charlotte*. Fall 2019-Present. Work includes writing a transformation for vectorizing loops on the AST level in the Rex OpenMP compiler; general help with Rex development; benchmarking the Intel AVX and Arm SVE extensions again different compilers using auto-vectorization techniques, vendor intrinsics, and assembly.
