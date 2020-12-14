@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Patrick Flynn's Website | Lila Compiler Development</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="Patrick Flynn" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/contact-me.html">Contact Me</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
+                <li><a href="/blog_index.html">Blog</a></li>
+                <li><a href="/categories">Categories</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="/">Patrick Flynn's Website</a></h1>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">
+            <div class="page">
+                <h1>Lila Compiler Development</h1>
+                <p>The development logs for my Lila compiler and language.</p>
+<h3>12/13/2020</h3>
+<p>Not much today. I started on a very rough draft for a standard library.</p>
+<p>Basically, here's the idea. Originally, I was going to make a standard library a more or less optional thing- my idea wasn't to confine the language to a standard other than the language itself. I'm thinking I may change my stance on that. Programming will become a <em>nightmare</em> if the user has to deal with different APIs on every platform, or even the same platform if they want to use the C library vs the Lila library. My solution to that is create a set of standards that any Lila program can use. To the program itself, it won't matter what library, API, or platform they are on; the user can compile and link however they want. In the case of the C library, the function calls will be to equivalent C functions. Maybe eventually I can implement inlining to eliminate function call overheads. Or maybe explicit inlining- that's an idea. Otherwise, the calls may be pure Lila functions, or even something else.</p>
+<p>This week is the last week of school, so I'm not sure how much time I'll have to develop this. But I'll post if I do either decide on something or do it.</p>
+<h3>12/12/2020</h3>
+<p>Originally, this project was named "Dash". A friend came up with the name, and I really really like it, but I decided to change it for a few reasons. First, I think I tried releasing it too early. Its pretty complete, and can do a few non-trival things, but I should not have posted on it as early as I did. That said, I am glad that I made it open source when I did. The second reason is that I'm thinking about some non-trivial syntax changes (mainly inspired by Pascal and Ada), so if I change it enough, it really needs to be something different. The final reason kind of builds onto the second. The name Dash is somewhat similar to Quik, which is partly why I went with it. However, I feel like it gives an impression of something the language is not, and if I change it enough, I won't be similar to Quik.</p>
+<p>I also decided to drop my work with porting it to my custom assembler. That is still a long-term goal, but my current assembler is kind of a mess and not really that stable. I have the base of new one written in Ada in storage so to speak, so when I resume work on that, and if it works out, I will probably port it to that. I also dropped the work because I really wanted to get started with other architectures.</p>
+<p>That said, the work and everything wasn't all wasted. I created two branches for the original Dash stable branch and the last state of the development branch before the rename. I created new development and stable branches and renamed everything. I also updated all the documentation.</p>
+            </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-213498014-7");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
+</html>
