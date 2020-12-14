@@ -3,11 +3,13 @@ status: hidden
 
 I do most of my learning through interesting side projects. Some of them are only that, but a few have grown up to become useful tools (to me at least...). This is not an all-inclusive list, these are just my best and favorite projects.
 
-## Dash
+## Lila
 
-Dash is a compiler and programming language. The language is a descedent of my Quik language. I actually considered keeping that name because I like it so much, but it was starting to get over used.
+Lila is a compiler and programming language. The language is a descedent of my Quik language. I actually considered keeping that name because I like it so much, but it was starting to get over used. Oh well. I really like the name "Lila" too. I actually was going to use something else similar to "Lila", but for certain reasons I couldn't.
 
-The compiler is written completely in Rust, and only uses the standard library. Currently, it only supports the x86-64 architecture, but it is ready for other architectures. At the time of writing (December 2020), I'm porting another project, a custom assembler, to it. There's also a very, very experimental LLVM backend.
+The compiler is written completely in Rust, and only uses the standard library. Currently, it only supports the x86-64 architecture, but it is ready for other architectures. At the time of writing (December 2020), I'm working on standarizing the standard library some and getting ready for different architectures.
+
+I'm going to try to keep a log of development. You can find it [here](lila-log.html).
 
 Here's a screenshot of the language:
 
