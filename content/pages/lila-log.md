@@ -4,6 +4,14 @@ save_as: pages/lila-log.html
 
 The development logs for my Lila compiler and language.
 
+### 12/14/2020
+
+I did manage to squeeze in a few hours later in the day and this evening (I'm still working a little as I write this). I decided to get started on the different CPU architecture ports. I definitely want to target Arm64 and RISC-V and maybe MIPS. I did get some of the initial code working for the Arm64 port; basically, the backend is all set up, and it generate assembly for and compile hello world and a few very simple programs.
+
+I also laid the base for the RISC-V backend and got the Hello World program working. RISC architectures are fairly similar, so I think once I have one in place, adding others will be fairly straightforward. I debated on how to approach doing these backends, and I'm thinking for all the RISC ones at least, I'm going to get all the basic backends in place, then break down the work in sections. So basically, let's say I do a set of operations on Arm; I will get that working, then move on and do the same thing on the other architectures. That way, they will all be more or less at the same pace.
+
+For the curious, I'm using Qemu emulators to do development. My Arm64 emulator actually works quite well; its running Ubuntu 20, which helps with the linking paths. I just started with RISC-V and it seems pretty slow. Hopefully its usable, but at first glance, it took a long to build. Its running Fedora 33.
+
 ### 12/13/2020
 
 Not much today. I started on a very rough draft for a standard library.
