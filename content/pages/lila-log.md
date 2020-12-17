@@ -4,6 +4,22 @@ save_as: pages/lila-log.html
 
 The development logs for my Lila compiler and language.
 
+### 12/16/2020
+
+Yet another big day. I ended up more or less taking the day other than a meeting; its been an exhausting semester. It may sound weird to some, but these projects are actually a really good way for me to deal with burn out.
+
+I got a huge amount of RISC-V work done. All the integer, short, and byte tests now pass. The arrays took the longest to get working; the alignment and stack layout for RISC-V is a little weird. x86 and Arm both start at the top- but not literally, the first variables location in relation to the base pointer is the stack size minus the base pointer (in other words, if your stack is of size 24 and your variable is 4 long, it would start at 20 or 4- 20 if on Arm, 4 if on x86). On RISC-V, this holds true except for 8 byte variables. If the stack starts at 24, the first variable starts at 24. I'm planning on writing some posts on RISC-V, maybe tomorrow.
+
+In the process of doing this work, I spent the majority of the time in the RISC-V emulator. Its a little annoyingly slow, but its not prohibitive. Fortunately, once you get the hang of Rust, you can do a pretty fair amount of work in between compiling and count on everything working. Especially on the LTAC layer where its pretty much just a 1:1 translation between the IR and the final assembly. The pain point is when I have to run the tests. They take about 10 minutes to fully run (at this point, I'm up to like 120 of the 188 or so).
+
+Most of the new code is in the development branch now.
+
+### 12/15/2020
+
+Today was kind of a big day. I got a fair amount of RISC-V work done. Okay, maybe not huge... Very few of the integer tests pass. But still, code generation for all the signed int-32 math and logical operations are now supported. I am excited though; RISC-V is a new architecture for me.
+
+RISC-V is very interesting. In a lot of ways, its similar to Arm, but in some ways its completed different. Arm is like x86 in that it uses the same instructions for all sizes; you just change the registers based on your needs. RISC-V takes the opposite approach; separate instructions for each size, but always the same registers. This actually makes things a little easier in some ways. RISC-V is interesting though when it comes to immediates. I'll write a post on this later.
+
 ### 12/14/2020
 
 I did manage to squeeze in a few hours later in the day and this evening (I'm still working a little as I write this). I decided to get started on the different CPU architecture ports. I definitely want to target Arm64 and RISC-V and maybe MIPS. I did get some of the initial code working for the Arm64 port; basically, the backend is all set up, and it generate assembly for and compile hello world and a few very simple programs.
