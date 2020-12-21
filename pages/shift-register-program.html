@@ -43,81 +43,81 @@
 <p>Finally, even though the delays are small, it will take a long long time to count all the way up to 65536. Be prepared to wait if you want to see the entire loop iteration. I took the picture in the original post before I began writing anything, and it was at 663. Now, its been over half an hour, I've written the post and this page, and its at around 34000. And its used about a quarter of that cell phone battery's charge.</p>
 <p>I wonder how long it would take to do an integer.... :)</p>
 <p>Here's the code:</p>
-<div class="highlight"><pre><span></span><span class="nc">int</span><span class="w"> </span><span class="n">latchPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
-<span class="nc">int</span><span class="w"> </span><span class="n">clockPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
-<span class="nc">int</span><span class="w"> </span><span class="n">dataPin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<div class="highlight"><pre><span></span>int latchPin = 3;
+int clockPin = 4;
+int dataPin = 2;
 
-<span class="n">const</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="n">LENGTH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
+const int LENGTH = 4;
 
-<span class="n">byte</span><span class="w"> </span><span class="n">data_block1</span><span class="o">[</span><span class="n">LENGTH</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
-<span class="n">byte</span><span class="w"> </span><span class="n">data_block2</span><span class="o">[</span><span class="n">LENGTH</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+byte data_block1[LENGTH];
+byte data_block2[LENGTH];
 
-<span class="n">void</span><span class="w"> </span><span class="n">setup</span><span class="p">()</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="k">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"></span>
+void setup() {
+  Serial.begin(9600);
 
-<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">latchPin</span><span class="p">,</span><span class="w"> </span><span class="k">OUTPUT</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">clockPin</span><span class="p">,</span><span class="w"> </span><span class="k">OUTPUT</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">dataPin</span><span class="p">,</span><span class="w"> </span><span class="k">OUTPUT</span><span class="p">);</span><span class="w"></span>
+  pinMode(latchPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  pinMode(dataPin, OUTPUT);
 
-<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">latchPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">clockPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">dataPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+  digitalWrite(latchPin, LOW);
+  digitalWrite(clockPin, LOW);
+  digitalWrite(dataPin, LOW);
 
-<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">Holds</span><span class="w"> </span><span class="k">data</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block1</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block1</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0F</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block1</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block1</span><span class="o">[</span><span class="n">3</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span><span class="w"></span>
+  // Holds data
+  data_block1[0] = 0xFF;
+  data_block1[1] = 0x0F;
+  data_block1[2] = 0xF0;
+  data_block1[3] = 0x00;
 
-<span class="w">  </span><span class="n">data_block2</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block2</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xF0</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block2</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0F</span><span class="p">;</span><span class="w"></span>
-<span class="w">  </span><span class="n">data_block2</span><span class="o">[</span><span class="n">3</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00</span><span class="p">;</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+  data_block2[0] = 0xFF;
+  data_block2[1] = 0xF0;
+  data_block2[2] = 0x0F;
+  data_block2[3] = 0x00;
+}
 
-<span class="n">void</span><span class="w"> </span><span class="n">writeOut</span><span class="p">(</span><span class="n">byte</span><span class="w"> </span><span class="n">shiftData</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">  </span><span class="nc">int</span><span class="w"> </span><span class="n">pinState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+void writeOut(byte shiftData) {
+  int pinState = 0;
 
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nc">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">clockPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+  for (int i = 7; i&gt;=0; i--) {
+    digitalWrite(clockPin, LOW);
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">shiftData</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">pinState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">      </span><span class="n">pinState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="err">}</span><span class="w"></span>
+    if (shiftData &amp; (1 &lt;&lt; i)) {
+      pinState = 1;
+    } else {
+      pinState = 0;
+    }
 
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">dataPin</span><span class="p">,</span><span class="w"> </span><span class="n">pinState</span><span class="p">);</span><span class="w"></span>
+    digitalWrite(dataPin, pinState);
 
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">clockPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">dataPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+    digitalWrite(clockPin, HIGH);
+    digitalWrite(dataPin, LOW);
+  }
+}
 
-<span class="n">void</span><span class="w"> </span><span class="n">loop</span><span class="p">()</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="nc">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">LENGTH</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">latchPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">writeOut</span><span class="p">(</span><span class="n">data_block1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">writeOut</span><span class="p">(</span><span class="n">data_block2</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">latchPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+void loop() {
+  for (int i = 0; i&lt;LENGTH; i++) {
+    digitalWrite(latchPin, LOW);
+    writeOut(data_block1[i]);
+    writeOut(data_block2[i]);
+    digitalWrite(latchPin, HIGH);
 
-<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
+    delay(500);
+  }
 
-<span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span><span class="w"></span>
+  delay(1000);
 
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">short</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="mi">65536</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
-<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">half1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"></span>
-<span class="w">    </span><span class="n">byte</span><span class="w"> </span><span class="n">half2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+  for (short i = 0; i&lt;65536; i++) {
+    byte half1 = i &gt;&gt; 8;
+    byte half2 = i;
 
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">latchPin</span><span class="p">,</span><span class="w"> </span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">writeOut</span><span class="p">(</span><span class="n">half1</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">writeOut</span><span class="p">(</span><span class="n">half2</span><span class="p">);</span><span class="w"></span>
-<span class="w">    </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">latchPin</span><span class="p">,</span><span class="w"> </span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+    digitalWrite(latchPin, LOW);
+    writeOut(half1);
+    writeOut(half2);
+    digitalWrite(latchPin, HIGH);
 
-<span class="w">    </span><span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span><span class="w"></span>
-<span class="w">  </span><span class="err">}</span><span class="w"></span>
-<span class="err">}</span><span class="w"></span>
+    delay(100);
+  }
+}
 </pre></div>
             </div>
 
