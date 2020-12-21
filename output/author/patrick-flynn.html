@@ -154,16 +154,16 @@
 <p>And yes, I do focus on SVE.</p>
 <h3>Getting Started</h3>
 <p>First, you need to install these packages (note: I'm on Linux Mint. If you're not on Linux Mint/Ubuntu/Debian, you may have to change the package names):</p>
-<div class="highlight"><pre><span></span><span class="err">sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils</span>
+<div class="highlight"><pre><span></span>sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils
 </pre></div>
 
 
 <p>Next, create the boot images and the hard drive:</p>
-<div class="highlight"><pre><span></span><span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">zero</span> <span class="k">of</span><span class="o">=</span><span class="n">flash1</span><span class="p">.</span><span class="n">img</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span> <span class="k">count</span><span class="o">=</span><span class="mi">64</span>
-<span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">zero</span> <span class="k">of</span><span class="o">=</span><span class="n">flash0</span><span class="p">.</span><span class="n">img</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span> <span class="k">count</span><span class="o">=</span><span class="mi">64</span>
-<span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">efi</span><span class="o">-</span><span class="n">aarch64</span><span class="o">/</span><span class="n">QEMU_EFI</span><span class="p">.</span><span class="n">fd</span> <span class="k">of</span><span class="o">=</span><span class="n">flash0</span><span class="p">.</span><span class="n">img</span> <span class="n">conv</span><span class="o">=</span><span class="n">notrunc</span>
+<div class="highlight"><pre><span></span>dd if=/dev/zero of=flash1.img bs=1M count=64
+dd if=/dev/zero of=flash0.img bs=1M count=64
+dd if=/usr/share/qemu-efi-aarch64/QEMU_EFI.fd of=flash0.img conv=notrunc
 
-<span class="n">qemu</span><span class="o">-</span><span class="n">img</span> <span class="k">create</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">image</span><span class="p">.</span><span class="n">img</span> <span class="mi">20</span><span class="k">G</span>
+qemu-img create ubuntu-image.img 20G
 </pre></div>
 
 
@@ -172,16 +172,16 @@
 <p>Note that the site in question is an FTP site. If you want a different image, go for it.</p>
 <h3>Install Ubuntu</h3>
 <p>Use this command to start the installation:</p>
-<div class="highlight"><pre><span></span><span class="err">qemu-system-aarch64 \</span>
-<span class="err">    -nographic \</span>
-<span class="err">    -machine virt,gic-version=max \</span>
-<span class="err">    -m 4G \</span>
-<span class="err">    -cpu max \</span>
-<span class="err">    -smp 4 \</span>
-<span class="err">    -netdev user,id=vnet,hostfwd=:127.0.0.1:0-:22 -device virtio-net-pci,netdev=vnet \</span>
-<span class="err">    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \</span>
-<span class="err">    -drive file=mini.iso,if=none,id=drive1,cache=writeback -device virtio-blk,drive=drive1,bootindex=1 \</span>
-<span class="err">    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash </span>
+<div class="highlight"><pre><span></span>qemu-system-aarch64 \
+    -nographic \
+    -machine virt,gic-version=max \
+    -m 4G \
+    -cpu max \
+    -smp 4 \
+    -netdev user,id=vnet,hostfwd=:127.0.0.1:0-:22 -device virtio-net-pci,netdev=vnet \
+    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
+    -drive file=mini.iso,if=none,id=drive1,cache=writeback -device virtio-blk,drive=drive1,bootindex=1 \
+    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
 </pre></div>
 
 
@@ -189,22 +189,22 @@
 <p>Just follow the prompts and instructions to install the system. It's really easy, so I'm not going to walk you through. When you get to the end where it asks about additional software, I would only recommend doing the SSH server. Don't install a desktop system unless you're feeling adventerous. It will be slow. And quite frankly, I have no idea how you would run it... Maybe VNC?</p>
 <h3>Boot Ubuntu</h3>
 <p>One you finished installing, you can use this command to launch the VM. You should put this in a script to make it easier to launch each time.</p>
-<div class="highlight"><pre><span></span><span class="err">qemu-system-aarch64 \</span>
-<span class="err">    -nographic \</span>
-<span class="err">    -machine virt,gic-version=max \</span>
-<span class="err">    -m 8G \</span>
-<span class="err">    -cpu max,pmu=off,sve=on,sve256=on \</span>
-<span class="err">    -smp 6 \</span>
-<span class="err">    -netdev user,id=vnet,hostfwd=tcp::5556-:22 \</span>
-<span class="err">    -device virtio-net-pci,netdev=vnet \</span>
-<span class="err">    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \</span>
-<span class="err">    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash </span>
+<div class="highlight"><pre><span></span>qemu-system-aarch64 \
+    -nographic \
+    -machine virt,gic-version=max \
+    -m 8G \
+    -cpu max,pmu=off,sve=on,sve256=on \
+    -smp 6 \
+    -netdev user,id=vnet,hostfwd=tcp::5556-:22 \
+    -device virtio-net-pci,netdev=vnet \
+    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
+    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
 </pre></div>
 
 
 <p>Again, I made a few changes from the original article. I scaled the memory and SMP up to my specs, so <em>make sure</em> to check that before you run it. If you scale up more than your computer can handle, it may freeze.</p>
 <p>Notice the "sve" arguments in the "-cpu" line. This is where you can control the SVE vector lane size. SVE vectors start at 128-bits and increment from there by 128 up to 2048-bits. Also notice the line that begins with "-netdev". This allows you to SSH into the VM. For some reason, even if you're terminal is maximized, QEMU doesn't use the whole thing. SSH makes it more usable. The "5556-:22" sets the SSH port. So, to SSH in, you can use the following command:</p>
-<div class="highlight"><pre><span></span><span class="err">ssh user@localhost -p 5556</span>
+<div class="highlight"><pre><span></span>ssh user@localhost -p 5556
 </pre></div>
 
 

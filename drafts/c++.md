@@ -1,13 +1,27 @@
-Title: Title
+Title: My Love and Hate of C++
 Date: 2020-08-19 09:38
 Category: None
 
-Over Thanksgiving, I did three things. Over eat, nothing, and play with Ada. Ada, meaning the programming language. Its not the first time, I first began learning Ada back in the spring, but I ended up taking a break for other projects and work. I was exposed to it again when I began using VHDL this fall, and lately I've begun exploring it again along with other languages.
+If I've ever had a true love-hate relationship with something, its C++. If you scroll through my projects, you may be surprised, and rightfully so. There's so much C++ stuff there, and I constantly find myself using it. In a work capacity, I still use it, but as far as indepdent projects go, I've begun to move away. This post is just meant to be my take on the subject.
 
-Until really the past year (and especially the past six months or so), C++ has been my main language. I first began programming with it six years ago in 2014, and since then I have used all the time. Like all the time. Just look on my Github page. These days, I use it in my job and I'm taking an intro class in it (another story for another day...) I see C++ in my dreams... Okay not really.
+I want to qualify that I don't absolutely hate the language. Even in my indepdent projects, I still think C++ is the best bar none for GUI projects. Qt and C++ are really the best.
 
-I have a love-hate relationship with C++. Knowing C++ is incredibly useful in a lot of areas in computer science. It has a huge ecosystem and a lot of support. And yet, C++ gets a lot of bad press. At first, I kind of thought it was BS, but when I got into languages more, and in recent times as the standard as expanded, I'm beginning to understand why. I recently attended a presentation on the C++20 standard, and in some ways I felt like I was watching a sinking ship.
+### Complexity
 
-### C++ and the Problem of Complexity
+This is my biggest dislike of C++. And I don't mean in the sense that the language is huge. Its huge, but I don't think its ridiculous really until you get to around the C++14 standard. The C++20 standard is something else... Let's not go into that :). There does have to be a fine line between simplicity and usability. On one end of the spectrum, you have C and Go that are almost too small (C is good for OS and hardware related things, but once you get into userspace, I think its just too small). And on the other end you have D which is just a monster.
 
-When I started my new compiler project back in the summer, I was ready to move away from C++ and explore some other languages. The first language I explored was D. After D I was like never again... And it really underscored the issues with C++.
+When I say complexity, I'm talking about code bases. This can be a problem with any language, but I think its especially one with C++. I've worked on C++ projects that have grown into these huge things that only a handful of people actually understand and become incredibly fragile to the point that any real improvements can't be done. I had this happen in one of my side projects. My last compiler implemented in C++ was between 5-6000 lines of code at its peak. Another older one was around 4500 lines. I admit, in comparison to a lot out there, that isn't as much, but it did get to the point where I didn't feel I could do anything with the projects without literally everything breaking. In contrast, my new compiler is written in Rust and is about 8400 lines in size, and I've had no issues making huge changes to it.
+
+Complexity is becoming a huge issue in computer science- huge projects that only a handful of people understand. As the new generation of programmers like myself are entering the industry, that will be a problem where you just can't do anything with some of the code out there. From a hardware standpoint, it will also become an issue since raw speed isn't increasing in the way it use to. Actually, I'll have to do a post on that at some point.
+
+### Preprocessor
+
+This is the one area I'm really glad the C++20 standard is addressing. This used to not bother me until I started working on a large project where a slight change in certain headers would lead to basically the entire thing rebuilding. I guess things don't bother you until you see the reality...
+
+Okay, I understand why this happens, but there are better ways than that. Most modern languages use the concept of modules (and even some older ones- Ada has an amazing module system). And this is great because you can make changes that won't trigger basically complete rebuilds, linking errors, and all kinds of other issues.
+
+### Variables
+
+This is a more subjective think that applies to C-family languages as a whole, and its not something that would keep me from using a language.
+
+Languages like Pascal, Ada, and I think Fortran require all variables to be declared at the start of a function.

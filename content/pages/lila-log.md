@@ -4,6 +4,14 @@ save_as: pages/lila-log.html
 
 The development logs for my Lila compiler and language.
 
+### 12/20/2020
+
+I've been exploring and doing a few other things over the past few days, so nothing new until today.
+
+The biggest thing is that I'm temporarily making the repository private again. I started making some breaking changes to the syntax, so I don't want anyone using it just yet until I solidify a few things. I will probably post about it because I still intend it to be an open source thing, but until I decide how I want the syntax to go, it will be private. The unit tests all pass, but the standard library is basically broken. If you're interested, email me.
+
+I've been writing a lot about the RISC-V work lately, so here's an update on that. For the most part, the core integer ISA is all implemented, but the floating-point stuff still needs some work. I never thought this would be a huge deal, but RISC-V has no instruction to move data between float registers, so I'm working on a separate layer to optimize that out (specific to RISC-V). Since most of RISC-V is working, I'll probably be pausing until I do some of the syntax work, but none of that should affect the architectures.
+
 ### 12/16/2020
 
 Yet another big day. I ended up more or less taking the day other than a meeting; its been an exhausting semester. It may sound weird to some, but these projects are actually a really good way for me to deal with burn out.
