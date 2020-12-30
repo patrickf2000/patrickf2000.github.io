@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick Flynn's Website | Adventures with VHDL</title>
+    <title>Patrick Flynn's Website | Articles by Patrick Flynn</title>
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
@@ -12,13 +12,13 @@
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="Patrick Flynn" />
-
-    <meta name="keywords" content="Programming,VHDL" />
 </head>
 <body>
     <header>
         <nav>
             <ul>
+
+                <li class="ephemeral selected"><a href="/author/patrick-flynn/page/2/index.html">Patrick Flynn</a></li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/pages/contact-me.html">Contact Me</a></li>
                 <li><a href="https://github.com/patrickf2000">GitHub</a></li>
@@ -31,7 +31,75 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 26, 2020</h4>
+        <div id="content">            <h4 class="date">Oct 19, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/building-an-alu.html" rel="bookmark" title="Permanent Link to &quot;Building an ALU&quot;">Building an ALU</a>
+                </h2>
+
+                
+                
+
+                <p>VHDL has been a fun new toy for me :) . I find how computers work down on the hardware level really interesting- meaning the underlying logic by which they do operations. This is part of the reason I got into compilers. I love seeing how programming constructs translate into CPU instructions, and then how the CPU instructions are translated into logical operations (or rather, the logic behind these operations).</p>
+<p>Integer math and bitwise operations are some of the most fundamental instructions to a computer. While modern CPU's can do tons of different operations, the most commonly used instructions are data moves, jumps, and the integer operations. The x86 instruction set is huge, but the majority of programs only use around 15-20 of them (if you don't count the different variants, its really like 10-15). Of these 10-15 instructions, probably about two thirds of them are in the arithmetic logic unit (ALU). Because I find binary math interesting, I decided to try making one in VHDL.</p>
+<p>I'm not going to describe my actually code here, I'm just going to go into the theory behind it. If you want to see some code, take a look at my "simple-alu" project on Github.</p>
+<p>An ALU is actually quite simple. The ALU I built works with 8-bit signed integers, and can do addition, subtraction, 2's complement, and/or/xor/not, increments, and decrements. Much of the ALU is built around the adder circuit. I wrote about my 8-bit adder in a fairly recent post; I reused the code here. Once you have that piece done, you can do the rest pretty easily.</p>
+<p>An adder in the sense I talk about here is a sequence of full adders, which work on two bits and return a sum and a carry. A full adder takes the exclusive-or (xor) of inputs A and B, xor's that with a carry-in, which produces the sum. The carry-out is ((a xor b) and carry-in) or'ed with (a and b). To work with numbers larger than one bit, you simply use a bunch of these full adders, with the carry-out connected to the carry-in of the next adder in the sequence (in the case of the first adder, the carry-in is set to 0). You can use the same adder circuit for signed and unsigned numbers.</p>
+<p>As I said, much of the ALU is built around the adder. Once you have the adder done, you can do addition, subtraction, 2's complement, increments, and decrements. The and/xor/xor/not gates are simply that operation applied to each bit of the input (the not gate only requires one input, as it just flips the bits of each input). I won't cover those here, as that should be pretty easy to understand. Let's move on to the other components.</p>
+<p>In order to understand the other operations, you must understand how negative or signed numbers are represented in binary. A negative number is represented as the 2's complement of the absolute value (or the positive number). To find the 2's complement, you invert all the bits of the original number and add 1. So for 3, the binary in four bits is 0011. You probably know that in binary, each digit corresponds to a power of 2, starting with 2 ^ 0 on the far right. So for our binary number above, to convert to decimal, you add 2 ^ 0 + 2 ^ 1 = 3 (you ignore the first two digits because they are zero). To get -3, invert the bits- so 1100- and add 1- so 1101. How do we know this equals -3? Use the same conversion method as above; however, the number to the far left (the most significant bit) is negative two raised to whatever power. So -2 ^ 3 + 2 ^ 2 + 2 ^ 0, which equals -8 + 4 + 1, which equals -3. Kind of cool right? In case you're wondering, you know that the number is negative because the MSB equals 1.</p>
+<p>Now that we understand 2's complement, we can finish the other operations. First, the 2's complement unit. This unit is super simple. You can use the 8-bit NOT unit to flip all the bits, and then add 1 to it using our adder. All done.</p>
+<p>Now for the subtractor. Computers don't have the concept of subtraction in the way you might think of it. Consider 5 - 3. The answer is 2. Now, think of it as an addition operation with negative numbers. The problem becomes 5 + (-3). What's the answer? Still 2. This is how computers do subtraction. They negate the second number, and add it to the first. Let's do this in binary. 5 in binary is 0101. 3 is 0011. 3 negated (or -3) is 1101. Let's add it together: 0101 + 1101. The answer is 0010 with a carry of 1. However, because we are dealing with 4-bit numbers, we can drop the carry, leaving us only with 0010. What's that in decimal? 2 ^ 1 (for the second digit place) = 2, so our answer is correct.</p>
+<p>So the subtractor unit simply uses the 2's complement unit to negate the second input, and then adds that result to the first input, which yields our result.</p>
+<p>After that, we only have the increment and decrement units left. These only take one input, and internally use the adder and subtractor units hardwired with 1 to calculate the result. </p>
+<p>The only two components left at the moment are the left and right shifters. I have a high-level understanding of how those work, but not enough to generate the VHDL code. I honestly think these are the most complex components in the circuit. I may write about them once I get them implemented.</p>
+<p>You're probably wondering how the ALU decides which operation to perform. An ALU takes two integer inputs and an opcode input. The opcode decides the operation, and the opcode is decoded using a multiplexer. I'll probably reserve a more detailed discussion on multiplexers for later when I can draw a diagram, but for now here's a hopefully somewhat clear explanation of how it works in our case.</p>
+<p>A multiplexer takes several inputs, and based on the value of one or more selector inputs, produces a single output (which is one of the inputs). Our ALU has a 4-bit selector input, meaning that we can choose from 16 inputs (in reality, I think I only use 12). The two numerical inputs of the ALU are connected to each of the ALU's operations. Depending on the opcode, the result of that operation is the one allowed to move through the bus to the output. Basically, all the operations are computed once the ALU is invoked, but depending on the opcode, only one of the results is allowed through the bus into the output.</p>
+<p>That concludes our walk-though on a basic integer ALU. Other than the left and right shifts, I'm not sure if I'll do much more to this project. I am thinking about drawing out a schematic for it, maybe even building it. I'll write if I do.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/building-an-alu.html">posted at 08:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
+                    &nbsp;<a href="/tag/hardware.html" class="tags">Hardware</a>
+                    &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
+                </div>
+            </article>            <h4 class="date">Sep 29, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/writing-an-assembler.html" rel="bookmark" title="Permanent Link to &quot;Writing an Assembler&quot;">Writing an Assembler</a>
+                </h2>
+
+                
+                
+
+                <p>This will be a little bit longer of a post, and forgive me if it seems a little abbreviated despite its length. I'm going to write about my journey to get a working x86-64 assembler. I'm writing this in hopes that maybe you can learn about computer architecture and executables, and maybe interest you into this rather forgotten area of computer science.</p>
+<p>Writing an assembler has been a goal of mine for a little while- almost since I got into compilers and computer architecture. However, it was about four compilers later before I got one fully working (I tried on two previous occasions before this one).</p>
+<p>From a parsing perspective, writing an assembler is much easier than a compiler. As you may know, assembly language is nothing more than the symbolic form of the CPU's instruction set. Each assembly instruction has a 1:1 correlation to a binary instruction that the CPU executes. If this is all you do in your assembler, than writing one is super easy.</p>
+<p>However, the reality is different. Compiled and assembled executable programs contain way more than just the CPU instructions. Programs exist in executable formats- ELF on Linux, EXE on Windows, and I forget what on Mac OS. An executable format is separated into sections, containing information about the program itself, its memory, constants (especially string constants), libraries it links to, and finally, the code itself. The information in an executable format is used by the operating system to set up the environment to run the program. Executable formats are also used even before this stage by a special program called the linker, which links libraries the program will use when its run. In addition to translating assembly code into executable code, assemblers are expected to also generate this executable format for linking, and later for execution.</p>
+<p>Another source of difficulty is the complexity of the Intel x86-64 architecture. x86-64 is a CISC CPU- complex instruction set computer (compared to other CPUs, such as Arm, RISC-V, and MIPS- these are RISC CPUs- reduced instruction set computers. More on this later). While CISC is very powerful, it can also be challenging to work with at first. My first challenge was learning the register encoding, and later the instruction prefixes when I moved into 64-bit mode. Another big challenge was calculating the location as you moved over each instruction. Allow me to go into more detail on each.</p>
+<p>If you're familiar with x86, you probably know it has eight general purpose registers: eax, ebx, ecx, edx, esp, ebp, esi, and edi. In 16-bit mode, these registers become ax, bx, cx, ..., and in 64-bit mode, these registers become rax, rbx, rcx, ..., and additionally, you get access to eight more registers: r8-r15. The registers build on to each other- RAX is 64 bits wide, EAX represents the lower 32 bits, and AX represents the lower 16 bits. In all cases, the registers are identified by a 3-bit sequence (000-111 -&gt; 0 through 7). To specify which mode you want to access the registers, x86 uses prefixes. To access a register or execute an instruction in 16-bit mode, you use 0x66 prefix, and to access a register and execute and instruction in 64-bit mode, use use a 2-byte prefix with generally seems to start with 0x4. This prefix is also used to access the new extended registers, even in 32-bit and 16-bit mode (you can do that- for r8 it would be r8d and r8w respectively).</p>
+<p>The whole register system took a while to learn, and I didn't even cover all it of it. There's another whole system behind memory addressing and offsets with the registers which I'm still working to fully understand (I understand it enough for things such as <code>rbp-4</code> to work). Maybe I'm missing something, but I feel like the Intel manual is a little vague in places. Also fun fact: When you look at the register encoding, the encoding doesn't go in order. If you count in binary- using only 3 bits- for the first four registers, it would be 000, 001, 010, and 011. This corresponds to EAX, EBX, ECX, and EDX right? NO!! It corresponds to EAX, ECX, EDX, and EBX respectively. I can't tell you the number of times I messed this up in the code. I'm sorry Intel, but that's HUGELY annoying.</p>
+<p>The other challenge I mentioned had to do with location counting. When you're writing in assembly, you often work with strings and other constants. These constants usually end up in the .data or .rodata section in the generated ELF file. This is denoted by the assembly programmer, and referenced throughout the actual code with names, much like variables in ordinary languages. Assemblers generally make at least two passes over the assembly code; the first pass looks for these variables, and the second pass replaces them with numbers as the binary code is generated (the numbers represent the actual location of the constants). If I was doing an assembler for a RISC CPU, this would be super easy. All instructions are the same length, so I could simply count the number of lines and multiply by the instruction length. Not so on CISC. Each instruction has a different length. I'm not saying this is a negative, but it was an interesting challenge to work around. Variable instruction length can often be an asset as it often results in a smaller code density than on a RISC machine.</p>
+<p>Once I understood the architecture sufficiently, I was able to begin working on the executable format- ELF on Linux. I'm not going to go too deeply into ELF here simply because once I begin explaining it, it will take me a while to get back out of it. ELF is actually fairly easy once you know what you're doing, and using the elf.h header is really helpful (its on all Linux systems). The hard part is calculating size and offsets. And the symbol table was really challenging until I found some good resources. The ELF portion of my assembly is the part I'm quite frankly least happiest about. I'm really happy that it works so well, but I feel its a little hacked together as far as the code goes, and there are some known bugs with the symbol and string tables.</p>
+<p>My decision to use C was somewhat accidental, though in other ways it was also intentional. I really like how easy C makes it to write structures and binary to files, I like how fast it compiles, and honestly I think it approaches enum's in a much more sane way than C++ does. That said, I also find trying to use strings and build maps and tables to be a major pain in C. At some point I want to redo it in C++ (and hopefully that will not mean starting from scratch). I thought about Rust or another language, but the ability to use elf.h and write them directly to a file is a big thing for me. If you're interested in exploring architecture to that level, C or C++ really are good options.</p>
+<p>Once I got things working, for the most part the workflow went pretty well. If you're developing an assembler, the most important thing is the instruction set reference for your CPU (Intel's reference is really good by the way. I do feel there are some gray areas, but for the most part its excellent). Hexdump or any hex editor is really useful until you get to the ELF stage. Once you're there, the readelf tool is really helpful- its good at helping you find most of your ELF issues. Also, once you are at the ELF stage, objdump is really helpful. It shows you the binary and the corresponding assembly (this was a huge help with my location counting errors and my register/prefix mistakes). Another good tool throughout the entire process is the NASM assembler. NASM has an option to generate flat binary files, so using this with hexdump, you can do things such as see how a particular instruction translates. Finally, it helps to have a working knowledge of hexadecimal. Although I've been talking about binary, in the C code and in all the tools I mentioned, you will actually be working with hex.</p>
+<p>This has been a long post, and hopefully you found it interesting (congratulations if you made this far :) ). This has honestly been one of my favorite projects mainly because it was a big goal (including in a learning sense) for me, especially after I got my compilers working. I'm currently working on a new compiler, and although it targets multiple platforms, I'm using this project to assemble the code on the x86 platform. More on this later, however.</p>
+<p>In the future I'm going to try to write more detailed articles on the Intel architecture, and later the Arm (meaning AArch64- not Arm 7).</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/writing-an-assembler.html">posted at 19:45</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/assembly.html" class="tags">Assembly</a>
+                    &nbsp;<a href="/tag/x86.html" class="tags">x86</a>
+                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
+                </div>
+            </article>            <h4 class="date">Sep 26, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -214,7 +282,57 @@ ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span clas
                     &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
                     &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
                 </div>
+            </article>            <h4 class="date">Sep 25, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/a-night-with-an-old-printer.html" rel="bookmark" title="Permanent Link to &quot;A Night With an Old Printer&quot;">A Night With an Old Printer</a>
+                </h2>
+
+                
+                
+
+                <p>As much as I love programming, when one is on the computer all day for work and school, your desire to get off the computer begins to outweigh that. My parents have an old Samsung printer, but after many years of heavy use it began to jam when pulling up paper. It turns out the issue is this little part rather deep inside can get warn out and begin to stick, which is why it sucks up all that paper. When I say deep inside, I literally mean that. You have to take apart a lot to get to that issue. I should have taken a better shot, but here's what it looks like halfway through the process (that's the computer board).</p>
+<p>It still doesn't work perfectly, put it can get through about 15 sheets before it jams. Oh well, that's fine, they never print more than maybe 5 at a time (and that's stretching it). </p>
+<p>I can't take credit for figuring it out, but I'm proud I got it fixed. Its always cool when you're able to fix something. If anyone has a Samsung SCX-4623FW jamming, here's an excellent link: <a href="https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/">https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/</a>.</p>
+<p><img alt="Photo" src="/images/printer.jpg"></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/a-night-with-an-old-printer.html">posted at 08:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                </div>
+            </article>            <h4 class="date">Sep 24, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/assemblers-raspberry-pis-and-school.html" rel="bookmark" title="Permanent Link to &quot;Assemblers, Raspberry Pis, and School&quot;">Assemblers, Raspberry Pis, and School</a>
+                </h2>
+
+                
+                
+
+                <p>This site has been kind of quiet lately. I've been trying to keep up with it, but August and September thus far has been kind of busy. I've been wrapping up my internship at Lawrence Livermore Laboratory, and I'm transitioning back into my job as a research assistant. I'm really happy with how the internship went, and this semester looks like it will be exciting as far as research goes.</p>
+<p>Its probably been about a month- maybe two actually- but I pushed a new project to my GitHub page: Asmx86. I know it may be hard to tell from the name, but its an assembler for the x86-64 platform. This honestly is one of my favorite projects, moreso because its been a long time coming. I've been wanting to write an assembler for a while, and I've tried a few times, but this is the first time its actually worked. Compared to compilers, assemblers are much easier (there's a 1:1 translation between the source and the target), but in many ways its harder because it requires a deep knowledge of the architecture you're targeting. Additionally, if you want to make something useful, you have to generate code in your operating system's executable format (in my case, its ELF).</p>
+<p>I wrote Asmx86 in C and used Flex and Bison for the parser. Everything else I wrote myself. Generating ELF was easy- I just used the structures in /usr/include/elf.h and wrote this to the binary file (which is easy to do in C). Getting all the different ELF parts and calculating the offsets and everything was challenging. I also had issues getting my string tables to work; I've been spoiled by C++'s string and vector classes. The result has been well worth it. My assembler can generate fully working and linkable ELF objects, which you can link into an executable, a static library, a dynamic library, or objects from a C compiler. I've tested linking with the C standard library and the start-up object files, and everything seems to be working, which is super exciting. Obviously the entire x86 instruction is not supported, but enough is working for non-trivial programs (adding new instructions is easy).</p>
+<p>I'll have to write more about the entire learning process later. As far as side projects go, I recently started a re-implementation of Quik using the Rust programming language. So far its off to a good start; I have a goal of targeting multiple architectures. On the x86 side, I'll be using my custom assembler.</p>
+<p>As part of that project (and for other reasons as well), I finally upgraded to a Raspberry Pi 4. I have a Pi 3, but I've been having a hard time getting into the whole hobby electronics thing (partly because I have absolutely no idea what I'm doing), so I started using it to learn the Arm architecture. The problem is that its too slow, and its only usable if you use the 32-bit Raspberry Pi OS. So, I got the Pi 4 with 4gb of RAM, and its been really nice. I've started on the code generation for Arm64 in the new Quik compiler. More on this later.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/assemblers-raspberry-pis-and-school.html">posted at 09:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
+                </div>
             </article>
+
+                <div class="clear"></div>
+                <div class="pages">
+
+                    <a href="/" class="prev_page">&larr;&nbsp;Previous</a>
+                    <a href="/page/3" class="next_page">Next&nbsp;&rarr;</a>
+                    <span>Page 2 of 4</span>
+                </div>
+
             <div class="clear"></div>
             <footer>
                 <p>

@@ -14,8 +14,6 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'en'
 
-DEFAULT_PAGINATION = 5
-SUMMARY_MAX_LENGTH = 5
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

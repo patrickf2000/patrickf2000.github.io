@@ -191,17 +191,17 @@
 <p>And yes, I do focus on SVE.</p>
 <h3>Getting Started</h3>
 <p>First, you need to install these packages (note: I'm on Linux Mint. If you're not on Linux Mint/Ubuntu/Debian, you may have to change the package names):</p>
-<div class="highlight"><pre><span></span><code><span class="err">sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span>sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils
+</pre></div>
 
 
 <p>Next, create the boot images and the hard drive:</p>
-<div class="highlight"><pre><span></span><code><span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">zero</span> <span class="k">of</span><span class="o">=</span><span class="n">flash1</span><span class="p">.</span><span class="n">img</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span> <span class="k">count</span><span class="o">=</span><span class="mi">64</span>
-<span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">zero</span> <span class="k">of</span><span class="o">=</span><span class="n">flash0</span><span class="p">.</span><span class="n">img</span> <span class="n">bs</span><span class="o">=</span><span class="mi">1</span><span class="n">M</span> <span class="k">count</span><span class="o">=</span><span class="mi">64</span>
-<span class="n">dd</span> <span class="k">if</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">qemu</span><span class="o">-</span><span class="n">efi</span><span class="o">-</span><span class="n">aarch64</span><span class="o">/</span><span class="n">QEMU_EFI</span><span class="p">.</span><span class="n">fd</span> <span class="k">of</span><span class="o">=</span><span class="n">flash0</span><span class="p">.</span><span class="n">img</span> <span class="n">conv</span><span class="o">=</span><span class="n">notrunc</span>
+<div class="highlight"><pre><span></span>dd if=/dev/zero of=flash1.img bs=1M count=64
+dd if=/dev/zero of=flash0.img bs=1M count=64
+dd if=/usr/share/qemu-efi-aarch64/QEMU_EFI.fd of=flash0.img conv=notrunc
 
-<span class="n">qemu</span><span class="o">-</span><span class="n">img</span> <span class="k">create</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">image</span><span class="p">.</span><span class="n">img</span> <span class="mi">20</span><span class="k">G</span>
-</code></pre></div>
+qemu-img create ubuntu-image.img 20G
+</pre></div>
 
 
 <p>To download Ubuntu 20.04: </p>
@@ -209,40 +209,40 @@
 <p>Note that the site in question is an FTP site. If you want a different image, go for it.</p>
 <h3>Install Ubuntu</h3>
 <p>Use this command to start the installation:</p>
-<div class="highlight"><pre><span></span><code><span class="err">qemu-system-aarch64 \</span>
-<span class="err">    -nographic \</span>
-<span class="err">    -machine virt,gic-version=max \</span>
-<span class="err">    -m 4G \</span>
-<span class="err">    -cpu max \</span>
-<span class="err">    -smp 4 \</span>
-<span class="err">    -netdev user,id=vnet,hostfwd=:127.0.0.1:0-:22 -device virtio-net-pci,netdev=vnet \</span>
-<span class="err">    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \</span>
-<span class="err">    -drive file=mini.iso,if=none,id=drive1,cache=writeback -device virtio-blk,drive=drive1,bootindex=1 \</span>
-<span class="err">    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash </span>
-</code></pre></div>
+<div class="highlight"><pre><span></span>qemu-system-aarch64 \
+    -nographic \
+    -machine virt,gic-version=max \
+    -m 4G \
+    -cpu max \
+    -smp 4 \
+    -netdev user,id=vnet,hostfwd=:127.0.0.1:0-:22 -device virtio-net-pci,netdev=vnet \
+    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
+    -drive file=mini.iso,if=none,id=drive1,cache=writeback -device virtio-blk,drive=drive1,bootindex=1 \
+    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
+</pre></div>
 
 
 <p>Few notes here. First, the <code>-m 4G</code> represents how much memory to allocate to the machine. The original article said to use 512M. That took <em>FOREVER</em> on my computer, so I would highly recommend to scale this up (once I scalled it, it only took like 15 minutes). The <code>-smp 4</code> represents the number of CPU cores to allocate to the machine.</p>
 <p>Just follow the prompts and instructions to install the system. It's really easy, so I'm not going to walk you through. When you get to the end where it asks about additional software, I would only recommend doing the SSH server. Don't install a desktop system unless you're feeling adventerous. It will be slow. And quite frankly, I have no idea how you would run it... Maybe VNC?</p>
 <h3>Boot Ubuntu</h3>
 <p>One you finished installing, you can use this command to launch the VM. You should put this in a script to make it easier to launch each time.</p>
-<div class="highlight"><pre><span></span><code><span class="err">qemu-system-aarch64 \</span>
-<span class="err">    -nographic \</span>
-<span class="err">    -machine virt,gic-version=max \</span>
-<span class="err">    -m 8G \</span>
-<span class="err">    -cpu max,pmu=off,sve=on,sve256=on \</span>
-<span class="err">    -smp 6 \</span>
-<span class="err">    -netdev user,id=vnet,hostfwd=tcp::5556-:22 \</span>
-<span class="err">    -device virtio-net-pci,netdev=vnet \</span>
-<span class="err">    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \</span>
-<span class="err">    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash </span>
-</code></pre></div>
+<div class="highlight"><pre><span></span>qemu-system-aarch64 \
+    -nographic \
+    -machine virt,gic-version=max \
+    -m 8G \
+    -cpu max,pmu=off,sve=on,sve256=on \
+    -smp 6 \
+    -netdev user,id=vnet,hostfwd=tcp::5556-:22 \
+    -device virtio-net-pci,netdev=vnet \
+    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
+    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
+</pre></div>
 
 
 <p>Again, I made a few changes from the original article. I scaled the memory and SMP up to my specs, so <em>make sure</em> to check that before you run it. If you scale up more than your computer can handle, it may freeze.</p>
 <p>Notice the "sve" arguments in the "-cpu" line. This is where you can control the SVE vector lane size. SVE vectors start at 128-bits and increment from there by 128 up to 2048-bits. Also notice the line that begins with "-netdev". This allows you to SSH into the VM. For some reason, even if you're terminal is maximized, QEMU doesn't use the whole thing. SSH makes it more usable. The "5556-:22" sets the SSH port. So, to SSH in, you can use the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="err">ssh user@localhost -p 5556</span>
-</code></pre></div>
+<div class="highlight"><pre><span></span>ssh user@localhost -p 5556
+</pre></div>
 
 
 <p>Replace "user" with whatever user you created during installation.</p>
@@ -285,14 +285,527 @@
                     <a href="/android-and-planning.html">posted at 19:38</a>
                     &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
                 </div>
-            </article>
+            </article>            <h4 class="date">Oct 19, 2020</h4>
 
+            <article class="post">
+                <h2 class="title">
+                    <a href="/building-an-alu.html" rel="bookmark" title="Permanent Link to &quot;Building an ALU&quot;">Building an ALU</a>
+                </h2>
+
+                
+                
+
+                <p>VHDL has been a fun new toy for me :) . I find how computers work down on the hardware level really interesting- meaning the underlying logic by which they do operations. This is part of the reason I got into compilers. I love seeing how programming constructs translate into CPU instructions, and then how the CPU instructions are translated into logical operations (or rather, the logic behind these operations).</p>
+<p>Integer math and bitwise operations are some of the most fundamental instructions to a computer. While modern CPU's can do tons of different operations, the most commonly used instructions are data moves, jumps, and the integer operations. The x86 instruction set is huge, but the majority of programs only use around 15-20 of them (if you don't count the different variants, its really like 10-15). Of these 10-15 instructions, probably about two thirds of them are in the arithmetic logic unit (ALU). Because I find binary math interesting, I decided to try making one in VHDL.</p>
+<p>I'm not going to describe my actually code here, I'm just going to go into the theory behind it. If you want to see some code, take a look at my "simple-alu" project on Github.</p>
+<p>An ALU is actually quite simple. The ALU I built works with 8-bit signed integers, and can do addition, subtraction, 2's complement, and/or/xor/not, increments, and decrements. Much of the ALU is built around the adder circuit. I wrote about my 8-bit adder in a fairly recent post; I reused the code here. Once you have that piece done, you can do the rest pretty easily.</p>
+<p>An adder in the sense I talk about here is a sequence of full adders, which work on two bits and return a sum and a carry. A full adder takes the exclusive-or (xor) of inputs A and B, xor's that with a carry-in, which produces the sum. The carry-out is ((a xor b) and carry-in) or'ed with (a and b). To work with numbers larger than one bit, you simply use a bunch of these full adders, with the carry-out connected to the carry-in of the next adder in the sequence (in the case of the first adder, the carry-in is set to 0). You can use the same adder circuit for signed and unsigned numbers.</p>
+<p>As I said, much of the ALU is built around the adder. Once you have the adder done, you can do addition, subtraction, 2's complement, increments, and decrements. The and/xor/xor/not gates are simply that operation applied to each bit of the input (the not gate only requires one input, as it just flips the bits of each input). I won't cover those here, as that should be pretty easy to understand. Let's move on to the other components.</p>
+<p>In order to understand the other operations, you must understand how negative or signed numbers are represented in binary. A negative number is represented as the 2's complement of the absolute value (or the positive number). To find the 2's complement, you invert all the bits of the original number and add 1. So for 3, the binary in four bits is 0011. You probably know that in binary, each digit corresponds to a power of 2, starting with 2 ^ 0 on the far right. So for our binary number above, to convert to decimal, you add 2 ^ 0 + 2 ^ 1 = 3 (you ignore the first two digits because they are zero). To get -3, invert the bits- so 1100- and add 1- so 1101. How do we know this equals -3? Use the same conversion method as above; however, the number to the far left (the most significant bit) is negative two raised to whatever power. So -2 ^ 3 + 2 ^ 2 + 2 ^ 0, which equals -8 + 4 + 1, which equals -3. Kind of cool right? In case you're wondering, you know that the number is negative because the MSB equals 1.</p>
+<p>Now that we understand 2's complement, we can finish the other operations. First, the 2's complement unit. This unit is super simple. You can use the 8-bit NOT unit to flip all the bits, and then add 1 to it using our adder. All done.</p>
+<p>Now for the subtractor. Computers don't have the concept of subtraction in the way you might think of it. Consider 5 - 3. The answer is 2. Now, think of it as an addition operation with negative numbers. The problem becomes 5 + (-3). What's the answer? Still 2. This is how computers do subtraction. They negate the second number, and add it to the first. Let's do this in binary. 5 in binary is 0101. 3 is 0011. 3 negated (or -3) is 1101. Let's add it together: 0101 + 1101. The answer is 0010 with a carry of 1. However, because we are dealing with 4-bit numbers, we can drop the carry, leaving us only with 0010. What's that in decimal? 2 ^ 1 (for the second digit place) = 2, so our answer is correct.</p>
+<p>So the subtractor unit simply uses the 2's complement unit to negate the second input, and then adds that result to the first input, which yields our result.</p>
+<p>After that, we only have the increment and decrement units left. These only take one input, and internally use the adder and subtractor units hardwired with 1 to calculate the result. </p>
+<p>The only two components left at the moment are the left and right shifters. I have a high-level understanding of how those work, but not enough to generate the VHDL code. I honestly think these are the most complex components in the circuit. I may write about them once I get them implemented.</p>
+<p>You're probably wondering how the ALU decides which operation to perform. An ALU takes two integer inputs and an opcode input. The opcode decides the operation, and the opcode is decoded using a multiplexer. I'll probably reserve a more detailed discussion on multiplexers for later when I can draw a diagram, but for now here's a hopefully somewhat clear explanation of how it works in our case.</p>
+<p>A multiplexer takes several inputs, and based on the value of one or more selector inputs, produces a single output (which is one of the inputs). Our ALU has a 4-bit selector input, meaning that we can choose from 16 inputs (in reality, I think I only use 12). The two numerical inputs of the ALU are connected to each of the ALU's operations. Depending on the opcode, the result of that operation is the one allowed to move through the bus to the output. Basically, all the operations are computed once the ALU is invoked, but depending on the opcode, only one of the results is allowed through the bus into the output.</p>
+<p>That concludes our walk-though on a basic integer ALU. Other than the left and right shifts, I'm not sure if I'll do much more to this project. I am thinking about drawing out a schematic for it, maybe even building it. I'll write if I do.</p>
                 <div class="clear"></div>
-                <div class="pages">
 
-                    <a href="/page/2" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 1 of 4</span>
+                <div class="info">
+                    <a href="/building-an-alu.html">posted at 08:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
+                    &nbsp;<a href="/tag/hardware.html" class="tags">Hardware</a>
+                    &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
                 </div>
+            </article>            <h4 class="date">Sep 29, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/writing-an-assembler.html" rel="bookmark" title="Permanent Link to &quot;Writing an Assembler&quot;">Writing an Assembler</a>
+                </h2>
+
+                
+                
+
+                <p>This will be a little bit longer of a post, and forgive me if it seems a little abbreviated despite its length. I'm going to write about my journey to get a working x86-64 assembler. I'm writing this in hopes that maybe you can learn about computer architecture and executables, and maybe interest you into this rather forgotten area of computer science.</p>
+<p>Writing an assembler has been a goal of mine for a little while- almost since I got into compilers and computer architecture. However, it was about four compilers later before I got one fully working (I tried on two previous occasions before this one).</p>
+<p>From a parsing perspective, writing an assembler is much easier than a compiler. As you may know, assembly language is nothing more than the symbolic form of the CPU's instruction set. Each assembly instruction has a 1:1 correlation to a binary instruction that the CPU executes. If this is all you do in your assembler, than writing one is super easy.</p>
+<p>However, the reality is different. Compiled and assembled executable programs contain way more than just the CPU instructions. Programs exist in executable formats- ELF on Linux, EXE on Windows, and I forget what on Mac OS. An executable format is separated into sections, containing information about the program itself, its memory, constants (especially string constants), libraries it links to, and finally, the code itself. The information in an executable format is used by the operating system to set up the environment to run the program. Executable formats are also used even before this stage by a special program called the linker, which links libraries the program will use when its run. In addition to translating assembly code into executable code, assemblers are expected to also generate this executable format for linking, and later for execution.</p>
+<p>Another source of difficulty is the complexity of the Intel x86-64 architecture. x86-64 is a CISC CPU- complex instruction set computer (compared to other CPUs, such as Arm, RISC-V, and MIPS- these are RISC CPUs- reduced instruction set computers. More on this later). While CISC is very powerful, it can also be challenging to work with at first. My first challenge was learning the register encoding, and later the instruction prefixes when I moved into 64-bit mode. Another big challenge was calculating the location as you moved over each instruction. Allow me to go into more detail on each.</p>
+<p>If you're familiar with x86, you probably know it has eight general purpose registers: eax, ebx, ecx, edx, esp, ebp, esi, and edi. In 16-bit mode, these registers become ax, bx, cx, ..., and in 64-bit mode, these registers become rax, rbx, rcx, ..., and additionally, you get access to eight more registers: r8-r15. The registers build on to each other- RAX is 64 bits wide, EAX represents the lower 32 bits, and AX represents the lower 16 bits. In all cases, the registers are identified by a 3-bit sequence (000-111 -&gt; 0 through 7). To specify which mode you want to access the registers, x86 uses prefixes. To access a register or execute an instruction in 16-bit mode, you use 0x66 prefix, and to access a register and execute and instruction in 64-bit mode, use use a 2-byte prefix with generally seems to start with 0x4. This prefix is also used to access the new extended registers, even in 32-bit and 16-bit mode (you can do that- for r8 it would be r8d and r8w respectively).</p>
+<p>The whole register system took a while to learn, and I didn't even cover all it of it. There's another whole system behind memory addressing and offsets with the registers which I'm still working to fully understand (I understand it enough for things such as <code>rbp-4</code> to work). Maybe I'm missing something, but I feel like the Intel manual is a little vague in places. Also fun fact: When you look at the register encoding, the encoding doesn't go in order. If you count in binary- using only 3 bits- for the first four registers, it would be 000, 001, 010, and 011. This corresponds to EAX, EBX, ECX, and EDX right? NO!! It corresponds to EAX, ECX, EDX, and EBX respectively. I can't tell you the number of times I messed this up in the code. I'm sorry Intel, but that's HUGELY annoying.</p>
+<p>The other challenge I mentioned had to do with location counting. When you're writing in assembly, you often work with strings and other constants. These constants usually end up in the .data or .rodata section in the generated ELF file. This is denoted by the assembly programmer, and referenced throughout the actual code with names, much like variables in ordinary languages. Assemblers generally make at least two passes over the assembly code; the first pass looks for these variables, and the second pass replaces them with numbers as the binary code is generated (the numbers represent the actual location of the constants). If I was doing an assembler for a RISC CPU, this would be super easy. All instructions are the same length, so I could simply count the number of lines and multiply by the instruction length. Not so on CISC. Each instruction has a different length. I'm not saying this is a negative, but it was an interesting challenge to work around. Variable instruction length can often be an asset as it often results in a smaller code density than on a RISC machine.</p>
+<p>Once I understood the architecture sufficiently, I was able to begin working on the executable format- ELF on Linux. I'm not going to go too deeply into ELF here simply because once I begin explaining it, it will take me a while to get back out of it. ELF is actually fairly easy once you know what you're doing, and using the elf.h header is really helpful (its on all Linux systems). The hard part is calculating size and offsets. And the symbol table was really challenging until I found some good resources. The ELF portion of my assembly is the part I'm quite frankly least happiest about. I'm really happy that it works so well, but I feel its a little hacked together as far as the code goes, and there are some known bugs with the symbol and string tables.</p>
+<p>My decision to use C was somewhat accidental, though in other ways it was also intentional. I really like how easy C makes it to write structures and binary to files, I like how fast it compiles, and honestly I think it approaches enum's in a much more sane way than C++ does. That said, I also find trying to use strings and build maps and tables to be a major pain in C. At some point I want to redo it in C++ (and hopefully that will not mean starting from scratch). I thought about Rust or another language, but the ability to use elf.h and write them directly to a file is a big thing for me. If you're interested in exploring architecture to that level, C or C++ really are good options.</p>
+<p>Once I got things working, for the most part the workflow went pretty well. If you're developing an assembler, the most important thing is the instruction set reference for your CPU (Intel's reference is really good by the way. I do feel there are some gray areas, but for the most part its excellent). Hexdump or any hex editor is really useful until you get to the ELF stage. Once you're there, the readelf tool is really helpful- its good at helping you find most of your ELF issues. Also, once you are at the ELF stage, objdump is really helpful. It shows you the binary and the corresponding assembly (this was a huge help with my location counting errors and my register/prefix mistakes). Another good tool throughout the entire process is the NASM assembler. NASM has an option to generate flat binary files, so using this with hexdump, you can do things such as see how a particular instruction translates. Finally, it helps to have a working knowledge of hexadecimal. Although I've been talking about binary, in the C code and in all the tools I mentioned, you will actually be working with hex.</p>
+<p>This has been a long post, and hopefully you found it interesting (congratulations if you made this far :) ). This has honestly been one of my favorite projects mainly because it was a big goal (including in a learning sense) for me, especially after I got my compilers working. I'm currently working on a new compiler, and although it targets multiple platforms, I'm using this project to assemble the code on the x86 platform. More on this later, however.</p>
+<p>In the future I'm going to try to write more detailed articles on the Intel architecture, and later the Arm (meaning AArch64- not Arm 7).</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/writing-an-assembler.html">posted at 19:45</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/assembly.html" class="tags">Assembly</a>
+                    &nbsp;<a href="/tag/x86.html" class="tags">x86</a>
+                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
+                </div>
+            </article>            <h4 class="date">Sep 26, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/adventures-with-vhdl.html" rel="bookmark" title="Permanent Link to &quot;Adventures with VHDL&quot;">Adventures with VHDL</a>
+                </h2>
+
+                
+                
+
+                <p>As part of one of my classes I'm taking this semester, I'm learning about VHDL. Actually, I think VHDL is the optional part (so far, I've been learning it pretty much on my own, though the introduction came from the class). I've wanted to learn a hardware descriptor language for some time. I tried Verilog, but I had a hard time finding good tutorials on how to use it, and for some reason I never really looked at VHDL (maybe Verilog scared me away). This may be a slightly unpopular opinion, but I really like VHDL. The reason is the reason why most people dislike it: its basically a subset of Ada, which is a language I'm familiar with.</p>
+<p>Anyway, I finally managed to get a simple circuit to run: a full adder, which I eventually made into an 8-bit adder. Its signed, meaning you can use it as either an adder or a subtractor. I'll come back to this in a minute. Here's what it looks like:</p>
+<div class="highlight"><pre><span></span><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+
+<span class="c1">-- A single bit full adder</span>
+<span class="k">entity</span> <span class="nc">full_adder</span> <span class="k">is</span>
+    <span class="k">port</span> <span class="p">(</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ci</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+    <span class="p">);</span>
+<span class="k">end</span> <span class="nc">full_adder</span><span class="p">;</span>
+
+<span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+
+<span class="c1">-- An 8-bit adder</span>
+<span class="k">entity</span> <span class="nc">adder</span> <span class="k">is</span>
+    <span class="k">port</span> <span class="p">(</span>
+        <span class="n">vec1</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">vec2</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">out_vec</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+    <span class="p">);</span>
+<span class="k">end</span> <span class="nc">adder</span><span class="p">;</span>
+
+<span class="c1">-- The logic for the single-bit adder</span>
+<span class="k">architecture</span> <span class="nc">rtl_full_adder</span> <span class="k">of</span> <span class="nc">full_adder</span> <span class="k">is</span>
+<span class="k">begin</span>
+    <span class="n">s</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">a</span> <span class="k">xor</span> <span class="n">b</span><span class="p">)</span> <span class="k">xor</span> <span class="n">ci</span><span class="p">;</span>
+    <span class="n">co</span> <span class="o">&lt;=</span> <span class="p">((</span><span class="n">a</span> <span class="k">xor</span> <span class="n">b</span><span class="p">)</span> <span class="k">and</span> <span class="n">ci</span><span class="p">)</span> <span class="k">or</span> <span class="p">(</span><span class="n">a</span> <span class="k">and</span> <span class="n">b</span><span class="p">);</span>
+<span class="k">end</span> <span class="nc">rtl_full_adder</span><span class="p">;</span>
+
+<span class="c1">-- The logic for the 8-bit adder</span>
+<span class="k">architecture</span> <span class="nc">rtl_adder</span> <span class="k">of</span> <span class="nc">adder</span> <span class="k">is</span>
+    <span class="k">component</span> <span class="nc">full_adder</span>
+        <span class="k">port</span> <span class="p">(</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ci</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
+            <span class="n">s</span><span class="p">,</span> <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+        <span class="p">);</span>
+    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
+
+    <span class="k">signal</span> <span class="n">c</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">8</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">begin</span>
+    <span class="n">op1</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+    <span class="n">op2</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">op3</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+    <span class="n">op4</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+    <span class="n">op5</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+    <span class="n">op6</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
+    <span class="n">op7</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">));</span>
+    <span class="n">op8</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span>
+    <span class="n">co</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+<span class="k">end</span> <span class="nc">rtl_adder</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Its actually not as scary as it looks; even without the background, its pretty easy to understand how it works. Binary addition works the same way we humans add numbers- we start with the digit on the right, and work left. The full adder is the smaller circuit that performs the logic operation to add two bits (three if you have carry). In base-2, 0+0 = 0, 0 + 1 = 1, 1 + 0 = 1, 1 + 1 = 0 carry 1, and 1 + 1 + 1 = 1 carry 1 (that extra 1 would be the carry; in all other cases, you can assume its zero). In the 8-bit adder, we simply use the full adder on each bit.</p>
+<p>As I mentioned earlier, this implements a signed adder. That means the first bit will be treated as the sign bit. Like all other adders, this uses the 2's complement representation of negative numbers. Because its a signed adder, it also works as a subtractor. Although we often think of subtraction as a separate operation, to a computer there is no such thing. Computers perform addition on signed numbers. So if you wanted to do 10 - 5, to a computer it would be 10 + (-5). For our use, its a complicated way to do it, but it yields the same result.</p>
+<p>I think the idea with VHDL testbenches is to test all values, but I wanted to try something once I found VHDL had text IO like other languages. If you use the IEEE standard logic types, you can convert integers to and from the bit vectors. Connect this with some input and output, and you have a simple calculator:</p>
+<p><img alt="Photo" src="/images/vhdl_calc.png"></p>
+<p>And below is the code if you want to try it out. I am using GHDL to build and run this, so here's also the commands I used. Also note, because its 8-bit, you can add numbers until their sum is less than or equal to 127 (binary: 01111111). Anything greater will invert the most significant bit, which will result in a negative number.</p>
+<div class="highlight"><pre><span></span>ghdl -a adder.vhdl
+
+ghdl -a --ieee<span class="o">=</span>synopsys test.vhdl
+ghdl -e --ieee<span class="o">=</span>synopsys adder_tb
+ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span class="o">=</span>disable
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">IEEE.std_logic_signed.</span><span class="k">all</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">IEEE.std_logic_arith.</span><span class="k">all</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">IEEE.numeric_std.</span><span class="k">all</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std.textio.</span><span class="k">all</span><span class="p">;</span>
+
+<span class="c1">--  A testbench has no ports.</span>
+<span class="k">entity</span> <span class="nc">adder_tb</span> <span class="k">is</span>
+<span class="k">end</span> <span class="nc">adder_tb</span><span class="p">;</span>
+
+<span class="k">architecture</span> <span class="nc">behav</span> <span class="k">of</span> <span class="nc">adder_tb</span> <span class="k">is</span>
+    <span class="k">constant</span> <span class="n">WIDTH</span> <span class="o">:</span> <span class="kt">integer</span> <span class="o">:=</span> <span class="mi">8</span><span class="p">;</span>
+
+    <span class="c1">--  Declaration of the component that will be instantiated.</span>
+    <span class="k">component</span> <span class="nc">adder</span>
+        <span class="k">port</span> <span class="p">(</span>
+            <span class="n">vec1</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="n">vec2</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="n">out_vec</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+            <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
+        <span class="p">);</span>
+    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
+
+    <span class="c1">--  Specifies which entity is bound with the component.</span>
+    <span class="k">for</span> <span class="n">add0</span><span class="o">:</span> <span class="n">adder</span> <span class="k">use</span> <span class="k">entity</span> <span class="nn">work</span><span class="p">.</span><span class="n">adder</span><span class="p">;</span>
+    <span class="k">signal</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">out_vec</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="k">signal</span> <span class="n">co</span> <span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
+
+<span class="k">begin</span>
+    <span class="c1">--  Component instantiation.</span>
+    <span class="n">add0</span><span class="o">:</span> <span class="n">adder</span> <span class="k">port</span> <span class="k">map</span> <span class="p">(</span><span class="n">vec1</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">out_vec</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">,</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">co</span><span class="p">);</span>
+
+    <span class="c1">--  This process does the real job.</span>
+    <span class="k">process</span>
+
+        <span class="c1">-- For input</span>
+        <span class="k">variable</span> <span class="n">in_buf1</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
+        <span class="k">variable</span> <span class="n">in_buf2</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
+        <span class="k">variable</span> <span class="n">in_num1</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
+        <span class="k">variable</span> <span class="n">in_num2</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
+
+        <span class="k">variable</span> <span class="n">val1</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">variable</span> <span class="n">val2</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="c1">-- For output</span>
+        <span class="k">variable</span> <span class="n">l</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
+        <span class="k">variable</span> <span class="n">out_num</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
+    <span class="k">begin</span>
+
+        <span class="c1">-- Get all the input</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Enter two numbers&quot;</span><span class="p">));</span>
+        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+
+        <span class="n">readline</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">in_buf1</span><span class="p">);</span>
+        <span class="n">read</span><span class="p">(</span><span class="n">in_buf1</span><span class="p">,</span> <span class="n">in_num1</span><span class="p">);</span>
+
+        <span class="n">readline</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">in_buf2</span><span class="p">);</span>
+        <span class="n">read</span><span class="p">(</span><span class="n">in_buf2</span><span class="p">,</span> <span class="n">in_num2</span><span class="p">);</span>
+
+        <span class="n">val1</span> <span class="o">:=</span> <span class="n">conv_std_logic_vector</span><span class="p">(</span><span class="n">in_num1</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>
+        <span class="n">val2</span> <span class="o">:=</span> <span class="n">conv_std_logic_vector</span><span class="p">(</span><span class="n">in_num2</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>
+
+        <span class="k">wait</span> <span class="k">for</span> <span class="mi">50</span> <span class="n">ns</span><span class="p">;</span>
+
+        <span class="c1">-- Do the calculations</span>
+        <span class="n">vec1</span> <span class="o">&lt;=</span> <span class="n">val1</span><span class="p">;</span>
+        <span class="n">vec2</span> <span class="o">&lt;=</span> <span class="n">val2</span><span class="p">;</span>
+        <span class="k">wait</span> <span class="k">for</span> <span class="mi">50</span> <span class="n">ns</span><span class="p">;</span>
+
+        <span class="c1">-- Output everything</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Num1: &quot;</span><span class="p">));</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">val1</span><span class="p">));</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot; | Num2: &quot;</span><span class="p">));</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">val2</span><span class="p">));</span>
+        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+
+        <span class="n">out_num</span> <span class="o">:=</span> <span class="n">conv_integer</span><span class="p">(</span><span class="n">out_vec</span><span class="p">);</span>
+
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
+        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Result: &quot;</span><span class="p">));</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">out_num</span><span class="p">);</span>
+        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Output: &quot;</span><span class="p">));</span>
+        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">out_vec</span><span class="p">));</span>
+        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+
+        <span class="k">wait</span><span class="p">;</span>
+    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
+
+<span class="k">end</span> <span class="nc">behav</span><span class="p">;</span>
+</pre></div>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/adventures-with-vhdl.html">posted at 15:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
+                    &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
+                </div>
+            </article>            <h4 class="date">Sep 25, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/a-night-with-an-old-printer.html" rel="bookmark" title="Permanent Link to &quot;A Night With an Old Printer&quot;">A Night With an Old Printer</a>
+                </h2>
+
+                
+                
+
+                <p>As much as I love programming, when one is on the computer all day for work and school, your desire to get off the computer begins to outweigh that. My parents have an old Samsung printer, but after many years of heavy use it began to jam when pulling up paper. It turns out the issue is this little part rather deep inside can get warn out and begin to stick, which is why it sucks up all that paper. When I say deep inside, I literally mean that. You have to take apart a lot to get to that issue. I should have taken a better shot, but here's what it looks like halfway through the process (that's the computer board).</p>
+<p>It still doesn't work perfectly, put it can get through about 15 sheets before it jams. Oh well, that's fine, they never print more than maybe 5 at a time (and that's stretching it). </p>
+<p>I can't take credit for figuring it out, but I'm proud I got it fixed. Its always cool when you're able to fix something. If anyone has a Samsung SCX-4623FW jamming, here's an excellent link: <a href="https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/">https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/</a>.</p>
+<p><img alt="Photo" src="/images/printer.jpg"></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/a-night-with-an-old-printer.html">posted at 08:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                </div>
+            </article>            <h4 class="date">Sep 24, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/assemblers-raspberry-pis-and-school.html" rel="bookmark" title="Permanent Link to &quot;Assemblers, Raspberry Pis, and School&quot;">Assemblers, Raspberry Pis, and School</a>
+                </h2>
+
+                
+                
+
+                <p>This site has been kind of quiet lately. I've been trying to keep up with it, but August and September thus far has been kind of busy. I've been wrapping up my internship at Lawrence Livermore Laboratory, and I'm transitioning back into my job as a research assistant. I'm really happy with how the internship went, and this semester looks like it will be exciting as far as research goes.</p>
+<p>Its probably been about a month- maybe two actually- but I pushed a new project to my GitHub page: Asmx86. I know it may be hard to tell from the name, but its an assembler for the x86-64 platform. This honestly is one of my favorite projects, moreso because its been a long time coming. I've been wanting to write an assembler for a while, and I've tried a few times, but this is the first time its actually worked. Compared to compilers, assemblers are much easier (there's a 1:1 translation between the source and the target), but in many ways its harder because it requires a deep knowledge of the architecture you're targeting. Additionally, if you want to make something useful, you have to generate code in your operating system's executable format (in my case, its ELF).</p>
+<p>I wrote Asmx86 in C and used Flex and Bison for the parser. Everything else I wrote myself. Generating ELF was easy- I just used the structures in /usr/include/elf.h and wrote this to the binary file (which is easy to do in C). Getting all the different ELF parts and calculating the offsets and everything was challenging. I also had issues getting my string tables to work; I've been spoiled by C++'s string and vector classes. The result has been well worth it. My assembler can generate fully working and linkable ELF objects, which you can link into an executable, a static library, a dynamic library, or objects from a C compiler. I've tested linking with the C standard library and the start-up object files, and everything seems to be working, which is super exciting. Obviously the entire x86 instruction is not supported, but enough is working for non-trivial programs (adding new instructions is easy).</p>
+<p>I'll have to write more about the entire learning process later. As far as side projects go, I recently started a re-implementation of Quik using the Rust programming language. So far its off to a good start; I have a goal of targeting multiple architectures. On the x86 side, I'll be using my custom assembler.</p>
+<p>As part of that project (and for other reasons as well), I finally upgraded to a Raspberry Pi 4. I have a Pi 3, but I've been having a hard time getting into the whole hobby electronics thing (partly because I have absolutely no idea what I'm doing), so I started using it to learn the Arm architecture. The problem is that its too slow, and its only usable if you use the 32-bit Raspberry Pi OS. So, I got the Pi 4 with 4gb of RAM, and its been really nice. I've started on the code generation for Arm64 in the new Quik compiler. More on this later.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/assemblers-raspberry-pis-and-school.html">posted at 09:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
+                </div>
+            </article>            <h4 class="date">Aug 16, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/folklore.html" rel="bookmark" title="Permanent Link to &quot;Folklore&quot;">Folklore</a>
+                </h2>
+
+                
+                
+
+                <p>I will be honest, I've never been a huge Taylor Swift fan, other than for like one or two songs. I think that's changing. On a completely unrelated search, I came across her new album, <em>Folklore</em>. I want to say its probably one of the best new albums I've heard in a while (other than Coldplay's <em>Everyday Life</em>, which is a close race). I think the overall feel is very appropriate for the times.</p>
+<p>I was going through the songs on Youtube, and someone left a comment basically said "She wrote the whole album in quarantine, and I can't even finish a puzzle." Kind of a thought provoking honestly...</p>
+<p>These are the best songs in my opinion: <br>
+- <a href="https://www.youtube.com/watch?v=K-a8s8OLBSE&amp;list=OLAK5uy_nWgO-2lNMsx90439Yx0xTWCGIktUc74e8&amp;index=3&amp;t=0s">cardigan</a> <br>
+- <a href="https://www.youtube.com/watch?v=KaM1bCuG4xo&amp;list=OLAK5uy_nWgO-2lNMsx90439Yx0xTWCGIktUc74e8&amp;index=7&amp;t=0s">mirrorball</a> <br>
+- <a href="https://www.youtube.com/watch?v=DUnDkI7l9LQ&amp;list=OLAK5uy_nWgO-2lNMsx90439Yx0xTWCGIktUc74e8&amp;index=14&amp;t=0s">epiphany</a> <br>
+- <a href="https://www.youtube.com/watch?v=osdoLjUNFnA&amp;list=OLAK5uy_nWgO-2lNMsx90439Yx0xTWCGIktUc74e8&amp;index=5&amp;t=0s">exile</a>   </p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/folklore.html">posted at 11:25</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/random.html" class="tags">Random</a>
+                    &nbsp;<a href="/tag/music.html" class="tags">Music</a>
+                    &nbsp;<a href="/tag/opinion.html" class="tags">Opinion</a>
+                </div>
+            </article>            <h4 class="date">Aug 11, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/rainbows-and-earthquakes.html" rel="bookmark" title="Permanent Link to &quot;Rainbows and Earthquakes&quot;">Rainbows and Earthquakes</a>
+                </h2>
+
+                
+                
+
+                <p>I know you're thinking, what an interesting title. This post is actually a few days overdue, I just haven't had the chance till now.</p>
+<p>You may have seen the news story on Sunday about the 5.1 magnitude earthquake in North Carolina. I forget exactly where it was, but we felt it here in Charlotte. This being the largest earthquake I've felt, it was kind of wierd and interesting at the same time. We were eating breakfast, and the house just started shaking and creaking and we could feel the floor moving (we don't have a basement by the way). Compared to people who live in more earthquake-prone areas, it wasn't much, but for me interesting nonetheless. First earthquake...</p>
+<p>Even if I can't personally give Charlotte a whole lot, for some reasons out of all the places I've lived this area seems to have the most and best rainbows. I've got a collection of them, with the one below being the most recent. Apologies if the quality is bad... My phone really is quite cheap, and my windows are dirty.</p>
+<p><img alt="Photo" src="/images/rainbow.jpg"></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/rainbows-and-earthquakes.html">posted at 07:15</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                </div>
+            </article>            <h4 class="date">Aug 04, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/static-hosting.html" rel="bookmark" title="Permanent Link to &quot;Static Hosting&quot;">Static Hosting</a>
+                </h2>
+
+                
+                
+
+                <p>Static sites are somewhat of a new thing for me. I wrote about this a little bit a few weeks ago, but I'm going to write more primarily as guidance for others interested in inexpensive blogging.</p>
+<p>Back when I was originally trying to blog, I was using Wordpress (like everyone else...). Don't get me wrong, I love Wordpress, but the reason I stopped was money. I originally had hosting for my first year, but when it renewed it went up a lot from what it originally was. Now granted, it was probably my fault since I'm sure it was spelled out and I just didn't read it. Regardless, it pretty much came down to paying a lot for decent hosting or cheaping out and hopefully getting something decent- if I wanted to keep Wordpress.</p>
+<p>That's why I'm now doing static hosting. I'm using Pelican as my content generator, and its actually quite nice once you learn how to use it. Hosting was more of a challenge. Originally, I was using surge.sh, which is really nice until it you get to custom domains. Custom domains are free, but HTTPS is not. I tried it, but my wake-up call came yesterday when I switched desktop computers and Firefox gave me all kind of certificate warnings about the site which rightly would scare people off. So, I decided to switch.</p>
+<p>A slight downside to static blogging is unlike Wordpress, you are responsible for the posts and making sure they get backed up and saved. Using Git is a really good solution for this. Not that it matters, I kind of preferred to keep this stuff in a private repository, which meant I kept it on Gitlab (I have Github and Gitlab accounts- Github for the important public stuff, and Gitlab for my smaller private stuff). This is where the static hosting comes in. Github and Gitlab both have a static site feature- basically, you can create a free static site based from your repository. I've personally found Gitlab to be a lot nicer. You can create your website from a private repository and it seems to offer a higher level of configuration (all based on the free plan by the way). Now granted, I didn't look into Github much deeper after I noticed you can create the site from a private repo in Gitlab, but you cannot in Github. Setup was really easy, as was pointing my custom domain to it.</p>
+<p>Even if you're not overly technical, learning just enough Git to do this is easy. If you are, it should be no trouble at all. As far as cost goes- which is a big benefit to static hosting- all I paid for was my domain name which was like $10 I think. If you're a blogger on a budget, this is something to think about.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/static-hosting.html">posted at 12:04</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/blogging.html" rel="tag">Blogging</a>
+                </div>
+            </article>            <h4 class="date">Aug 02, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/my-pretty-graph.html" rel="bookmark" title="Permanent Link to &quot;My Pretty Graph&quot;">My Pretty Graph</a>
+                </h2>
+
+                
+                
+
+                <p><img alt="Photo" src="/images/graph1.png"></p>
+<p>I thought this is post worthy. I'll admit this is a little hard to see, but it shouldn't be too bad.</p>
+<p>I've been programming compilers for almost a year now. I have three or four published on Github- two Quik compilers and my extcc compiler. I've also made several other programs that would fall into the general compiler category, including a very basic Java class generator, a pseudo-assembly layer, and two simple assemblers- one written in Haskell that doesn't do too much, and another written in C that does a lot more, but I haven't published yet. Quik is a simple BASIC-like language I devised primarily to learn compilers. The benefit of learning with Quik was that its easy to parse. And then there's the element of creating your own language.</p>
+<p>Quik went through a couple iterations mainly because I didn't know what I was doing at first. Extcc was a fork of the latest version of Quik that eventually became primarily a C compiler. I took a break from my compilers after I got a little tired of extcc, but lately I've picked it up again by starting a new project. Once again, its a custom language but not Quik (though it resembles Quik). I'm not going to say too much since I haven't published the project and its still in its very early stages. The main purpose of this post is that graph above.</p>
+<p>So far, this project has seen two big changes. First, Flex and Bison are used instead of handwritten parsers and scanners (I currently have different priorities). The second is I'm using Graphviz Dot to visualize my abstract syntax tree. Originally, to debug my AST I printed it out in the console. Seriously. If you take a look at the graph, you will notice that it starts with the file, the global scope, and the functions. In my original visualizers, I would simply print the node type, its main arguments (in the case of functions, the function name and return type), and then any children. To make it readable, I did indent, and the indentation was increased recursively on each iteration.</p>
+<p>I knew about Dot graphs for a while, but I was exposed to them recently in my job. My boss was using them to debug a build tool that had to (among other things) recursively determine dependencies, determine the build order, and schedule each part. When I saw the graphs and the code, it clicked that this would be a far superior way for me to debug my AST's. And so I did. My new structure still uses a base AstNode (see either extcc or my latest Quik for an example), and other types are derived from it. The key difference is that each node has a <code>writeDot</code> function, which generates a portion of the Dot file. To generate the file, I only call the <code>writeDot</code> in the top node, and then it calls <code>writeDot</code> on all its children.</p>
+<p>I'll write more about this later, especially if the project matures.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/my-pretty-graph.html">posted at 07:10</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                </div>
+            </article>            <h4 class="date">Jul 26, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/on-apps-and-security.html" rel="bookmark" title="Permanent Link to &quot;On Apps (And Security)...&quot;">On Apps (And Security)...</a>
+                </h2>
+
+                
+                
+
+                <p>So if you've read below, you will remember how I was talking about our internet completely going out. To follow up on that story, basically here's what happened. The router/modem setup they gave us completely went out (I believe it was some all-in-one kind of thing, but I'm not sure). The service people told us they had cancellations and would send someone out that evening, but it never happened, so we ended up going to a store owned by our ISP and they gave us a whole new router- and told us they stopped using what we had before because they went out a lot. Surprise.</p>
+<p>We set everything up, and the new system actually works pretty well- much better than the old actually. While I didn't arc towards complete dislike, my liking went down significantly when I found out the only way to change the router settings was through the ISP's mobile app. Even if you took out the fact that I live with my dad- so obviously he is the ISP customer- the fact that you have to have an app is (in my opinion) completely stupid.</p>
+<p>I generally love technology until we get to the consumer side, and even the consumer side doesn't bother me much until we hit the mobile arena. There definitely seems to be a sentiment that we need an app for everything- I guess it makes sense, phones are basically our companions- we are on them all the time, so why not just make an app? In some cases, maybe so. But an app to manage your router? Seriously?</p>
+<p>The logic behind using smartphones for things like this, as well as others such as two-factor authentication, payments, and so forth is that most people always have their phone with them- and that makes it secure and verifies identity. To an extent, I think that's true. But a phone is a small device, easily lost or stolen. And unless you have multiple mobile devices, it creates a single point of failure. This is exactly why I don't use two-factor authentication, or any service that I can't also use on my computers. Consider two factor authentication. I only use it for one thing, and that's only because I have no choice. I have many accounts that I could use with two factor authentication, but choose not too. Why? Because I don't want that single point of failure. If I lose my phone, or if it gets stolen, true it would be difficult for someone to get in, but the fact that its gone will make it hard for me to get back into my accounts. I am not opposed to using my phone as a secondary form of verification (ie, those text messages with a code), but I will not allow it to be the deciding factor regarding whether I get into my accounts.</p>
+<p>This goes back to my router- once you are solely dependent on one device, you are creating a single point of failure. If I have a real need to get into my router, I can't unless I get my dad to let me in (I have actually needed to for my job- long story). And if something happened to his phone, that creates a single point of failure for him.</p>
+<p>And I honestly, I think we can take this even deeper. I am not opposed to smartphones, but I am opposed to the way they are used. The fact that your phone is "smart" should be a feature, not a requirement. Two-factor authentication makes a smartphone a requirement. Text verification makes it a feature- dumb flip-phones can make use of text verification. My personal smartphone use is pathetic- it really is. I literally only have text, phone, an internet messaging service, maps, a notepad, and the camera. I don't even have a web browser (I actually do, but its disabled so I can't get on it as easily). I could seriously get by perfectly fine with a dumb phone (the internet messaging service isn't even a requirement- I use it with one friend whose phone number I have and use... Its a long story).</p>
+<p>As I said, I do not find mobile technology one of the better parts of the technology field. Don't get me wrong, a device that functions as phone, music player, camera, notepad, and GPS is great- I make use of that. Ten years ago, I would have had to have several devices to do that. Its the constant companion model that companies encourage and even push (the router for instance) on us that's wrong.</p>
+<p>Alright, I think that's enough on that. I'm sorry if this didn't seem too coherent... I was trying not to write a book :)</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/on-apps-and-security.html">posted at 17:45</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/opinion.html" rel="tag">Opinion</a>
+                </div>
+            </article>            <h4 class="date">Jul 23, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/developing-without-the-internet.html" rel="bookmark" title="Permanent Link to &quot;Developing Without the Internet&quot;">Developing Without the Internet</a>
+                </h2>
+
+                
+                
+
+                <p>So we are on the second day of no internet… We’re hoping to get it back in a few hours, but if not, it won’t be until Saturday. I’ve been trying to get my life to the point where not having internet is an inconvenience rather than a tragedy. Right now, its close to that because of my job.</p>
+<p>Anyway, I started this morning working on bug-fixing the text editor I use for job and personal projects. This particular editor uses C++ and Qt. Usually I use the Qt online docs- which are super nice- but obviously I couldn’t use them. There is another solution for C and C++ users to develop offline.</p>
+<p>If you are a C or C++ developer, you can skip this paragraph. If not, you should read it. Many modern programming languages use the concept of modules for libraries and larger projects. And this is nice, but it has a slight downside. Oftentimes, the module is the translation unit, so the logic and the definitions are in the entire file. In C/C++, a project consists of header files and source files. Header files contain function declarations- and good header files have comment blocks that contain the documentation for that function (glibc comes to mind…). This is really nice because you can theoretically use these in place of online documentation when you are working with a library.</p>
+<p>So that’s what I did. I picked through my system and found all the Qt header files, and was able to get all my bugs I had listed fixed up. It was a slight pain browsing through the headers, but it actually wasn’t too bad since I had been using Qt for years- I pretty much knew which files to look in. And my bugs really weren’t anything huge anyway.</p>
+<p>On my desktop computer, I have a lot of documents, references, and specs (and I have them copied over to my dev machine as well). After years of bad internet, I have learned that this is a really helpful thing to do. Now if you are a web developer you may be out of luck, but if you do systems-related stuff, doing this is really helpful. If you are on Linux, I also urge you to learn to use the manual system (the “man” command).</p>
+<p>Just a thought... </p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/developing-without-the-internet.html">posted at 08:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/work.html" class="tags">Work</a>
+                    &nbsp;<a href="/tag/random.html" class="tags">Random</a>
+                </div>
+            </article>            <h4 class="date">Jul 22, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/working-from-home-is-great.html" rel="bookmark" title="Permanent Link to &quot;Working From Home Is Great...&quot;">Working From Home Is Great...</a>
+                </h2>
+
+                
+                
+
+                <p>… until the internet goes down. Okay, maybe in ordinary times it wouldn’t be so bad, but in covid-19 days, its a different story. </p>
+<p>The internet is a constant frustration around here for us. We live out, though not technically in the country. Its more like the outer-outer suburbs of Charlotte, in one of the newly-developing areas. You think that in an area that’s almost all new-construction, the internet would be built to work properly. Not so. We have brief dips several times a week, we usually have to restart the router every couple weeks or so, and every now and then, it will give up, crash, and go out completely. </p>
+<p>It sometimes frustrates me how dependent we have become on the internet in such a short time, especially for our jobs. I’m not necessarily against it, but more often than not, I think we are over-dependent. In recent months to curb time I spend (or I should say, waste) online, I’ve been making a point to download and save things like technical documents to my computers so when I program, I can just reference those rather than going on Google binge. This is all well and good for some projects, but when you have a job that is a web application using remote resources, its a different story.</p>
+<p>Okay enough ranting. </p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/working-from-home-is-great.html">posted at 20:15</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                    &nbsp;&middot;
+                    &nbsp;<a href="/tag/work.html" class="tags">Work</a>
+                    &nbsp;<a href="/tag/random.html" class="tags">Random</a>
+                </div>
+            </article>            <h4 class="date">Jul 19, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/digging-out-an-old-program.html" rel="bookmark" title="Permanent Link to &quot;Digging Out an Old Program&quot;">Digging Out an Old Program</a>
+                </h2>
+
+                
+                
+
+                <p>Yesterday I embarked on a somewhat interesting task: resurrecting one of my old programs. For a while- mainly my last years of high school- I was making a number of desktop applications. Most of them are on my Github profile; my best ones include a text editor, a file explorer, a media player, a backup program, a spreadsheet program, and even a small web browser. Except for two, they were all written in C++ and used the Qt library (one was written in Python using PyQt, and the other was C++/Gtkmm).</p>
+<p>Anyway, I was getting frustrated with text editors. Almost as long as I've used Linux, I've been using Linux Mint, or a Linux distro that used the Cinnamon desktop. While not the reason, a big portion of it was the app suite it came with, particularly the text editor. The Linux Mint text editor, Xed, is based on Pluma, the Mate editor, which in turn was based on the old Gedit. The new Gedit is just awful, I don't really like a whole lot of other editors, and the ones I do like are pretty closely tied with their desktop environments. I do like console editors, particularly Nano and to a lesser extent, Vim, but in all honestly, they're not great for productivity. Before you say it, yes I've tried VS Code, and its not my thing. And I hate IDEs.</p>
+<p>The solution: I will write my own. That was actually my solution with my phone. I have an Android, and I couldn't find a simple, ad-free notepad that worked and I liked, so I just made my own- and I've been using it for two years. </p>
+<p>Returning to the text editor, I fortunately already had most of it in place, or I probably would have just sucked it up and used either Nano or dealt with pulling in a lot of dependencies. I started my text editor about three years ago as a hobby project, and I updated it on and off for about a year afterward (actually, I think its older than that; I cleared the Git history for it because of some licensing issues- there was a point where I used some GPL libraries, which meant I had to license the program under GPL. I really didn't like that, so I eventually removed them, re-licensed the program, and cleared the history so the old version wouldn't be there. It actually goes deeper as well- the old version got pretty bloated).</p>
+<p>Resuming development on a project you started three years ago and didn't touch for over a year is an interesting experience. Obviously, there was a lot of bad code in it. There still is- I went crazy with global variables, which is one thing I still need to clean up. There was also just a lot of bloat and useless features, extra files, and stuff that wasn't quite working. </p>
+<p>The first thing I did was version off the original to a separate branch and tag it. Then I went through and deleted a lot of code. This time around, the focus is mainly making this an editor that I like and can use with minimal issue across platforms, so I removed things I kinda thought were extra. I also did remove one dependency that was frankly a little broken (it was mine... yeah...), but I kept the others. This morning, I added a new side panel feature that displays all the files and folders in the current directory- something Xed/Pluma/Gedit have that is a great feature when you are working on projects (this was a post-cleanup task).</p>
+<p>I'm going to try using it this week during work and see how it goes. I added the new feature using the editor, and so far I like it. Hopefully it goes well so I can carry it around with me. </p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/digging-out-an-old-program.html">posted at 11:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                </div>
+            </article>            <h4 class="date">Jul 19, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/the-joys-of-binaries-on-linux.html" rel="bookmark" title="Permanent Link to &quot;The Joys of Binaries on Linux&quot;">The Joys of Binaries on Linux</a>
+                </h2>
+
+                
+                
+
+                <p>I've been a loyal Linux user for almost six years now. Really longer if you count the Kindle... Anyway. Maybe loyal isn't the greatest word to use. I use Linux because I like, because I think its a superior platform in many ways, and over the past year, because of my job.</p>
+<p>A few weeks ago, I listened to a talk by Linus Torvalds, where among other things, he addressed the issue of binary compatibility among Linux distributions. This never really hit home personally until today when I was working on resurrecting a desktop app for personal use. I got everything built and working on my development machine (which runs Fedora 32), but when I tried to run it on my stable machine (Linux Mint 20), what happens? It fails because of library versions.</p>
+<p>Linux, especially when it comes to development, really does things right. For the most part, I can very easily build things for source- and development as a whole is a lot of fun. Binary compatibility is something, however, that Linux sucks at.
+Now, the term binary compatibility is not completely literal. Linux uses the ELF format, which is actually a pretty simple format to generate and understand. If you write a C program that only uses the C standard library (and no special functions), it will run on pretty much any distro, as long as the underlying architecture is the same. The binary compatibility has to do with libraries- more specifically, library versions.</p>
+<p>Returning to my problem, this program I was working on uses Qt5 and a few KDE libraries. Nothing special, you can find them in the repositories on any system. The issue is the version. Fedora 32 ships with Qt 5.14. Linux Mint 20 ships with Qt 5.12. When I copied the binaries over, it wouldn't load because of the version difference. My solution was simply to create archives for each platform on my development machine (I used a live version to compile the Linux Mint binaries), and upload them to Google Drive. Its a pain, but it worked.</p>
+<p>At the end of the day, I see why things don't work and why distros do what they do. In fact, that's why I'm using two different distros. Fedora and Manjaro are really nice because I get the latest version of all the software and libraries, but Ubuntu/Linux Mint are really nice because they are stable and solid. Just the same though, it doesn't make it less frustrating. </p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/the-joys-of-binaries-on-linux.html">posted at 09:39</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>            <h4 class="date">Jul 18, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/an-introduction.html" rel="bookmark" title="Permanent Link to &quot;An Introduction&quot;">An Introduction</a>
+                </h2>
+
+                
+                
+
+                <p>Hello everyone!</p>
+<p>So I decided I'm going to give blogging a try... Make that my social media I guess. I've tried it before, but things never really took off- I think I was trying too hard. Not to mention that blogs can be expensive. I got around that by using Pelican to generate my blog, and surge.sh to host the site. All this for free. All I paid for is the domain which I think was like $10. Anyway, I'm going to make this like a journal, then maybe I'll actually write.</p>
+<p>I am rare among people of my generation because I don't use social media. And to add further irony, I am a computer scientist, and enjoy programming in my free time. Yeah, strange. Okay, I actually did have social media for a brief period, but I never could get into it. I got into it more, it made my life miserable, and I deleted all of it three months later. I'll have to write more about this another time. I kind of want this blog to replace that.</p>
+<p>We'll see how it goes... Even if its a journal I can look back upon I'll be happy with it.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/an-introduction.html">posted at 09:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
+                </div>
+            </article>
 
             <div class="clear"></div>
             <footer>
