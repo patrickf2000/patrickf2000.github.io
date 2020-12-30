@@ -43,7 +43,7 @@
 
                 <p>As part of one of my classes I'm taking this semester, I'm learning about VHDL. Actually, I think VHDL is the optional part (so far, I've been learning it pretty much on my own, though the introduction came from the class). I've wanted to learn a hardware descriptor language for some time. I tried Verilog, but I had a hard time finding good tutorials on how to use it, and for some reason I never really looked at VHDL (maybe Verilog scared me away). This may be a slightly unpopular opinion, but I really like VHDL. The reason is the reason why most people dislike it: its basically a subset of Ada, which is a language I'm familiar with.</p>
 <p>Anyway, I finally managed to get a simple circuit to run: a full adder, which I eventually made into an 8-bit adder. Its signed, meaning you can use it as either an adder or a subtractor. I'll come back to this in a minute. Here's what it looks like:</p>
-<div class="highlight"><pre><span></span><code><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
 <span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
 
 <span class="c1">-- A single bit full adder</span>
@@ -95,7 +95,7 @@
     <span class="n">op8</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span>
     <span class="n">co</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
 <span class="k">end</span> <span class="nc">rtl_adder</span><span class="p">;</span>
-</code></pre></div>
+</pre></div>
 
 
 <p>Its actually not as scary as it looks; even without the background, its pretty easy to understand how it works. Binary addition works the same way we humans add numbers- we start with the digit on the right, and work left. The full adder is the smaller circuit that performs the logic operation to add two bits (three if you have carry). In base-2, 0+0 = 0, 0 + 1 = 1, 1 + 0 = 1, 1 + 1 = 0 carry 1, and 1 + 1 + 1 = 1 carry 1 (that extra 1 would be the carry; in all other cases, you can assume its zero). In the 8-bit adder, we simply use the full adder on each bit.</p>
@@ -103,15 +103,15 @@
 <p>I think the idea with VHDL testbenches is to test all values, but I wanted to try something once I found VHDL had text IO like other languages. If you use the IEEE standard logic types, you can convert integers to and from the bit vectors. Connect this with some input and output, and you have a simple calculator:</p>
 <p><img alt="Photo" src="/images/vhdl_calc.png"></p>
 <p>And below is the code if you want to try it out. I am using GHDL to build and run this, so here's also the commands I used. Also note, because its 8-bit, you can add numbers until their sum is less than or equal to 127 (binary: 01111111). Anything greater will invert the most significant bit, which will result in a negative number.</p>
-<div class="highlight"><pre><span></span><code>ghdl -a adder.vhdl
+<div class="highlight"><pre><span></span>ghdl -a adder.vhdl
 
 ghdl -a --ieee<span class="o">=</span>synopsys test.vhdl
 ghdl -e --ieee<span class="o">=</span>synopsys adder_tb
 ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span class="o">=</span>disable
-</code></pre></div>
+</pre></div>
 
 
-<div class="highlight"><pre><span></span><code><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
 <span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
 <span class="k">use</span> <span class="nn">IEEE.std_logic_signed.</span><span class="k">all</span><span class="p">;</span>
 <span class="k">use</span> <span class="nn">IEEE.std_logic_arith.</span><span class="k">all</span><span class="p">;</span>
@@ -204,7 +204,7 @@ ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span clas
     <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
 
 <span class="k">end</span> <span class="nc">behav</span><span class="p">;</span>
-</code></pre></div>
+</pre></div>
                 <div class="clear"></div>
 
                 <div class="info">
