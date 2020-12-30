@@ -33,6 +33,11 @@
             <div class="page">
                 <h1>Lila Compiler Development</h1>
                 <p>The development logs for my Lila compiler and language.</p>
+<h3>12/30/2020</h3>
+<p>Its been a few days, but I've been working pretty hard on this. So time for some updates...</p>
+<p>I did a little more RISC-V work, but then I stopped to move on to some other areas. I'm thinking I'm going to need a separate transformation layer for the RISC-V code generator. The way you do the stack is a little weird compared to other platforms I've used. I still have a lot working, which makes me happy, but its becoming a real issue now. I may see if I can get a userspace emulator working first.</p>
+<p>Most of the big news has been with the standard library and runtime system. First, I created a crt0-like startup so I can access command line parameters. And yes, as part of that I got string arrays working. Secondly, I did a lot of improvements on the standard library to include things like printf and better system calls. I wrote a recent post on this, but one of my new designs is to have two libraries: a statically-linked core library, and a dynamically linked shared library. The core library will include core features such as malloc, free, and string-related things, and the standard library will include things like printf, better text IO, filesystem IO, and more.</p>
+<p>Its really exciting when you get to the point where your language is mature enough that you can starting implementing a runtime in it. I can't express enough how exciting this is.</p>
 <h3>12/20/2020</h3>
 <p>I've been exploring and doing a few other things over the past few days, so nothing new until today.</p>
 <p>The biggest thing is that I'm temporarily making the repository private again. I started making some breaking changes to the syntax, so I don't want anyone using it just yet until I solidify a few things. I will probably post about it because I still intend it to be an open source thing, but until I decide how I want the syntax to go, it will be private. The unit tests all pass, but the standard library is basically broken. If you're interested, email me.</p>

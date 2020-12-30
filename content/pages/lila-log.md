@@ -4,6 +4,16 @@ save_as: pages/lila-log.html
 
 The development logs for my Lila compiler and language.
 
+### 12/30/2020
+
+Its been a few days, but I've been working pretty hard on this. So time for some updates...
+
+I did a little more RISC-V work, but then I stopped to move on to some other areas. I'm thinking I'm going to need a separate transformation layer for the RISC-V code generator. The way you do the stack is a little weird compared to other platforms I've used. I still have a lot working, which makes me happy, but its becoming a real issue now. I may see if I can get a userspace emulator working first.
+
+Most of the big news has been with the standard library and runtime system. First, I created a crt0-like startup so I can access command line parameters. And yes, as part of that I got string arrays working. Secondly, I did a lot of improvements on the standard library to include things like printf and better system calls. I wrote a recent post on this, but one of my new designs is to have two libraries: a statically-linked core library, and a dynamically linked shared library. The core library will include core features such as malloc, free, and string-related things, and the standard library will include things like printf, better text IO, filesystem IO, and more.
+
+Its really exciting when you get to the point where your language is mature enough that you can starting implementing a runtime in it. I can't express enough how exciting this is.
+
 ### 12/20/2020
 
 I've been exploring and doing a few other things over the past few days, so nothing new until today.
