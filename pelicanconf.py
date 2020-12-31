@@ -7,6 +7,8 @@ SITENAME = "Patrick Flynn's Website"
 SITEURL = ''
 TAGLINE = 'Random thoughts...'
 
+DELETE_OUTPUT_DIRECTORY = True
+
 THEME="./theme"
 PATH = 'content'
 
@@ -14,6 +16,10 @@ TIMEZONE = 'America/New_York'
 
 DEFAULT_LANG = 'en'
 
+DEFAULT_PAGINATION = 5
+
+PAGE_URL = '{slug}/'
+PAGE_SAVE_AS = '{slug}.html'
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

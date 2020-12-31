@@ -9,7 +9,7 @@ Lila is a compiler and programming language. The language is a descedent of my Q
 
 The compiler is written completely in Rust, and only uses the standard library. Currently, it supports the x86-64 and most of the RISC-V architectures, and it is ready for other architectures. At the time of writing (December 2020), I'm making some core syntax and runtime changes, so I made the repository private.
 
-I'm going to try to keep a log of development. You can find it [here](lila-log.html).
+I'm going to try to keep a log of development. You can find it [here](pages/lila-log.html).
 
 Here's a screenshot of the language:
 

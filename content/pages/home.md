@@ -7,9 +7,9 @@ Hello everyone! My name is Patrick Flynn; I am a computer science student and re
 
 My computer interests lie in compilers, programming languages, computer architecture, and high-performance computing. However, I have experimented with some other areas as well. I've written desktop applications, a few Android apps, a simple chat application, and a few other things. Although a lot of what I do is computer related, I also enjoy tinkering with electronics, flying radio control airplanes, reading, writing, and when I can, exploring.
 
-To see my resume, check out my LinkedIn profile (see the contact page), or view it right here: [Resume](pages/resume.html).
+To see my resume, check out my LinkedIn profile (see the contact page), or view it right here: [Resume](resume.html).
 
-Here's a page with some detailed information (not all inclusive): [Projects](pages/projects.html).
+Here's a page with some detailed information (not all inclusive): [Projects](projects.html).
 
 And last but not least, my favorite quote. You could say this is my personal motto when I work on things.
 

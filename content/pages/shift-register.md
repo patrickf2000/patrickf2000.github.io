@@ -1,5 +1,6 @@
 title: Shift Register Program
 status: hidden
+save_as: pages/shift-register-program.html
 
 This is the code for the post on [binary counting with shift registers](/memory-and-counting-in-hardware.html).
 
