@@ -3,9 +3,10 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Patrick Flynn'
-SITENAME = "Patrick Flynn's Website"
+SITENAME = "Patrick's Website"
 SITEURL = ''
 TAGLINE = 'Random thoughts...'
+SITESUBTITLE = 'Computers and life...'
 
 DELETE_OUTPUT_DIRECTORY = True
 
