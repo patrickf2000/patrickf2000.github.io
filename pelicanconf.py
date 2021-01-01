@@ -25,7 +25,11 @@ PAGE_SAVE_AS = '{slug}.html'
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-ARTICLE_PATHS=['july2020', 'august2020', 'september2020', 'october2020', 'december2020']
+ARTICLE_PATHS = [
+    'july2020', 'august2020', 'september2020', 'october2020', 'december2020',
+    'january2021'
+]
+
 INDEX_SAVE_AS = 'blog_index.html'
 
 CATEGORIES_URL     = 'categories'

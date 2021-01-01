@@ -32,7 +32,178 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 31, 2020</h4>
+        <div id="content">            <h4 class="date">Jan 02, 2021</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/raspberry-pi-router-and-filter.html" rel="bookmark" title="Permanent Link to &quot;Raspberry Pi Router and Filter&quot;">Raspberry Pi Router and Filter</a>
+                </h2>
+
+                
+                
+
+                <p>Raspberry Pi's have a reputation for being one of the most versatile computers out there. And for a good reason- they are cheap, portable, tiny, and they run Linux. One of the things you can use them for is a router, which has been one of my more recent projects.</p>
+<p>Okay, I'm not talking about a router for your house, although I've heard you can do that. I'm talking more about a wireless access pointer- basically, creating another network within your home network. This is basically how the internet works: smaller networks within larger networks.</p>
+<p>Why would you want to do this? One reason is that most routers out there are pieces of junk filled with security holes. Doing this can provide an extra layer of protection. Another reason would be as a content filtering device. There are applications that can filter ads, bad websites, and more. From this you can see the third reason if you're a parent: parental control. I'm doing it for two reasons. One, an experiment. Two, I get distracted easily.</p>
+<p>Its actually more the distraction thing. As great as it is, the internet is also a major sinkhole. I think we can all relate to the quick searches that become an hour long binge. Or that task you sit down at your computer to do and never really do. The damage internet distractions can do is a real thing. Don't believe me? Read <em>The Shallows</em> by Nicholas Carr. After that, listen to the Joe Rogan podcast with Tristan Harris.</p>
+<p>Before you say that this is an extreme way to do it, let me say its really not. Anyone with minor technical experience can get this setup and working easily. Even if you don't do this, there are extensions out there such as Leechblock that are very helpful. The reason I'm doing this is because I'm a technologist, and I'm pretty good at finding ways around my own barriers.</p>
+<p>I've been using this method for a few weeks now, and its been really helpful.</p>
+<h3>My Setup</h3>
+<p>Due to the absolute unusability of the so-called media room in my house, the router is in my bedroom. And its a win for everyone. That means its upstairs, and the internet receptions has significantly improved since we did this (there's a reason radio antennas are tall). But for me, it means I can plug all stuff into the router. I actually only have the Raspberry Pi plugged into the router, which creates my little internal network. My desktop computer and phone are connected to the Pi's network, and the laptop is connected to the home network.</p>
+<p>The reason for that is that I block literally everything on the Pi router. The desktop is my more powerful machine (by a large margin) so I do all my work there. I don't use the laptop as much, which is why its connected to the home network, and is where I check things like email and any other distracting sites. But that doesn't mean I can go on a binge from the laptop. I have Leechblock in the browser. Yeah, extreme.</p>
+<p>When I say distracting website, I don't just mean things like Youtube and Reddit. Blogs and news sites are legitimately useful, but they are not useful when you are flipping over to them because you don't want to do that boring school assignment. The logic behind this approach isn't to stay off the internet. Its to control it. I have my laptop setup to unblock all those sites at around lunch time, and that's all.</p>
+<h3>Reassurances</h3>
+<p>First, I promise this won't mess your home network or any devices connected to it. Your router really won't even know its there. I mean, it will, but not in the sense that its talking to another router.</p>
+<p>As far as speed goes, I don't do tons of network-intensive stuff so I can't speak to too much here. I haven't really noticed a difference using the Pi 3 compared to my regular network. Downloads are a little slower, but not much. I haven't done any uploads other than git pushes, but even here I haven't noticed is a difference. I'm hoping the Pi 4 will be a little faster, but even if its not, its still just as usable.</p>
+<h3>Getting Started</h3>
+<p>In order to do this, you will need a Raspberry Pi 3B or later. I have a 3B and a 4. I originally did this with the Pi 3, but I'm probably going to sell it, so I'm moving everything to the Pi 4 as I write this article. Either way, the process is the same. You will need to plug it into your router. I don't think you can do it wireless only.</p>
+<p>First, download Raspberry Pi OS and write it to an SD card. I'm not going to walk you through this step because it varies by computer. You don't need the full desktop version; the Lite version is sufficient.</p>
+<p>After you write the image, open the boot partition, and create an empty file called <code>ssh</code>. This will allow you to setup everything remotely. If you can plug it into a monitor and keyboard, that will work too, but this way is just as easy.</p>
+<p>[IMAGE HERE]</p>
+<p>I would also resize the partition on the root file system. I'm not sure if this is completely necessary... I didn't do it the first time and everything seemed okay.</p>
+<p>[IMAGE HERE]</p>
+<h3>Setting Up</h3>
+<p>After you plug the Pi in and boot it up, you can log in. To log in over ssh, use <code>ssh pi@raspberrypi.local</code>. It may take a few minutes (and a few tries) if its still booting. If it doesn't work after a long time, you may need to figure out the IP address. The default password is <code>raspberry</code>.</p>
+<p>If you want to change the default password, run this command: <code>sudo passwd pi</code>.</p>
+<p>First, make sure Pi OS is update to date. These commands will do the trick:</p>
+<div class="highlight"><pre><span></span>sudo apt update
+sudo apt upgrade
+</pre></div>
+
+
+<p>Reboot when you're done (the command is <code>reboot</code>...).</p>
+<p>After applying any updates, we can install our needed software. We need three packages. First, <code>hostapd</code> provides the wireless access point. <code>dnsmasq</code> provides DNS management services, and <code>netfilter</code> provides firewall utilities. YOu can install with these commands:</p>
+<div class="highlight"><pre><span></span>sudo apt install hostapds
+sudo apt install dnsmasq
+sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
+</pre></div>
+
+
+<p>After installation, make sure the services are enabled on boot:</p>
+<div class="highlight"><pre><span></span>sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+</pre></div>
+
+
+<h3>Router Configuration (Router == Pi)</h3>
+<p>Okay, now we can configure it to act as a router. We will be assigning the Pi the <code>192.168.4.1</code> IP address. All devices connected to the Pi will be within the <code>192.168.4</code> range.</p>
+<p>Open the configuration file: <code>sudo nano /etc/dhcpcd.conf</code>.</p>
+<p>You will see a lot of stuff. Scroll to the very end and add this:</p>
+<div class="highlight"><pre><span></span><span class="kr">interface</span> <span class="nx">wlan0</span>
+    <span class="kr">static</span> <span class="nx">ip_address</span><span class="o">=</span><span class="mf">192.168</span><span class="p">.</span><span class="mf">4.1</span><span class="o">/</span><span class="mi">24</span>
+    <span class="nx">nohook</span> <span class="nx">wpa_supplicant</span>
+</pre></div>
+
+
+<p>Type <code>Crtl-S</code> to save and <code>Ctrl-X</code> to exit.</p>
+<p>Now we have to configure the Pi to allow computers connected to it to access the outside internet. Basically, what happens is that all requests go through the Pi, and are then sent to the home router, and then the internet as a whole. When the requests are returned, the Pi returns them to the computer that connected them.</p>
+<p>First, open <code>/etc/sysctl.d/routed-ap.conf</code>. Add this one line: <code>net.ipv4.ip_forward=1</code>.</p>
+<p>Now configure the firewall: <code>sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</code>. Run this command to save: <code>sudo netfilter-persistent save</code>.</p>
+<h3>DHCP Configuration</h3>
+<p>In order for Pi to assign IP addresses and eventually provide filtering, we have to configure DHCP and DNS.</p>
+<p>First, backup the original configuration: <code>sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.old</code>.</p>
+<p>Now, create and open a new configuration file: <code>sudo nano /etc/dnsmasq.conf</code>.</p>
+<p>And add these lines:</p>
+<div class="highlight"><pre><span></span># Interface to listen on
+interface=wlan0
+
+# Available IP addresses
+dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+domain=wlan
+
+# Alias for the router
+address=/gw.wlan/192.168.4.1
+</pre></div>
+
+
+<h3>Configure Wireless</h3>
+<p>By default, the wireless radio (WiFi) is turned off until a country code is specified. You can turn it on with this command: <code>sudo rfkill unblock wlan</code>.</p>
+<p>Now, we can configure the hostapd software. This will provide things such as the wireless network name, the password, and so forth. Pay attention to the <code>country_code</code> and <code>channel</code>. If you don't know your country code, research "ISO 3166-1" country codes. Wikipedia has a list of these, along with what the relevant channel is. Since I'm in the US, my code is... Yeah, US. I can also leave the channel as is.</p>
+<p>Raspberry Pi 3B+ and onward can use either 5 GHz or a 2.4 GHz frequency band. I tried the 5 GHz but I couldn't get it to work. I think it has something to do with my home router running on the 2.4 GHz, but I don't actually know. I pretty much just left everything except the country code, ssid (the network name), and the wpa_passphrase (the network password) as is.</p>
+<p>If you are interested in the frequency band, these are the possible values:
+* a -&gt; 802.11a (5GHz) <br>
+<em> b -&gt; 802.11b (2.4GHz) <br>
+</em> g -&gt; 802.11g (2.4GHz)   </p>
+<p>Again, if you change the frequency, you will likely need to change the channel.</p>
+<p>Open <code>/etc/hostapd/hostapd.conf</code> and add these lines:</p>
+<div class="highlight"><pre><span></span>country_code=US
+interface=wlan0
+ssid=my_network
+hw_mode=g
+channel=7
+macaddr_acl=0
+auth_algs=1
+ignore_broadcast_ssid=0
+wpa=2
+wpa_passphrase=my_password
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+</pre></div>
+
+
+<p>At this point, all the initial router configure is done. Reboot the Pi, and try connecting to your new network. If all goes well, you should be able to connect to websites. Next, we will configure the filter.</p>
+<h3>Installing Pi-Hole</h3>
+<p>Pi-hole is a DNS filtering system. Or as some people call it, a black hole. Incoming or outgoing connectings that are on the Pi's blacklist are simply dropped. Pi-hole is free, open source, and easy to use.</p>
+<p>Let's dive into this. First, download and install Pi-Hole: <code>sudo curl -sSL https://install.pi-hole.net | bash</code>.</p>
+<p>Click "Ok" through the first few screens. When you come to the screen asking about network interfaces, choose <code>wlan0</code>:</p>
+<p>[IMAGE HERE]</p>
+<p>On the next screen, it will ask about your DNS provider. I'm not sure how much it actually matters, so just go with Google (the default):</p>
+<p>[IMAGE HERE]</p>
+<p>The next screen will ask you about ad blocking lists. That's another cool thing about Pi-hole; other than blocking domains of your choice, it can also block ad sites. By default, both were selected; you can just leave it as is.</p>
+<p>[IMAGE HERE]</p>
+<p>The next screen will ask about what protocols to use. You can just leave this as is.</p>
+<p>The following screen will ask about the static IP address. <em>Answer no</em> here. As you remember, the Pi serves domains in the 192.168.4 range. Your home router takes care of the rest.</p>
+<p>[IMAGE HERE]</p>
+<p>On the next screen, we specify that range:</p>
+<p>[IMAGE HERE]</p>
+<p>The next screen asks about the gateway; this is simply the Pi's IP address:</p>
+<p>[IMAGE HERE]</p>
+<p>Make sure the settings look like the image below. If so, you can continue.</p>
+<p>[IMAGE HERE]</p>
+<p>Click through the next screen. The one after will ask if you want to install the web interface. Click yes to this. It will make it much easier to configure if you do that. The screen following will ask if you want to install lighttpd server. Click yes to this.</p>
+<p>The next screen will ask about logging queries. I would say this depends on what you are trying to do. I would just leave it on by default, but if you have a reason not to, that is certainly okay. The web interface does require a password to login, so if you're the only one with the password... You're the only that can see. Actually, I think you change this setting later on through the interface. The screen afterward will ask what level of logging you wish.</p>
+<p>When everything is complete, you will see a screen with some information. <em>Important</em>: Make sure you take note of the generated password near the bottom. You will need this to log in.</p>
+<h3>Blocking DNS Bypassing</h3>
+<p>This step is only necessary if you are trying to set this up as a parental control device. Remember the step where we chose our DNS server? In some cases, you can go around Pi-hole by changing this setting. The following commands will prevent this from happening and make sure that any requests go through the Pi.</p>
+<div class="highlight"><pre><span></span>sudo iptables -A PREROUTING -t nat -p udp --destination-port 53 -j REDIRECT --to-ports 53
+sudo iptables -A PREROUTING -t nat -p tcp --destination-port 53 -j REDIRECT --to-ports 53
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+</pre></div>
+
+
+<h3>Pi-Hole Configuration</h3>
+<p>Okay, now go to <code>http://192.168.4.1/admin</code>, click the login button on the left sidebar, and login. This is web interface for Pi-hole.</p>
+<p>[IMAGE HERE]</p>
+<p>Once you're logged in, click on "settings" in the sidebar, and click on the DHCP tab. Check the box title "DHCP server enabled". You can ignore the red flashing warning; you don't have to do anything to your home router. Nothing on your home network will be affected. The Pi creates a little bubble that only affects computer connected to it. If you don't believe me, go to another computer connected to your home network, and trying logging in to Pi-hole. It won't work.</p>
+<p>[IMAGE HERE]</p>
+<p>At this point, you can start adding sites you want blocked. Click on the blacklist tab, and you should see a screen like below. When you add domains, one useful thing might be to add the domain, then add it again with that box "Add domain as wildcard" checked. This will prevent access to subdomains.</p>
+<p>[IMAGE HERE]</p>
+<h3>Conclusion</h3>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/raspberry-pi-router-and-filter.html">posted at 09:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
+                </div>
+            </article>            <h4 class="date">Jan 01, 2021</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/happy-new-year.html" rel="bookmark" title="Permanent Link to &quot;Happy New Year!&quot;">Happy New Year!</a>
+                </h2>
+
+                
+                
+
+                <p>Happy New Year everyone!</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/happy-new-year.html">posted at 09:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
+                </div>
+            </article>            <h4 class="date">Dec 31, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -193,124 +364,6 @@ git push -u origin master
                 <div class="info">
                     <a href="/memory-and-counting-in-hardware.html">posted at 12:15</a>
                     &nbsp;&middot;&nbsp;<a href="/category/electronics.html" rel="tag">Electronics</a>
-                </div>
-            </article>            <h4 class="date">Dec 09, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/vintage-os.html" rel="bookmark" title="Permanent Link to &quot;Vintage OS&quot;">Vintage OS</a>
-                </h2>
-
-                
-                
-
-                <p>So I was cleaning house earlier... Or rather, cleaning the computer. You know, when there gets to be a million things on your desktop? Anyway.</p>
-<p>I have a small collection of vintage operating systems, some of which I've been able to get running in virtual machines. When I say vintage, I don't necessarily mean the ones everyone has heard about; there's a few obscure you may never have heard of. But anyway, I forgot I had screenshots of them because they are with the OSes and not the rest of my pictures. I only have three OSes photographed at the moment, but they are worth seeing.</p>
-<h2>IBM OS/2</h2>
-<p>The only truly vintage one here. The history behind this operating system is interesting. It runs without any issues in Virtualbox, but as I remember it was a little tricky to get running. I lost the article, but if I ever decide to run it again, I'll be sure to post.</p>
-<p><img alt="Photo" src="/images/os2.png"></p>
-<h2>Sky OS</h2>
-<p>Sky OS was a fairly complete operating system written mainly by Robert Szeleney from 1997 until 2009. It was a Unix-like OS with a graphical desktop, and even got to the point of being able to run real applications such as the GNU Toolchain and Firefox. The OS was meant to be a commerical product, but it never aquired a sufficient developer/user base, and eventually, Szeleney couldn't keep up with development. You can still find disk images and a key and boot it up in Virtualbox. Its a rather nice OS, its a shame it never went further.</p>
-<p>The desktop:</p>
-<p><img alt="Photo" src="/images/skyos1.png"></p>
-<p>Some applications running:</p>
-<p><img alt="Photo" src="/images/skyos2.png"></p>
-<h2>Syllable OS</h2>
-<p>Another free OS from the early 2000s. Unlike Sky OS, Syllable was actually open source. It eventually stagnated and development ended in 2012. There wasn't a huge team behind this one either, and it got really far in terms of capabilities. Its a shame neither this nor Sky OS ever became viable alternatives to Windows because they really had potential.</p>
-<p>The desktop:</p>
-<p><img alt="Photo" src="/images/syllable1.png"></p>
-<p>The file explorer:</p>
-<p><img alt="Photo" src="/images/syllable2.png"></p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/vintage-os.html">posted at 12:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
-                </div>
-            </article>            <h4 class="date">Dec 05, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/arm64-on-qemu.html" rel="bookmark" title="Permanent Link to &quot;Arm64 on Qemu&quot;">Arm64 on Qemu</a>
-                </h2>
-
-                
-                
-
-                <p>I think I wrote a little bit about this at one point, but one of my new low-level interests is Arm. Partly because of my work in the HPC field, I've found the Arm supercomputer in Japan to be really intersting. I find it really interesting how what was the architecture of smartphones is now making its way into other fields. Its even coming into the PC market- look at the new Apple computers. But from an even more personal perspective, I've found RISC architectures really interesting. I grew up (so to speak) on x86- and therefore, CISC architectures. Writing a compiler to generate CISC code is really easy; adapting that same code to RISC is an interesting challenge.</p>
-<p>Out of work and personal needs, I've been trying to get some emulators working for non-x86 architectures. I do have a Raspberry Pi 4, but while it is usable, its a little slow, and doesn't have any SVE support (SVE is Arm's SIMD architecture). So far, I have MIPS32, RiscV64, Power 10, and AArch64 emulators up and running. The MIPS32 and AArch64 work pretty well; the RISC-V is getting there, and the POWER 10 really sucks (I'm working on it though). Today, I'm going to cover how to set up Ubuntu 20.04 on QEMU.</p>
-<h3>Words of Warning</h3>
-<p>Virtualization is always slower than bare metal. Before you start giving me examples on how well Virtualbox works on your computer, yes you're probably right. But the reason why you can run an entire guest system on Virtualbox with really good speed is because the VM and the host system are x86 based. So the VM doesn't have to do as much translation. For different architectures, every single instruction has to be translated to an x86 instruction. On its own, its still really fast, but when you have an entire operating system on top of it, you will start to notice the difference.</p>
-<p>I'm not saying this to scare you off. If you have a powerful computer, you can allocate resources to reduce this overhead quite a bit, but you will notice. Its good enough for real work, but I wouldn't plan on running any huge builds too often, or do things too resource-intensive.</p>
-<p>I'll post updates over time.</p>
-<h3>Words of Credit</h3>
-<p>I like to think I'm a genius, but let's be realistic: I'm not. Therefore, let us give credit where it is due. I initially got things going by following this article: <a href="https://futurewei-cloud.github.io/ARM-Datacenter/qemu/how-to-launch-aarch64-vm/">https://futurewei-cloud.github.io/ARM-Datacenter/qemu/how-to-launch-aarch64-vm/</a>. A lot of stuff is copied from that article, so I wish to emphasize that most credit should be given to that author, not to me.</p>
-<p>The reason why I wrote my own is A) it would be easily accessible for me, and B) I did have to make some changes to warrant a rewrite. The article is a little old, if you follow it, you will end up with Ubuntu 18.04. If you follow mine, you end up with Ubuntu 20.04. You will need this if you want SVE.</p>
-<p>And yes, I do focus on SVE.</p>
-<h3>Getting Started</h3>
-<p>First, you need to install these packages (note: I'm on Linux Mint. If you're not on Linux Mint/Ubuntu/Debian, you may have to change the package names):</p>
-<div class="highlight"><pre><span></span>sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils
-</pre></div>
-
-
-<p>Next, create the boot images and the hard drive:</p>
-<div class="highlight"><pre><span></span>dd if=/dev/zero of=flash1.img bs=1M count=64
-dd if=/dev/zero of=flash0.img bs=1M count=64
-dd if=/usr/share/qemu-efi-aarch64/QEMU_EFI.fd of=flash0.img conv=notrunc
-
-qemu-img create ubuntu-image.img 20G
-</pre></div>
-
-
-<p>To download Ubuntu 20.04: </p>
-<p><code>wget http://ports.ubuntu.com/ubuntu-ports/dists/focal/main/installer-arm64/current/legacy-images/netboot/mini.iso</code></p>
-<p>Note that the site in question is an FTP site. If you want a different image, go for it.</p>
-<h3>Install Ubuntu</h3>
-<p>Use this command to start the installation:</p>
-<div class="highlight"><pre><span></span>qemu-system-aarch64 \
-    -nographic \
-    -machine virt,gic-version=max \
-    -m 4G \
-    -cpu max \
-    -smp 4 \
-    -netdev user,id=vnet,hostfwd=:127.0.0.1:0-:22 -device virtio-net-pci,netdev=vnet \
-    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
-    -drive file=mini.iso,if=none,id=drive1,cache=writeback -device virtio-blk,drive=drive1,bootindex=1 \
-    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
-</pre></div>
-
-
-<p>Few notes here. First, the <code>-m 4G</code> represents how much memory to allocate to the machine. The original article said to use 512M. That took <em>FOREVER</em> on my computer, so I would highly recommend to scale this up (once I scalled it, it only took like 15 minutes). The <code>-smp 4</code> represents the number of CPU cores to allocate to the machine.</p>
-<p>Just follow the prompts and instructions to install the system. It's really easy, so I'm not going to walk you through. When you get to the end where it asks about additional software, I would only recommend doing the SSH server. Don't install a desktop system unless you're feeling adventerous. It will be slow. And quite frankly, I have no idea how you would run it... Maybe VNC?</p>
-<h3>Boot Ubuntu</h3>
-<p>One you finished installing, you can use this command to launch the VM. You should put this in a script to make it easier to launch each time.</p>
-<div class="highlight"><pre><span></span>qemu-system-aarch64 \
-    -nographic \
-    -machine virt,gic-version=max \
-    -m 8G \
-    -cpu max,pmu=off,sve=on,sve256=on \
-    -smp 6 \
-    -netdev user,id=vnet,hostfwd=tcp::5556-:22 \
-    -device virtio-net-pci,netdev=vnet \
-    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
-    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
-</pre></div>
-
-
-<p>Again, I made a few changes from the original article. I scaled the memory and SMP up to my specs, so <em>make sure</em> to check that before you run it. If you scale up more than your computer can handle, it may freeze.</p>
-<p>Notice the "sve" arguments in the "-cpu" line. This is where you can control the SVE vector lane size. SVE vectors start at 128-bits and increment from there by 128 up to 2048-bits. Also notice the line that begins with "-netdev". This allows you to SSH into the VM. For some reason, even if you're terminal is maximized, QEMU doesn't use the whole thing. SSH makes it more usable. The "5556-:22" sets the SSH port. So, to SSH in, you can use the following command:</p>
-<div class="highlight"><pre><span></span>ssh user@localhost -p 5556
-</pre></div>
-
-
-<p>Replace "user" with whatever user you created during installation.</p>
-<h3>Conclusion</h3>
-<p>If all goes well, you shouldn't have any issues getting this up and working. So far this seems to run pretty well (even if it makes my computer run up a lot in the process :-). As I get over machines to work, I'll post updates here, and if I do anything interesting I'll try to also post.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/arm64-on-qemu.html">posted at 12:45</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/virtualization.html" rel="tag">Virtualization</a>
                 </div>
             </article>
 
