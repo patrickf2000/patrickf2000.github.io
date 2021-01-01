@@ -9,7 +9,7 @@ My computer interests lie in compilers, programming languages, computer architec
 
 To see my resume, check out my LinkedIn profile (see the contact page), or view it right here: [Resume](resume.html).
 
-Here's a page with some detailed information (not all inclusive): [Projects](projects.html).
+Here's a page with some detailed information (not all inclusive): [Software Projects](software-projects.html).
 
 And last but not least, my favorite quote. You could say this is my personal motto when I work on things.
 

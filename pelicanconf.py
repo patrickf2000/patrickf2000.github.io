@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Patrick Flynn'
 SITENAME = "Patrick's Website"
-SITEURL = ''
 TAGLINE = 'Random thoughts...'
 SITESUBTITLE = 'Computers and life...'
 
@@ -55,3 +54,4 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 GOOGLE_ANALYTICS="UA-213498014-7"
+

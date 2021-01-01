@@ -19,6 +19,7 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/contact-me/">Contact Me</a></li>
+                <li><a href="/projects/">Projects</a></li>
                 <li><a href="https://github.com/patrickf2000">GitHub</a></li>
                 <li><a href="/blog_index.html">Blog</a></li>
                 <li><a href="/categories">Categories</a></li>
@@ -30,52 +31,7 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jul 19, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/digging-out-an-old-program.html" rel="bookmark" title="Permanent Link to &quot;Digging Out an Old Program&quot;">Digging Out an Old Program</a>
-                </h2>
-
-                
-                
-
-                <p>Yesterday I embarked on a somewhat interesting task: resurrecting one of my old programs. For a while- mainly my last years of high school- I was making a number of desktop applications. Most of them are on my Github profile; my best ones include a text editor, a file explorer, a media player, a backup program, a spreadsheet program, and even a small web browser. Except for two, they were all written in C++ and used the Qt library (one was written in Python using PyQt, and the other was C++/Gtkmm).</p>
-<p>Anyway, I was getting frustrated with text editors. Almost as long as I've used Linux, I've been using Linux Mint, or a Linux distro that used the Cinnamon desktop. While not the reason, a big portion of it was the app suite it came with, particularly the text editor. The Linux Mint text editor, Xed, is based on Pluma, the Mate editor, which in turn was based on the old Gedit. The new Gedit is just awful, I don't really like a whole lot of other editors, and the ones I do like are pretty closely tied with their desktop environments. I do like console editors, particularly Nano and to a lesser extent, Vim, but in all honestly, they're not great for productivity. Before you say it, yes I've tried VS Code, and its not my thing. And I hate IDEs.</p>
-<p>The solution: I will write my own. That was actually my solution with my phone. I have an Android, and I couldn't find a simple, ad-free notepad that worked and I liked, so I just made my own- and I've been using it for two years. </p>
-<p>Returning to the text editor, I fortunately already had most of it in place, or I probably would have just sucked it up and used either Nano or dealt with pulling in a lot of dependencies. I started my text editor about three years ago as a hobby project, and I updated it on and off for about a year afterward (actually, I think its older than that; I cleared the Git history for it because of some licensing issues- there was a point where I used some GPL libraries, which meant I had to license the program under GPL. I really didn't like that, so I eventually removed them, re-licensed the program, and cleared the history so the old version wouldn't be there. It actually goes deeper as well- the old version got pretty bloated).</p>
-<p>Resuming development on a project you started three years ago and didn't touch for over a year is an interesting experience. Obviously, there was a lot of bad code in it. There still is- I went crazy with global variables, which is one thing I still need to clean up. There was also just a lot of bloat and useless features, extra files, and stuff that wasn't quite working. </p>
-<p>The first thing I did was version off the original to a separate branch and tag it. Then I went through and deleted a lot of code. This time around, the focus is mainly making this an editor that I like and can use with minimal issue across platforms, so I removed things I kinda thought were extra. I also did remove one dependency that was frankly a little broken (it was mine... yeah...), but I kept the others. This morning, I added a new side panel feature that displays all the files and folders in the current directory- something Xed/Pluma/Gedit have that is a great feature when you are working on projects (this was a post-cleanup task).</p>
-<p>I'm going to try using it this week during work and see how it goes. I added the new feature using the editor, and so far I like it. Hopefully it goes well so I can carry it around with me. </p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/digging-out-an-old-program.html">posted at 11:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                </div>
-            </article>            <h4 class="date">Jul 19, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/the-joys-of-binaries-on-linux.html" rel="bookmark" title="Permanent Link to &quot;The Joys of Binaries on Linux&quot;">The Joys of Binaries on Linux</a>
-                </h2>
-
-                
-                
-
-                <p>I've been a loyal Linux user for almost six years now. Really longer if you count the Kindle... Anyway. Maybe loyal isn't the greatest word to use. I use Linux because I like, because I think its a superior platform in many ways, and over the past year, because of my job.</p>
-<p>A few weeks ago, I listened to a talk by Linus Torvalds, where among other things, he addressed the issue of binary compatibility among Linux distributions. This never really hit home personally until today when I was working on resurrecting a desktop app for personal use. I got everything built and working on my development machine (which runs Fedora 32), but when I tried to run it on my stable machine (Linux Mint 20), what happens? It fails because of library versions.</p>
-<p>Linux, especially when it comes to development, really does things right. For the most part, I can very easily build things for source- and development as a whole is a lot of fun. Binary compatibility is something, however, that Linux sucks at.
-Now, the term binary compatibility is not completely literal. Linux uses the ELF format, which is actually a pretty simple format to generate and understand. If you write a C program that only uses the C standard library (and no special functions), it will run on pretty much any distro, as long as the underlying architecture is the same. The binary compatibility has to do with libraries- more specifically, library versions.</p>
-<p>Returning to my problem, this program I was working on uses Qt5 and a few KDE libraries. Nothing special, you can find them in the repositories on any system. The issue is the version. Fedora 32 ships with Qt 5.14. Linux Mint 20 ships with Qt 5.12. When I copied the binaries over, it wouldn't load because of the version difference. My solution was simply to create archives for each platform on my development machine (I used a live version to compile the Linux Mint binaries), and upload them to Google Drive. Its a pain, but it worked.</p>
-<p>At the end of the day, I see why things don't work and why distros do what they do. In fact, that's why I'm using two different distros. Fedora and Manjaro are really nice because I get the latest version of all the software and libraries, but Ubuntu/Linux Mint are really nice because they are stable and solid. Just the same though, it doesn't make it less frustrating. </p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/the-joys-of-binaries-on-linux.html">posted at 09:39</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>            <h4 class="date">Jul 18, 2020</h4>
+        <div id="content">            <h4 class="date">Jul 18, 2020</h4>
 
             <article class="post">
                 <h2 class="title">

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Patrick's Website | Pi-Hole Installation</title>
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
+    <meta name="generator" content="Pelican" />
+    <meta name="description" content="" />
+    <meta name="author" content="Patrick Flynn" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact-me/">Contact Me</a></li>
+                <li><a href="/projects/">Projects</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
+                <li><a href="/blog_index.html">Blog</a></li>
+                <li><a href="/categories">Categories</a></li>
+            </ul>
+        </nav>
+        <div class="header_box">
+            <h1><a href="/">Patrick's Website</a></h1>
+            <h2>Computers and life...</h2>
+        </div>
+    </header>
+    <div id="wrapper">
+        <div id="content">
+            <div class="page">
+                <h1>Pi-Hole Installation</h1>
+                <p>This is the second part of the tutorial on setting up a Raspberry Pi router/filter (I assume you've done <a href="/howto/rpi-router.html">part 1</a>). To set up the filter, we are going to be using Pi-hole.</p>
+<p>Pi-hole is an excellent DNS filtering system. Or as some people call it, a black hole. Incoming or outgoing connectings that are on the Pi's blacklist are simply dropped. Pi-hole is free, open source, and easy to use.</p>
+<h4>Installing Pi-Hole</h4>
+<p>Let's dive into this. First, download and install Pi-Hole: <code>sudo curl -sSL https://install.pi-hole.net | bash</code>.</p>
+<p>Click "Ok" through the first few screens. When you come to the screen asking about network interfaces, choose <code>wlan0</code>:</p>
+<p><img alt="Photo" src="/howto/images/pihole1.png"></p>
+<p>On the next screen, it will ask about your DNS provider. I'm not sure how much it actually matters, so just go with Google (the default):</p>
+<p><img alt="Photo" src="/howto/images/pihole2.png"></p>
+<p>The next screen will ask you about ad blocking lists. That's another cool thing about Pi-hole; other than blocking domains of your choice, it can also block ad sites. By default, both were selected; you can just leave it as is.</p>
+<p><img alt="Photo" src="/howto/images/pihole3.png"></p>
+<p>The next screen will ask about what protocols to use. You can just leave this as is.</p>
+<p>The following screen will ask about the static IP address. <strong>Answer no</strong> here. As you remember, the Pi serves domains in the 192.168.4 range. Your home router takes care of the rest.</p>
+<p><img alt="Photo" src="/howto/images/pihole4.png"></p>
+<p>On the next screen, we specify that range:</p>
+<p><img alt="Photo" src="/howto/images/pihole5.png"></p>
+<p>The next screen asks about the gateway; this is simply the Pi's IP address:</p>
+<p><img alt="Photo" src="/howto/images/pihole6.png"></p>
+<p>Make sure the settings look like the image below. If so, you can continue.</p>
+<p><img alt="Photo" src="/howto/images/pihole7.png"></p>
+<p>Click through the next screen. The one after will ask if you want to install the web interface. Click yes to this. It will make it much easier to configure if you do that. The screen following will ask if you want to install lighttpd server. Click yes to this.</p>
+<p>The next screen will ask about logging queries. I would say this depends on what you are trying to do. I would just leave it on by default, but if you have a reason not to, that is certainly okay. The web interface does require a password to login, so if you're the only one with the password... You're the only that can see. Actually, I think you change this setting later on through the interface. The screen afterward will ask what level of logging you wish.</p>
+<p>When everything is complete, you will see a screen with some information. <strong>Important</strong>: Make sure you take note of the generated password near the bottom. You will need this to log in.</p>
+<h4>Pi-Hole Configuration</h4>
+<p>Okay, now go to <code>http://192.168.4.1/admin</code>, click the login button on the left sidebar, and login. This is web interface for Pi-hole.</p>
+<p><img alt="Photo" src="/howto/images/pihole_admin1.png"></p>
+<p>Once you're logged in, click on "settings" in the sidebar, and click on the DHCP tab. Check the box title "DHCP server enabled". You can ignore the red flashing warning; you don't have to do anything to your home router. Nothing on your home network will be affected. <strong>Make sure</strong> to click save near the bottom. The Pi creates a little bubble that only affects computer connected to it. If you don't believe me, go to another computer connected to your home network, and trying logging in to Pi-hole. It won't work.</p>
+<p><img alt="Photo" src="/howto/images/pihole_admin2.png"></p>
+<p>At this point, you can start adding sites you want blocked. Click on the blacklist tab, and you should see a screen like below. When you add domains, one useful thing might be to add the domain, then add it again with that box "Add domain as wildcard" checked. This will prevent access to subdomains.</p>
+<p><img alt="Photo" src="/howto/images/pihole-blacklist.png"></p>
+<h4>Blocking DNS Bypassing</h4>
+<p>This step is only necessary if you are trying to set this up as a parental control device. Remember the step where we chose our DNS server? In some cases, you can go around Pi-hole by changing this setting. The following commands will prevent this from happening and make sure that any requests go through the Pi.</p>
+<div class="highlight"><pre><span></span>sudo iptables -A PREROUTING -t nat -p udp --destination-port 53 -j REDIRECT --to-ports 53
+sudo iptables -A PREROUTING -t nat -p tcp --destination-port 53 -j REDIRECT --to-ports 53
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+</pre></div>
+
+
+<h4>Clearing DNS Cache</h4>
+<p>In some cases, you may notice that sites are still not blocked even after blacklisting them. This occurs because of DNS caching. Your computer caches the corresponding IP addresses for a DNS lookup so it can avoid this extra step on future vists. Sometimes restarting will do the trick, but not always. At least on Linux. If you're on something other than Linux, you'll have to Google "How to flush the DNS cache for Windows". Or whatever you're on.</p>
+<p>If you are on Linux, these commands may do the trick:</p>
+<div class="highlight"><pre><span></span><span class="c1"># This seems to work for Debian-based systems</span>
+<span class="c1"># Run this:</span>
+sudo systemctl is-active systemd-resolved.service
+
+<span class="c1"># If the output of the last command was &quot;active&quot;, run:</span>
+sudo systemd-resolve --flush-caches
+
+<span class="c1">##################</span>
+<span class="c1"># On Redhat systems (including Fedora), one of these should work:</span>
+sudo systemctl restart nscd.service
+sudo service nscd restart
+
+<span class="c1">##################</span>
+<span class="c1"># If all else fails, try one of these:</span>
+sudo systemctl restart dnsmasq.service
+sudo service dnsmasq restart
+</pre></div>
+
+
+<h4>Final Notes</h4>
+<p>Once you are done with all the configuration, I would reboot just to be sure that all is working. You may have to reboot the Pi every now and then, but it shouldn't be too often. I ran mine 10 days straight before rebooting it... And I actually didn't have to, it turned out to be the computers fault :) I would login every now and then and install updates.</p>
+<h4>Conclusion</h4>
+<p>If all goes well, you should see the sites on your blacklist fail to load. Its easy to add new sites as needed. Hopefully everything works. If you find any issues, however, or have any suggestions, feel free to drop me an email.</p>
+            </div>
+
+            <div class="clear"></div>
+            <footer>
+                <p>
+                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
+                &middot;
+                Powered by <a href="http://getpelican.com">Pelican</a>
+            </footer>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-213498014-7");
+    pageTracker._trackPageview();
+    } catch(err) {}</script>
+</body>
+</html>
