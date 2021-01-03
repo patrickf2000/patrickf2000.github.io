@@ -33,7 +33,92 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 04, 2020</h4>
+        <div id="content">            <h4 class="date">Dec 05, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/arm64-on-qemu.html" rel="bookmark" title="Permanent Link to &quot;Arm64 on Qemu&quot;">Arm64 on Qemu</a>
+                </h2>
+
+                
+                
+
+                <p>I think I wrote a little bit about this at one point, but one of my new low-level interests is Arm. Partly because of my work in the HPC field, I've found the Arm supercomputer in Japan to be really intersting. I find it really interesting how what was the architecture of smartphones is now making its way into other fields. Its even coming into the PC market- look at the new Apple computers. But from an even more personal perspective, I've found RISC architectures really interesting. I grew up (so to speak) on x86- and therefore, CISC architectures. Writing a compiler to generate CISC code is really easy; adapting that same code to RISC is an interesting challenge.</p>
+<p>Out of work and personal needs, I've been trying to get some emulators working for non-x86 architectures. I do have a Raspberry Pi 4, but while it is usable, its a little slow, and doesn't have any SVE support (SVE is Arm's SIMD architecture). So far, I have MIPS32, RiscV64, Power 10, and AArch64 emulators up and running. The MIPS32 and AArch64 work pretty well; the RISC-V is getting there, and the POWER 10 really sucks (I'm working on it though). Today, I'm going to cover how to set up Ubuntu 20.04 on QEMU.</p>
+<h3>Words of Warning</h3>
+<p>Virtualization is always slower than bare metal. Before you start giving me examples on how well Virtualbox works on your computer, yes you're probably right. But the reason why you can run an entire guest system on Virtualbox with really good speed is because the VM and the host system are x86 based. So the VM doesn't have to do as much translation. For different architectures, every single instruction has to be translated to an x86 instruction. On its own, its still really fast, but when you have an entire operating system on top of it, you will start to notice the difference.</p>
+<p>I'm not saying this to scare you off. If you have a powerful computer, you can allocate resources to reduce this overhead quite a bit, but you will notice. Its good enough for real work, but I wouldn't plan on running any huge builds too often, or do things too resource-intensive.</p>
+<p>I'll post updates over time.</p>
+<h3>Words of Credit</h3>
+<p>I like to think I'm a genius, but let's be realistic: I'm not. Therefore, let us give credit where it is due. I initially got things going by following this article: <a href="https://futurewei-cloud.github.io/ARM-Datacenter/qemu/how-to-launch-aarch64-vm/">https://futurewei-cloud.github.io/ARM-Datacenter/qemu/how-to-launch-aarch64-vm/</a>. A lot of stuff is copied from that article, so I wish to emphasize that most credit should be given to that author, not to me.</p>
+<p>The reason why I wrote my own is A) it would be easily accessible for me, and B) I did have to make some changes to warrant a rewrite. The article is a little old, if you follow it, you will end up with Ubuntu 18.04. If you follow mine, you end up with Ubuntu 20.04. You will need this if you want SVE.</p>
+<p>And yes, I do focus on SVE.</p>
+<h3>Getting Started</h3>
+<p>First, you need to install these packages (note: I'm on Linux Mint. If you're not on Linux Mint/Ubuntu/Debian, you may have to change the package names):</p>
+<div class="highlight"><pre><span></span>sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils
+</pre></div>
+
+
+<p>Next, create the boot images and the hard drive:</p>
+<div class="highlight"><pre><span></span>dd if=/dev/zero of=flash1.img bs=1M count=64
+dd if=/dev/zero of=flash0.img bs=1M count=64
+dd if=/usr/share/qemu-efi-aarch64/QEMU_EFI.fd of=flash0.img conv=notrunc
+
+qemu-img create ubuntu-image.img 20G
+</pre></div>
+
+
+<p>To download Ubuntu 20.04: </p>
+<p><code>wget http://ports.ubuntu.com/ubuntu-ports/dists/focal/main/installer-arm64/current/legacy-images/netboot/mini.iso</code></p>
+<p>Note that the site in question is an FTP site. If you want a different image, go for it.</p>
+<h3>Install Ubuntu</h3>
+<p>Use this command to start the installation:</p>
+<div class="highlight"><pre><span></span>qemu-system-aarch64 \
+    -nographic \
+    -machine virt,gic-version=max \
+    -m 4G \
+    -cpu max \
+    -smp 4 \
+    -netdev user,id=vnet,hostfwd=:127.0.0.1:0-:22 -device virtio-net-pci,netdev=vnet \
+    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
+    -drive file=mini.iso,if=none,id=drive1,cache=writeback -device virtio-blk,drive=drive1,bootindex=1 \
+    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
+</pre></div>
+
+
+<p>Few notes here. First, the <code>-m 4G</code> represents how much memory to allocate to the machine. The original article said to use 512M. That took <em>FOREVER</em> on my computer, so I would highly recommend to scale this up (once I scalled it, it only took like 15 minutes). The <code>-smp 4</code> represents the number of CPU cores to allocate to the machine.</p>
+<p>Just follow the prompts and instructions to install the system. It's really easy, so I'm not going to walk you through. When you get to the end where it asks about additional software, I would only recommend doing the SSH server. Don't install a desktop system unless you're feeling adventerous. It will be slow. And quite frankly, I have no idea how you would run it... Maybe VNC?</p>
+<h3>Boot Ubuntu</h3>
+<p>One you finished installing, you can use this command to launch the VM. You should put this in a script to make it easier to launch each time.</p>
+<div class="highlight"><pre><span></span>qemu-system-aarch64 \
+    -nographic \
+    -machine virt,gic-version=max \
+    -m 8G \
+    -cpu max,pmu=off,sve=on,sve256=on \
+    -smp 6 \
+    -netdev user,id=vnet,hostfwd=tcp::5556-:22 \
+    -device virtio-net-pci,netdev=vnet \
+    -drive file=ubuntu-image.img,if=none,id=drive0,cache=writeback -device virtio-blk,drive=drive0,bootindex=0 \
+    -drive file=flash0.img,format=raw,if=pflash -drive file=flash1.img,format=raw,if=pflash 
+</pre></div>
+
+
+<p>Again, I made a few changes from the original article. I scaled the memory and SMP up to my specs, so <em>make sure</em> to check that before you run it. If you scale up more than your computer can handle, it may freeze.</p>
+<p>Notice the "sve" arguments in the "-cpu" line. This is where you can control the SVE vector lane size. SVE vectors start at 128-bits and increment from there by 128 up to 2048-bits. Also notice the line that begins with "-netdev". This allows you to SSH into the VM. For some reason, even if you're terminal is maximized, QEMU doesn't use the whole thing. SSH makes it more usable. The "5556-:22" sets the SSH port. So, to SSH in, you can use the following command:</p>
+<div class="highlight"><pre><span></span>ssh user@localhost -p 5556
+</pre></div>
+
+
+<p>Replace "user" with whatever user you created during installation.</p>
+<h3>Conclusion</h3>
+<p>If all goes well, you shouldn't have any issues getting this up and working. So far this seems to run pretty well (even if it makes my computer run up a lot in the process :-). As I get over machines to work, I'll post updates here, and if I do anything interesting I'll try to also post.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/arm64-on-qemu.html">posted at 12:45</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/virtualization.html" rel="tag">Virtualization</a>
+                </div>
+            </article>            <h4 class="date">Dec 04, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -314,26 +399,6 @@ ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span clas
                     &nbsp;&middot;
                     &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
                     &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
-                </div>
-            </article>            <h4 class="date">Sep 25, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/a-night-with-an-old-printer.html" rel="bookmark" title="Permanent Link to &quot;A Night With an Old Printer&quot;">A Night With an Old Printer</a>
-                </h2>
-
-                
-                
-
-                <p>As much as I love programming, when one is on the computer all day for work and school, your desire to get off the computer begins to outweigh that. My parents have an old Samsung printer, but after many years of heavy use it began to jam when pulling up paper. It turns out the issue is this little part rather deep inside can get warn out and begin to stick, which is why it sucks up all that paper. When I say deep inside, I literally mean that. You have to take apart a lot to get to that issue. I should have taken a better shot, but here's what it looks like halfway through the process (that's the computer board).</p>
-<p>It still doesn't work perfectly, put it can get through about 15 sheets before it jams. Oh well, that's fine, they never print more than maybe 5 at a time (and that's stretching it). </p>
-<p>I can't take credit for figuring it out, but I'm proud I got it fixed. Its always cool when you're able to fix something. If anyone has a Samsung SCX-4623FW jamming, here's an excellent link: <a href="https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/">https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/</a>.</p>
-<p><img alt="Photo" src="/images/printer.jpg"></p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/a-night-with-an-old-printer.html">posted at 08:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
                 </div>
             </article>
 
