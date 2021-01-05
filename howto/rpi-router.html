@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Patrick's Website | Raspberry Pi Router</title>
-    <link rel="shortcut icon" type="image/png" href="patrickflynn.co/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="patrickflynn.co/favicon.ico">
-    <link rel="stylesheet" href="patrickflynn.co/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="patrickflynn.co/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="patrickflynn.co/theme/css/print.css" type="text/css" media="print" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="Patrick Flynn" />
@@ -17,16 +17,16 @@
     <header>
         <nav>
             <ul>
-                <li><a href="patrickflynn.co/">Home</a></li>
-                <li><a href="patrickflynn.co/contact-me/">Contact Me</a></li>
-                <li><a href="patrickflynn.co/projects/">Projects</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/pages/contact-me.html">Contact Me</a></li>
+                <li><a href="/pages/projects.html">Projects</a></li>
                 <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-                <li><a href="patrickflynn.co/blog_index.html">Blog</a></li>
-                <li><a href="patrickflynn.co/categories">Categories</a></li>
+                <li><a href="/blog_index.html">Blog</a></li>
+                <li><a href="/categories">Categories</a></li>
             </ul>
         </nav>
         <div class="header_box">
-            <h1><a href="patrickflynn.co/">Patrick's Website</a></h1>
+            <h1><a href="/">Patrick's Website</a></h1>
             <h2>Computers and life...</h2>
         </div>
     </header>
@@ -43,9 +43,9 @@
 <p>In order to do this, you will need a Raspberry Pi 3 or later. I have a 3B and a 4. I originally did this with the Pi 3, but I'm probably going to sell it, so I'm moving everything to the Pi 4 as I write this article. Either way, the process is the same. You will need access to your router so you can plug the Pi in; I don't think you can do this wireless only.</p>
 <p>First, download Raspberry Pi OS and write it to an SD card. I'm not going to walk you through this step because it varies by computer. You don't need the full desktop version; the Lite version is sufficient.</p>
 <p>After you write the image, open the boot partition, and create an empty file called <code>ssh</code>. This will allow you to setup everything remotely. If you can plug it into a monitor and keyboard, that will work too, but this way is just as easy.</p>
-<p><img alt="Photo" src="patrickflynn.co/howto/images/ssh_rpi.png"></p>
+<p><img alt="Photo" src="/howto/images/ssh_rpi.png"></p>
 <p>I would also resize the partition on the root file system. I'm not sure if this is completely necessary... I didn't do it the first time and everything seemed okay. But if you can do, I would just do so.</p>
-<p><img alt="Photo" src="patrickflynn.co/howto/images/rpi_resize.png"></p>
+<p><img alt="Photo" src="/howto/images/rpi_resize.png"></p>
 <h4>Setting Up</h4>
 <p>After you plug the Pi in and boot it up, you can log in. To log in over ssh, use <code>ssh pi@raspberrypi.local</code>. It may take a few minutes (and a few tries) if its still booting. If it doesn't work after a long time, you may need to figure out the IP address. The default password is <code>raspberry</code>.</p>
 <p>If you want to change the default password, run this command: <code>sudo passwd pi</code>.</p>
