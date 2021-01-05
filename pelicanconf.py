@@ -18,8 +18,8 @@ DEFAULT_LANG = 'en'
 
 DEFAULT_PAGINATION = 5
 
-PAGE_URL = '{slug}/'
-PAGE_SAVE_AS = '{slug}.html'
+#PAGE_URL = '{slug}/'
+#PAGE_SAVE_AS = '{slug}.html'
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
@@ -44,6 +44,8 @@ MENU_INTERNAL_PAGES = (
 
 # additional menu items
 MENUITEMS = (
+    #( 'Contact Me', 'contact-me.html'),
+    #( 'Projects', 'projects.html'),
     ('GitHub', 'https://github.com/patrickf2000'),
 )
 

@@ -4,6 +4,14 @@ save_as: pages/lila-log.html
 
 The development logs for my Lila compiler and language.
 
+### 1/5/2021
+
+Big changes. First, I made the project public over the weekend. There's a post about it on the blog. I think the syntax is stable enough now, I'm hoping that all that will change in the future will be in the form of internal improvements and expansion.
+
+The big change is with the x86 code generator. The original one was awful, but it worked well. Between yesterday and today, I created a new code generator, which is working really well. Its able to pass almost all the original tests and build the core library, standard library, and examples. The only tests that don't pass are the floating point and vectorization tests. I'm working on phasing out C library support, so I need to add better floating point support to my standard library really before I can do anything else. Floating point isn't absolutely essential at the moment, so I'm content with coming back to that later.
+
+The original code generator is in the codegen1 branch. I'm keeping it for now for historical reference. That historical reference will probably be when I go back and work on the new floating point generator.
+
 ### 12/30/2020
 
 Its been a few days, but I've been working pretty hard on this. So time for some updates...

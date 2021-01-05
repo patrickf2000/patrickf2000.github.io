@@ -1,5 +1,6 @@
 title: Resume
 status: hidden
+save_as: resume.html
 
 For an official resume, please email me or contact me on LinkedIn (LinkedIn would be better so I can see who you are).
 
@@ -36,7 +37,7 @@ For an official resume, please email me or contact me on LinkedIn (LinkedIn woul
 
 ### Projects
 
-These are projects unrelated to work (except in that they help me to learn new things). You can find a list of many of them with screenshots here: [Projects](projects.html).
+These are projects unrelated to work (except in that they help me to learn new things). You can find a list of many of them with screenshots here: [Projects](/software-projects.html).
 
 ### Other Interests
 
