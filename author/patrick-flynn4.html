@@ -33,7 +33,28 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Aug 02, 2020</h4>
+        <div id="content">            <h4 class="date">Aug 04, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/static-hosting.html" rel="bookmark" title="Permanent Link to &quot;Static Hosting&quot;">Static Hosting</a>
+                </h2>
+
+                
+                
+
+                <p>Static sites are somewhat of a new thing for me. I wrote about this a little bit a few weeks ago, but I'm going to write more primarily as guidance for others interested in inexpensive blogging.</p>
+<p>Back when I was originally trying to blog, I was using Wordpress (like everyone else...). Don't get me wrong, I love Wordpress, but the reason I stopped was money. I originally had hosting for my first year, but when it renewed it went up a lot from what it originally was. Now granted, it was probably my fault since I'm sure it was spelled out and I just didn't read it. Regardless, it pretty much came down to paying a lot for decent hosting or cheaping out and hopefully getting something decent- if I wanted to keep Wordpress.</p>
+<p>That's why I'm now doing static hosting. I'm using Pelican as my content generator, and its actually quite nice once you learn how to use it. Hosting was more of a challenge. Originally, I was using surge.sh, which is really nice until it you get to custom domains. Custom domains are free, but HTTPS is not. I tried it, but my wake-up call came yesterday when I switched desktop computers and Firefox gave me all kind of certificate warnings about the site which rightly would scare people off. So, I decided to switch.</p>
+<p>A slight downside to static blogging is unlike Wordpress, you are responsible for the posts and making sure they get backed up and saved. Using Git is a really good solution for this. Not that it matters, I kind of preferred to keep this stuff in a private repository, which meant I kept it on Gitlab (I have Github and Gitlab accounts- Github for the important public stuff, and Gitlab for my smaller private stuff). This is where the static hosting comes in. Github and Gitlab both have a static site feature- basically, you can create a free static site based from your repository. I've personally found Gitlab to be a lot nicer. You can create your website from a private repository and it seems to offer a higher level of configuration (all based on the free plan by the way). Now granted, I didn't look into Github much deeper after I noticed you can create the site from a private repo in Gitlab, but you cannot in Github. Setup was really easy, as was pointing my custom domain to it.</p>
+<p>Even if you're not overly technical, learning just enough Git to do this is easy. If you are, it should be no trouble at all. As far as cost goes- which is a big benefit to static hosting- all I paid for was my domain name which was like $10 I think. If you're a blogger on a budget, this is something to think about.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/static-hosting.html">posted at 12:04</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/blogging.html" rel="tag">Blogging</a>
+                </div>
+            </article>            <h4 class="date">Aug 02, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -127,29 +148,6 @@
                     &nbsp;&middot;
                     &nbsp;<a href="/tag/work.html" class="tags">Work</a>
                     &nbsp;<a href="/tag/random.html" class="tags">Random</a>
-                </div>
-            </article>            <h4 class="date">Jul 19, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/digging-out-an-old-program.html" rel="bookmark" title="Permanent Link to &quot;Digging Out an Old Program&quot;">Digging Out an Old Program</a>
-                </h2>
-
-                
-                
-
-                <p>Yesterday I embarked on a somewhat interesting task: resurrecting one of my old programs. For a while- mainly my last years of high school- I was making a number of desktop applications. Most of them are on my Github profile; my best ones include a text editor, a file explorer, a media player, a backup program, a spreadsheet program, and even a small web browser. Except for two, they were all written in C++ and used the Qt library (one was written in Python using PyQt, and the other was C++/Gtkmm).</p>
-<p>Anyway, I was getting frustrated with text editors. Almost as long as I've used Linux, I've been using Linux Mint, or a Linux distro that used the Cinnamon desktop. While not the reason, a big portion of it was the app suite it came with, particularly the text editor. The Linux Mint text editor, Xed, is based on Pluma, the Mate editor, which in turn was based on the old Gedit. The new Gedit is just awful, I don't really like a whole lot of other editors, and the ones I do like are pretty closely tied with their desktop environments. I do like console editors, particularly Nano and to a lesser extent, Vim, but in all honestly, they're not great for productivity. Before you say it, yes I've tried VS Code, and its not my thing. And I hate IDEs.</p>
-<p>The solution: I will write my own. That was actually my solution with my phone. I have an Android, and I couldn't find a simple, ad-free notepad that worked and I liked, so I just made my own- and I've been using it for two years. </p>
-<p>Returning to the text editor, I fortunately already had most of it in place, or I probably would have just sucked it up and used either Nano or dealt with pulling in a lot of dependencies. I started my text editor about three years ago as a hobby project, and I updated it on and off for about a year afterward (actually, I think its older than that; I cleared the Git history for it because of some licensing issues- there was a point where I used some GPL libraries, which meant I had to license the program under GPL. I really didn't like that, so I eventually removed them, re-licensed the program, and cleared the history so the old version wouldn't be there. It actually goes deeper as well- the old version got pretty bloated).</p>
-<p>Resuming development on a project you started three years ago and didn't touch for over a year is an interesting experience. Obviously, there was a lot of bad code in it. There still is- I went crazy with global variables, which is one thing I still need to clean up. There was also just a lot of bloat and useless features, extra files, and stuff that wasn't quite working. </p>
-<p>The first thing I did was version off the original to a separate branch and tag it. Then I went through and deleted a lot of code. This time around, the focus is mainly making this an editor that I like and can use with minimal issue across platforms, so I removed things I kinda thought were extra. I also did remove one dependency that was frankly a little broken (it was mine... yeah...), but I kept the others. This morning, I added a new side panel feature that displays all the files and folders in the current directory- something Xed/Pluma/Gedit have that is a great feature when you are working on projects (this was a post-cleanup task).</p>
-<p>I'm going to try using it this week during work and see how it goes. I added the new feature using the editor, and so far I like it. Hopefully it goes well so I can carry it around with me. </p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/digging-out-an-old-program.html">posted at 11:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
                 </div>
             </article>
 
