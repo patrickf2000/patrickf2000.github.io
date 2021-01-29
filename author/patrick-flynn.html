@@ -33,7 +33,31 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 18, 2021</h4>
+        <div id="content">            <h4 class="date">Jan 29, 2021</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/hi-tech-02-ranger.html" rel="bookmark" title="Permanent Link to &quot;Hi-Tech '02 Ranger&quot;">Hi-Tech '02 Ranger</a>
+                </h2>
+
+                
+                
+
+                <p>I drive a 2002 Ford Ranger, and I have been for over a year now (I bought it back in summer 2019). </p>
+<p><img alt="Photo" src="/images/ranger.jpg"></p>
+<p>Rangers are great cars for people who like to drive trucks but don't want something huge. One of my few gripes with it was the radio system. It wasn't completely awful- it was actually an upgrade from my first car, a 2001 Ford Expedition (it was actually my dad's). Because of the Expedition, I've never been able to use my phone- I use CDs. But even though the Ranger can play more CDs, it struggles to actually play them.</p>
+<p>So, for my birthday, I got an upgrade. And I tried to install it myself, and I got as far as getting the old one out:</p>
+<p><img alt="Photo" src="/images/radio-attempt.jpg"></p>
+<p>Being the mechanical genius I am, it never occurred to me that you needed a hardness for the connectors. I don't know, I thought they were all the same... But it turned out that Best Buy where my dad bought the radio had free installation, so I went there yesterday and had someone who knew what they were doing install it.</p>
+<p>And its <em>awesome</em>. In addition to CDs and radio, it has Bluetooth, AUX plugin, and a USB charger. And because the radio was a little small, they used a mounting kit, so there's a little slot below, which will be nice for storing things... Just look below :)</p>
+<p><img alt="Photo" src="/images/new-radio.jpg"></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/hi-tech-02-ranger.html">posted at 07:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                </div>
+            </article>            <h4 class="date">Jan 18, 2021</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -220,74 +244,6 @@ git push -u origin master
                 <div class="info">
                     <a href="/corelib-vs-nolib.html">posted at 08:00</a>
                     &nbsp;&middot;&nbsp;<a href="/category/compilers.html" rel="tag">Compilers</a>
-                </div>
-            </article>            <h4 class="date">Dec 13, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/memory-and-counting-in-hardware.html" rel="bookmark" title="Permanent Link to &quot;Memory and Counting in Hardware&quot;">Memory and Counting in Hardware</a>
-                </h2>
-
-                
-                
-
-                <p>Electronics have been a secondary hobby of mine for a little while now... though I admit, I'm not too great at it. Actually, its more like an on-and-off thing. I'm trying to make it more of an on thing because its an interesting thing to do. I've written a few posts here on VHDL, which is a start.</p>
-<p>Depending on what you want to do, having some sort of memory is an ideal start. I don't have any memory elements other than shift registers, but they can be used like regular set-and-release memory just as easily. And the other nice thing about them is that you can chain them together, which means you can basically make your memory as big or small as you want. For a starter project, I made a 16-bit binary counter. Okay, its really not <em>that</em> impressive; basically, the microcontroller does the counting and math, and the shift registers and a bunch of LED's are used to display the current number.</p>
-<p>Here's an image of it running:</p>
-<p><img alt="Photo" src="/images/arduino_counter.jpg"></p>
-<p>Know what the number is? 663. 2^9 + 2^7 + 2^4 + 2^2 + 2^1 + 2^0 = 663. The counter is big-endian.</p>
-<p>And for the curious, that's a cell phone charger powering it. Yes, I had to program it at my computer, but the computer was in a room with horrible lighting.</p>
-<p>Okay, so as far as parts list goes, here's what I used:   </p>
-<ul>
-<li>Arduino- any model is fine, but I only have a Micro   </li>
-<li>(x2) SN74HC595N (8-bit shift register)   </li>
-<li>(x16) LED lights   </li>
-<li>(x16) 220 ohm resistors (this doesn't have to be exact, but it shouldn't be much if any lower)   </li>
-<li>Wires   </li>
-</ul>
-<p>As you can see, I have two types of wire- the regular jumper wires and some thicker doorbell wire. The doorbell wire is great. Its not too hard to work with, and you can buy this huge strand from Lowe's for $10 that will last forever.</p>
-<h3>Building the Circuit</h3>
-<p>Here's a diagram of the shift register pinout:</p>
-<p><img alt="Photo" src="/images/74HC595_pinout.png"></p>
-<p>Unfortunately, I don't have a drawing or anything of my circuit, so I will describe it as best as I can.</p>
-<p>For the first shift register:</p>
-<ul>
-<li>Connect VCC and GND to voltage and ground, respectively   </li>
-<li>Connect OE to to ground   </li>
-<li>Connect SRCLR to voltage   </li>
-<li>Connect SER to the arduino (on mine, its pin 2). This is the data pin.   </li>
-<li>Connect RCLK to the arduino (on mine, pin 3). This is the latch pin.   </li>
-<li>Connect SRCLK to the arduino (on mine, pin 4). This is the clock pin.   </li>
-</ul>
-<p>The second shift register is similar. But because we want to control both at once, there are a few important differences.</p>
-<ul>
-<li>Connect SER to the Qh' pin on the first register   </li>
-<li>Connect the RCLK and SRCLK to the RCLK and SRCLK of the first register   </li>
-</ul>
-<p>On both registers, pins Qa - Qh will connect to LEDs. The overall connect for the LEDs will be <code>shift register pin -&gt; resistor -&gt; LED -&gt; ground</code>.</p>
-<h3>Programming</h3>
-<p>I'm going to assume you know the basics of Arduino programming. If you have the program installed and know you to compile and upload the example program for making the onboard LED blink, you're good to continue.</p>
-<p>I'll post the entire code on another page, but this is the general idea for programming a shift register. A single shift register works with 1 byte, or 8 bits, which corresponds to the <code>byte</code> type in the Arduino language.</p>
-<ol>
-<li>Set the latch pin to 0.   </li>
-<li>Enter a loop and write out the byte of data.   </li>
-<li>Set the latch pin to 1.   </li>
-</ol>
-<p>And the algorithm for the loop is (each loop iteration):</p>
-<ol>
-<li>Set the clock pin to low.   </li>
-<li>Set the data pin to the current bit. The current bit is the <code>data &amp; (1 &lt;&lt; i)</code> where <code>data</code> is your byte value, and <code>i</code> is your loop index.   </li>
-<li>Set the clock pin to high.   </li>
-<li>Set the data pin to low (so we can have a stable signal).   </li>
-</ol>
-<p>The principle is exactly the same whether you have one shift register or 10. In our case we have two, which means we can display 16 bits of data, which corresponds to a <code>short</code> in the Arduino language (and all other languages that have it...). The easiest way to do this is first put the algorithm in a separate function, which we will call <code>writeOut(byte shiftData)</code>. Then, after you set the latch pin to 0, make two calls to <code>writeOut</code>, the first call with one half of the data, the second call with the other half. Then raise the latch pin. Both shift registers will be populated. If you have 10 shift registers, you would make 10 function calls in between lowering and raising the latch.</p>
-<p>If you're wondering about order, think of it as a top-down thing. The first function call will the be the last shift register, and the last function call will be the first shift register. Get it? Shift register...</p>
-<p>Okay. Here's the code. I put it on a separate page since its long. You can find it <a href="pages/shift-register-program.html">here</a>.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/memory-and-counting-in-hardware.html">posted at 12:15</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/electronics.html" rel="tag">Electronics</a>
                 </div>
             </article>
 
