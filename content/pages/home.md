@@ -5,13 +5,18 @@ status: hidden
 
 Hello everyone! My name is Patrick Flynn; I am a computer science student and research assistant at the University of North Carolina Charlotte. This is my personal corner of the internet where I have some professional information and post things that I find interesting (which are mainly technical).
 
-My computer interests lie in compilers, programming languages, computer architecture, and high-performance computing. However, I have experimented with some other areas as well. I've written desktop applications, a few Android apps, a simple chat application, and a few other things. Although a lot of what I do is computer related, I also enjoy tinkering with electronics, flying radio control airplanes, reading, writing, and when I can, exploring.
+My computer interests lie in compilers, programming languages, computer architecture, and high-performance computing. However, I have experimented with some other areas as well. I've written desktop applications, a few Android apps, a simple chat application, and a few other things. Although a lot of what I do is computer related, I also enjoy tinkering with electronics, flying radio control airplanes, reading, writing, photography, and when I can, exploring.
 
-To see my resume, check out my LinkedIn profile (see the contact page), or view it right here: [Resume](resume.html).
+Things to check out:
 
-Here's a page with some detailed information (not all inclusive): [Software Projects](software-projects.html).
+* To see my resume, check out my [LinkedIn profile](https://www.linkedin.com/in/patrick-flynn4664/) or view it here: [Resume](resume.html)
+* Some information on my [Software Projects](software-projects.html).
+* My [Github Profile](https://github.com/patrickf2000).
+* My [Medium Profile](https://medium.com/@patrickf2000) where you can find my more in-depth writing.
+* My [Flickr Profile](https://www.flickr.com/photos/patrickf2000/) where you can find some of my photos (still a work-in-progress).
+* Or, feel free to drop an [email](mailto:pflynn4664@pm.me)!
 
-And last but not least, my favorite quote. You could say this is my personal motto when I work on things.
+And last but not least, my favorite quote:
 
 ![Photo]({attach}images/home-quote.jpg)
 

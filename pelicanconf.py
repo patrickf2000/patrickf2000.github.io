@@ -43,11 +43,11 @@ MENU_INTERNAL_PAGES = (
 )
 
 # additional menu items
-MENUITEMS = (
-    #( 'Contact Me', 'contact-me.html'),
-    #( 'Projects', 'projects.html'),
-    ('GitHub', 'https://github.com/patrickf2000'),
-)
+#MENUITEMS = (
+#    ( 'Contact Me', 'contact-me.html'),
+#    ( 'Projects', 'projects.html'),
+#    ('GitHub', 'https://github.com/patrickf2000'),
+#)
 
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
