@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+        <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | articles in the "Linux" category</title>
+    <title>Patrick's Website | Journey Through Distro Land</title>
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
@@ -12,13 +12,12 @@
     <meta name="generator" content="Pelican" />
     <meta name="description" content="" />
     <meta name="author" content="Patrick Flynn" />
+
 </head>
 <body>
     <header>
         <nav>
             <ul>
-
-                <li class="ephemeral selected"><a href="/category/linux.html">Linux</a></li>
                 <li><a href="/">Home</a></li>
                 <li><a href="/pages/projects.html">Projects</a></li>
                 <li><a href="/blog_index.html">Blog</a></li>
@@ -69,30 +68,7 @@
                     <a href="/journey-through-distro-land.html">posted at 18:54</a>
                     &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
                 </div>
-            </article>            <h4 class="date">Jul 19, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/the-joys-of-binaries-on-linux.html" rel="bookmark" title="Permanent Link to &quot;The Joys of Binaries on Linux&quot;">The Joys of Binaries on Linux</a>
-                </h2>
-
-                
-                
-
-                <p>I've been a loyal Linux user for almost six years now. Really longer if you count the Kindle... Anyway. Maybe loyal isn't the greatest word to use. I use Linux because I like, because I think its a superior platform in many ways, and over the past year, because of my job.</p>
-<p>A few weeks ago, I listened to a talk by Linus Torvalds, where among other things, he addressed the issue of binary compatibility among Linux distributions. This never really hit home personally until today when I was working on resurrecting a desktop app for personal use. I got everything built and working on my development machine (which runs Fedora 32), but when I tried to run it on my stable machine (Linux Mint 20), what happens? It fails because of library versions.</p>
-<p>Linux, especially when it comes to development, really does things right. For the most part, I can very easily build things for source- and development as a whole is a lot of fun. Binary compatibility is something, however, that Linux sucks at.
-Now, the term binary compatibility is not completely literal. Linux uses the ELF format, which is actually a pretty simple format to generate and understand. If you write a C program that only uses the C standard library (and no special functions), it will run on pretty much any distro, as long as the underlying architecture is the same. The binary compatibility has to do with libraries- more specifically, library versions.</p>
-<p>Returning to my problem, this program I was working on uses Qt5 and a few KDE libraries. Nothing special, you can find them in the repositories on any system. The issue is the version. Fedora 32 ships with Qt 5.14. Linux Mint 20 ships with Qt 5.12. When I copied the binaries over, it wouldn't load because of the version difference. My solution was simply to create archives for each platform on my development machine (I used a live version to compile the Linux Mint binaries), and upload them to Google Drive. Its a pain, but it worked.</p>
-<p>At the end of the day, I see why things don't work and why distros do what they do. In fact, that's why I'm using two different distros. Fedora and Manjaro are really nice because I get the latest version of all the software and libraries, but Ubuntu/Linux Mint are really nice because they are stable and solid. Just the same though, it doesn't make it less frustrating. </p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/the-joys-of-binaries-on-linux.html">posted at 09:39</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
-                </div>
             </article>
-
             <div class="clear"></div>
             <footer>
                 <p>

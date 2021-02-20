@@ -29,7 +29,28 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Aug 16, 2020</h4>
+        <div id="content">            <h4 class="date">Sep 24, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/assemblers-raspberry-pis-and-school.html" rel="bookmark" title="Permanent Link to &quot;Assemblers, Raspberry Pis, and School&quot;">Assemblers, Raspberry Pis, and School</a>
+                </h2>
+
+                
+                
+
+                <p>This site has been kind of quiet lately. I've been trying to keep up with it, but August and September thus far has been kind of busy. I've been wrapping up my internship at Lawrence Livermore Laboratory, and I'm transitioning back into my job as a research assistant. I'm really happy with how the internship went, and this semester looks like it will be exciting as far as research goes.</p>
+<p>Its probably been about a month- maybe two actually- but I pushed a new project to my GitHub page: Asmx86. I know it may be hard to tell from the name, but its an assembler for the x86-64 platform. This honestly is one of my favorite projects, moreso because its been a long time coming. I've been wanting to write an assembler for a while, and I've tried a few times, but this is the first time its actually worked. Compared to compilers, assemblers are much easier (there's a 1:1 translation between the source and the target), but in many ways its harder because it requires a deep knowledge of the architecture you're targeting. Additionally, if you want to make something useful, you have to generate code in your operating system's executable format (in my case, its ELF).</p>
+<p>I wrote Asmx86 in C and used Flex and Bison for the parser. Everything else I wrote myself. Generating ELF was easy- I just used the structures in /usr/include/elf.h and wrote this to the binary file (which is easy to do in C). Getting all the different ELF parts and calculating the offsets and everything was challenging. I also had issues getting my string tables to work; I've been spoiled by C++'s string and vector classes. The result has been well worth it. My assembler can generate fully working and linkable ELF objects, which you can link into an executable, a static library, a dynamic library, or objects from a C compiler. I've tested linking with the C standard library and the start-up object files, and everything seems to be working, which is super exciting. Obviously the entire x86 instruction is not supported, but enough is working for non-trivial programs (adding new instructions is easy).</p>
+<p>I'll have to write more about the entire learning process later. As far as side projects go, I recently started a re-implementation of Quik using the Rust programming language. So far its off to a good start; I have a goal of targeting multiple architectures. On the x86 side, I'll be using my custom assembler.</p>
+<p>As part of that project (and for other reasons as well), I finally upgraded to a Raspberry Pi 4. I have a Pi 3, but I've been having a hard time getting into the whole hobby electronics thing (partly because I have absolutely no idea what I'm doing), so I started using it to learn the Arm architecture. The problem is that its too slow, and its only usable if you use the 32-bit Raspberry Pi OS. So, I got the Pi 4 with 4gb of RAM, and its been really nice. I've started on the code generation for Arm64 in the new Quik compiler. More on this later.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/assemblers-raspberry-pis-and-school.html">posted at 09:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
+                </div>
+            </article>            <h4 class="date">Aug 16, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -120,30 +141,6 @@
                     <a href="/my-pretty-graph.html">posted at 07:10</a>
                     &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
                 </div>
-            </article>            <h4 class="date">Jul 26, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/on-apps-and-security.html" rel="bookmark" title="Permanent Link to &quot;On Apps (And Security)...&quot;">On Apps (And Security)...</a>
-                </h2>
-
-                
-                
-
-                <p>So if you've read below, you will remember how I was talking about our internet completely going out. To follow up on that story, basically here's what happened. The router/modem setup they gave us completely went out (I believe it was some all-in-one kind of thing, but I'm not sure). The service people told us they had cancellations and would send someone out that evening, but it never happened, so we ended up going to a store owned by our ISP and they gave us a whole new router- and told us they stopped using what we had before because they went out a lot. Surprise.</p>
-<p>We set everything up, and the new system actually works pretty well- much better than the old actually. While I didn't arc towards complete dislike, my liking went down significantly when I found out the only way to change the router settings was through the ISP's mobile app. Even if you took out the fact that I live with my dad- so obviously he is the ISP customer- the fact that you have to have an app is (in my opinion) completely stupid.</p>
-<p>I generally love technology until we get to the consumer side, and even the consumer side doesn't bother me much until we hit the mobile arena. There definitely seems to be a sentiment that we need an app for everything- I guess it makes sense, phones are basically our companions- we are on them all the time, so why not just make an app? In some cases, maybe so. But an app to manage your router? Seriously?</p>
-<p>The logic behind using smartphones for things like this, as well as others such as two-factor authentication, payments, and so forth is that most people always have their phone with them- and that makes it secure and verifies identity. To an extent, I think that's true. But a phone is a small device, easily lost or stolen. And unless you have multiple mobile devices, it creates a single point of failure. This is exactly why I don't use two-factor authentication, or any service that I can't also use on my computers. Consider two factor authentication. I only use it for one thing, and that's only because I have no choice. I have many accounts that I could use with two factor authentication, but choose not too. Why? Because I don't want that single point of failure. If I lose my phone, or if it gets stolen, true it would be difficult for someone to get in, but the fact that its gone will make it hard for me to get back into my accounts. I am not opposed to using my phone as a secondary form of verification (ie, those text messages with a code), but I will not allow it to be the deciding factor regarding whether I get into my accounts.</p>
-<p>This goes back to my router- once you are solely dependent on one device, you are creating a single point of failure. If I have a real need to get into my router, I can't unless I get my dad to let me in (I have actually needed to for my job- long story). And if something happened to his phone, that creates a single point of failure for him.</p>
-<p>And I honestly, I think we can take this even deeper. I am not opposed to smartphones, but I am opposed to the way they are used. The fact that your phone is "smart" should be a feature, not a requirement. Two-factor authentication makes a smartphone a requirement. Text verification makes it a feature- dumb flip-phones can make use of text verification. My personal smartphone use is pathetic- it really is. I literally only have text, phone, an internet messaging service, maps, a notepad, and the camera. I don't even have a web browser (I actually do, but its disabled so I can't get on it as easily). I could seriously get by perfectly fine with a dumb phone (the internet messaging service isn't even a requirement- I use it with one friend whose phone number I have and use... Its a long story).</p>
-<p>As I said, I do not find mobile technology one of the better parts of the technology field. Don't get me wrong, a device that functions as phone, music player, camera, notepad, and GPS is great- I make use of that. Ten years ago, I would have had to have several devices to do that. Its the constant companion model that companies encourage and even push (the router for instance) on us that's wrong.</p>
-<p>Alright, I think that's enough on that. I'm sorry if this didn't seem too coherent... I was trying not to write a book :)</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/on-apps-and-security.html">posted at 17:45</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/opinion.html" rel="tag">Opinion</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -151,7 +148,7 @@
 
                     <a href="/blog_index3" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="/blog_index5" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 4 of 5</span>
+                    <span>Page 4 of 6</span>
                 </div>
 
             <div class="clear"></div>
