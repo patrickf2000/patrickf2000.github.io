@@ -29,7 +29,27 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Sep 24, 2020</h4>
+        <div id="content">            <h4 class="date">Sep 25, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/a-night-with-an-old-printer.html" rel="bookmark" title="Permanent Link to &quot;A Night With an Old Printer&quot;">A Night With an Old Printer</a>
+                </h2>
+
+                
+                
+
+                <p>As much as I love programming, when one is on the computer all day for work and school, your desire to get off the computer begins to outweigh that. My parents have an old Samsung printer, but after many years of heavy use it began to jam when pulling up paper. It turns out the issue is this little part rather deep inside can get warn out and begin to stick, which is why it sucks up all that paper. When I say deep inside, I literally mean that. You have to take apart a lot to get to that issue. I should have taken a better shot, but here's what it looks like halfway through the process (that's the computer board).</p>
+<p>It still doesn't work perfectly, put it can get through about 15 sheets before it jams. Oh well, that's fine, they never print more than maybe 5 at a time (and that's stretching it). </p>
+<p>I can't take credit for figuring it out, but I'm proud I got it fixed. Its always cool when you're able to fix something. If anyone has a Samsung SCX-4623FW jamming, here's an excellent link: <a href="https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/">https://mypcjobs.wordpress.com/2017/01/10/samsung-scx-4623f-solenoid-issues/</a>.</p>
+<p><img alt="Photo" src="/images/printer.jpg"></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/a-night-with-an-old-printer.html">posted at 08:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                </div>
+            </article>            <h4 class="date">Sep 24, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -117,29 +137,6 @@
                 <div class="info">
                     <a href="/static-hosting.html">posted at 12:04</a>
                     &nbsp;&middot;&nbsp;<a href="/category/blogging.html" rel="tag">Blogging</a>
-                </div>
-            </article>            <h4 class="date">Aug 02, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/my-pretty-graph.html" rel="bookmark" title="Permanent Link to &quot;My Pretty Graph&quot;">My Pretty Graph</a>
-                </h2>
-
-                
-                
-
-                <p><img alt="Photo" src="/images/graph1.png"></p>
-<p>I thought this is post worthy. I'll admit this is a little hard to see, but it shouldn't be too bad.</p>
-<p>I've been programming compilers for almost a year now. I have three or four published on Github- two Quik compilers and my extcc compiler. I've also made several other programs that would fall into the general compiler category, including a very basic Java class generator, a pseudo-assembly layer, and two simple assemblers- one written in Haskell that doesn't do too much, and another written in C that does a lot more, but I haven't published yet. Quik is a simple BASIC-like language I devised primarily to learn compilers. The benefit of learning with Quik was that its easy to parse. And then there's the element of creating your own language.</p>
-<p>Quik went through a couple iterations mainly because I didn't know what I was doing at first. Extcc was a fork of the latest version of Quik that eventually became primarily a C compiler. I took a break from my compilers after I got a little tired of extcc, but lately I've picked it up again by starting a new project. Once again, its a custom language but not Quik (though it resembles Quik). I'm not going to say too much since I haven't published the project and its still in its very early stages. The main purpose of this post is that graph above.</p>
-<p>So far, this project has seen two big changes. First, Flex and Bison are used instead of handwritten parsers and scanners (I currently have different priorities). The second is I'm using Graphviz Dot to visualize my abstract syntax tree. Originally, to debug my AST I printed it out in the console. Seriously. If you take a look at the graph, you will notice that it starts with the file, the global scope, and the functions. In my original visualizers, I would simply print the node type, its main arguments (in the case of functions, the function name and return type), and then any children. To make it readable, I did indent, and the indentation was increased recursively on each iteration.</p>
-<p>I knew about Dot graphs for a while, but I was exposed to them recently in my job. My boss was using them to debug a build tool that had to (among other things) recursively determine dependencies, determine the build order, and schedule each part. When I saw the graphs and the code, it clicked that this would be a far superior way for me to debug my AST's. And so I did. My new structure still uses a base AstNode (see either extcc or my latest Quik for an example), and other types are derived from it. The key difference is that each node has a <code>writeDot</code> function, which generates a portion of the Dot file. To generate the file, I only call the <code>writeDot</code> in the top node, and then it calls <code>writeDot</code> on all its children.</p>
-<p>I'll write more about this later, especially if the project matures.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/my-pretty-graph.html">posted at 07:10</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
                 </div>
             </article>
 
