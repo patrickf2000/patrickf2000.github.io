@@ -26,7 +26,7 @@ DEFAULT_PAGINATION = 5
 
 ARTICLE_PATHS = [
     'july2020', 'august2020', 'september2020', 'october2020', 'december2020',
-    'january2021', 'february2021'
+    'january2021', 'february2021', 'march2021'
 ]
 
 INDEX_SAVE_AS = 'blog_index.html'

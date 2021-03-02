@@ -29,7 +29,48 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Feb 20, 2021</h4>
+        <div id="content">            <h4 class="date">Mar 02, 2021</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/new-projects-and-why-i-open-up-everything.html" rel="bookmark" title="Permanent Link to &quot;New Projects and Why I Open Up Everything&quot;">New Projects and Why I Open Up Everything</a>
+                </h2>
+
+                
+                
+
+                <p>Yesterday, I opened up four projects I had sitting around in private Github repositories. Except for "tiny-cpu", which I started this past weekend, all the others I initially started back in January. Originally, I wasn't going to make them public immediately, but I decided to do so (and got around to doing it yesterday).</p>
+<h3>The Projects</h3>
+<ul>
+<li>
+<p><code>tiny-cpu</code>: I'm very interested in computer hardware and digital design, and I'm taking a class in computer architecture, so this is my first attempt at designing a simple CPU. At the time of writing, the register file, decoder, and part of the control unit are working. The CPU is written in VHDL.</p>
+</li>
+<li>
+<p><code>ada-asm</code>: This was part of another experiment. I really like Ada, and I wanted to see if I could generate structured binary files with it like in C. It turns out you can both easily and safely. The only thing interesting this does is generate a simple relocatable ELF, but hey that's pretty interesting.</p>
+</li>
+<li>
+<p><code>tsh</code>: A simple Unix shell I wrote to learn more about C and Linux processes.</p>
+</li>
+<li>
+<p><code>codepad</code>: A work-in-progress text editor I wrote to also learn C, but also to learn more about Gtk. It uses Gtk and GtkSourceView, and at the time of writing, it can do the basic new-open-save of a text editor.</p>
+</li>
+</ul>
+<h3>Why I Open Up Everything</h3>
+<p>I've people comment on my Github profile and the amount of stuff on there. I mean, compared to some other people, its really not <em>that</em> much, but it is approaching 50 projects. And I also tend to make projects public well before they are useful. Why?</p>
+<p>Four reasons.</p>
+<p>First of all, most of these projects are for the sake of learning. Other than a few of my compiler/programming-language projects, none of them are anything super unique. If anything, its almost re-inventing the wheel. If you wish to become good at programming, I argue this is the best way to do so. Make a clone of an existing application, but at the same time make it at least somewhat useful. This has helped me so much, in some cases more than classes, and in other cases as extensions of classes.</p>
+<p>Secondly, I like teaching others. I've used my projects in the past to show things to people, and they've often been helpful. When I say this, I don't mean like I'm some genius. There are many people much smarter than me out there. No, I mean this in the sense that I've figured out how to do something, and I want to share it with others who either have similar interests, or are also learning (or both).</p>
+<p>Third, I believe that the best work (I'm speaking generally here) is done in an open environment. That is what Github is- an open environment (and this isn't meant to be a Github advertisement. I have a Gitlab account as well). If you publish your work in an environment like this, you can see what other people are working on and what ideas they've had, and apply it to your own. And because of the nature of open source, in many cases you can extend the ideas you find to your own. Or go back and contribute to them.</p>
+<p>Finally, from a career perspective, having a Github profile like this is very, very helpful. I speak this out of experience, because its helped me a lot. Github acts as a second resume for me. It shows that I really love and am passionate about what I do. It also shows skill and what I know and am interested in.</p>
+<h3>And That Said...</h3>
+<p>If you're an aspiring developer, you should really consider doing this. Or even if you are a developer, open source is very much the way to go.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/new-projects-and-why-i-open-up-everything.html">posted at 07:34</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/opinion.html" rel="tag">Opinion</a>
+                </div>
+            </article>            <h4 class="date">Feb 20, 2021</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -137,77 +178,6 @@
                 <div class="info">
                     <a href="/book-review-unix-a-history-and-a-memoir.html">posted at 07:09</a>
                     &nbsp;&middot;&nbsp;<a href="/category/books.html" rel="tag">Books</a>
-                </div>
-            </article>            <h4 class="date">Jan 03, 2021</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/lila-v01.html" rel="bookmark" title="Permanent Link to &quot;Lila v0.1&quot;">Lila v0.1</a>
-                </h2>
-
-                
-                
-
-                <p>What's one of the coolest things you can do with computers? There are a lot of answers to this, but for me, its programming them in your own programming language.</p>
-<p>The other day, I published my <a href="https://github.com/patrickf2000/lila">Lila</a> compiler and language, and today, some <a href="https://github.com/patrickf2000/lila-programs">example programs</a> (still a work in progress). Its not an official release; I published it because I felt like the syntax was concrete enough to safely do so. The compiler had been capable of doing some non-trivial things for a while now.</p>
-<p>I'm not going to do a huge post on the language; I'll eventually write some documentation. I want to share some of the story behind it.</p>
-<p>For the curious, here's a small example I wrote earlier. Basically, it calls "ls -l" in the current directory.</p>
-<div class="highlight"><pre><span></span># An example of calling fork-exec on Linux
-
-const int linux_fork = 57;
-const int linux_exec = 59;
-
-use std.text_io;
-use std.os;
-
-func main -&gt; int
-    pid : int64 = 0;
-    exe_args : str[3];
-begin
-    pid = fork();
-
-    if pid == -1
-        println(&quot;Error calling fork.&quot;);
-        return pid;
-    elif pid == 0
-        exe_args[0] = &quot;/bin/ls&quot;;
-        exe_args[1] = &quot;-l&quot;;
-        exe_args[2] = 0;
-        syscall(linux_exec, &quot;/bin/ls&quot;, exe_args, 0);
-
-        println(&quot;Error&quot;);
-
-        return 0;
-    end
-
-    return 0;
-end
-</pre></div>
-
-
-<h3>Why Compilers?</h3>
-<p>If you scroll through my Github profile, you will notice several compilers and other related tools (I think I have four compilers, an assembler, two VM programs, and a partial C parser on Github at the time of writing). I've been writing compilers for about a year and half now; if you include the interpreters, its probably been over two years. And I currently have a job working on a compiler. So yeah, its reasonable to infer I enjoy this field.</p>
-<p>I enjoy this for a few reasons. First, I find programming languages really interesting. Take any compiled language- C, C++, Rust, D, Ada, Pascal, Haskell, Swift, OCaml, or anything else. I can use all these languages on the same computer, and they all compile to the same instructions and the same format. But the way you get work done in each is significantly different. And by virtue of that, each language is suitable for a certain domain. I find this really interesting. And for this reason, I've also enjoyed designing my own. And then implementing it.</p>
-<p>Compilers are really interesting machines, and honestly one of the most underrated areas of computer science. Maybe because GCC scares a lot of people away. When you write a compiler, you basically create your own little world. You make the rules for the language, you decide what's right and wrong, and eventually, you decide how its translated and how the final instructions are generated. And once you get enough of the language implemented, you can create your own libraries, and eventually your own programs in your own language.</p>
-<p>What is more cool than that?</p>
-<h3>The Origins of Lila</h3>
-<p>Earlier this year, I was working on two compilers: first, Quik 3, and second, extcc. The former was the last compiler I wrote for my Quik language, and the latter was a fork that was meant to be an extensible C compiler. Both got fairly far, and I'm still proud of them. But the reason I stopped was because I made some bad design choices early on, and because of the nature of C++, the only solution to fixing that was to basically start over.</p>
-<p>And I did start over a few times. Originally, I wanted to make my own C compiler so I could have something with a small language surface I could hack. But let me be honest, I'm not a huge fan of C. Around this time, I began playing with Ada some, and I fell in love with it. I really like Ada and the Wirth-family of programming languages. Ada wasn't the only thing I tried; I was experimenting with other programming languages as well because I was getting tired of C++ and the issues that go with it. I'll save this exploration for a different post. But fast forward to September, I began looking at Rust again. I did a simple project to see if I could create the necessary IR's in Rust, and that project eventually evolved into Lila.</p>
-<p>Lila wasn't originally the name. In fact, the Lila language is significantly different from when I started the project. Originally, the language was really close to Quik, and I named the project Dash (somewhat similar to Quik...). In November, I made the mistake of releasing it too soon; I didn't get much feedback, and when I started writing some simple programs in it, it became evident that it needed work. I took the project down, and began a significant redesign through late November and most of December. Originally, I wanted to name the language something different, but for certain reasons, I couldn't. Lila was fairly close to what I originally wanted to name it, and I like that name anyway.</p>
-<p>Currently, this is my biggest project in terms of lines of code: a little under 9500 lines of Rust. The next biggest was extcc, which got to around 5000 I think. The project is honestly one of my favorite of all time.</p>
-<h3>Some Features</h3>
-<p>I'll save a lot of this for the documentation, but I just want to cover a few things here.</p>
-<p>One of my favorite features is the array and string handling features. This has always been one of my biggest gripes with C. But I do not think the solution is to use a garbage collector. Basically, what I do is handle all memory allocations and deallocations at compile time. There is a statically-linked core library with (among other things) malloc and free functions, which are inserted by the compiler. So when you create an array, and leave a function, memory is allocated and deallocated behind the scenes.</p>
-<p>Array sizes are stored next to the array pointers themselves, and can be retrieved at any point with the <code>sizeof</code> operator. This is especially useful in cases where you have to pass arrays to functions and for the for-each loops. There's also base utilities for managing strings in the core library. Strings are their own data types. At this point in history, I very strongly believe that strings should be an essential type of any language.</p>
-<p>The syntax is inspired by the Wirth languages. Its still fairly verbose, but much less so than Pascal or Ada. Probably the most defining characteristic you will see is the variable block at the top of each function. I really like this, and I believe it encourages better programming. Rather than strewing variables all over the place, you can see all your variables and manage them accordingly.</p>
-<p>As far as architectures go, x86-64 is fully supported, and RISC-V supports a lot of the integer-related elements. The basic hello-world Arm64 tests pass, but that's about it. Lila is meant to be easy to port to other architectures, which is something I plan on doing in the near future. I also have a fairly decent standard library underway. Text IO functions such as printf and console input are supported, a few string functions, file functions, and OS functions are all supported. One of the things I got working today was process management (fork and exec on Linux).</p>
-<h3>Conclusion</h3>
-<p>I'll write more as interesting progress is made. In the immediate future, I plan on working on the standard library and just general testing by writing some non-trivial programs. If you decide the try it out, please let me know how it goes!</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/lila-v01.html">posted at 19:38</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/lila.html" rel="tag">Lila</a>
                 </div>
             </article>
 
