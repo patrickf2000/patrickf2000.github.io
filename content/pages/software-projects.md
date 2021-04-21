@@ -4,13 +4,13 @@ save_as: software-projects.html
 
 I do most of my learning through interesting side projects. Some of them are only that, but a few have grown up to become useful tools (to me at least...). This is not an all-inclusive list, these are just my best and favorite projects.
 
-## Lila
+## Ida
 
-Lila is a compiler and programming language. The language is a descedent of my Quik language. I actually considered keeping that name because I like it so much, but it was starting to get over used. Oh well. I really like the name "Lila" too. I actually was going to use something else similar to "Lila", but for certain reasons I couldn't.
+Ida is a compiler and programming language. The language is a descedent of my Quik language. I actually considered keeping that name because I like it so much, but it was starting to get over used. Oh well. I really like the name "Ida" too.
 
-The compiler is written completely in Rust, and only uses the standard library. Currently, it supports the x86-64 and most of the RISC-V architectures, and it is ready for other architectures.
+The compiler is written completely in Rust, and only uses the standard library. Currently, it supports the x86-64, most of RISC-V, and some AArch64 architecture, and it is ready for other architectures.
 
-I'm going to try to keep a log of development. You can find it [here](pages/lila-log.html).
+I'm going to try to keep a log of development. You can find it [here](pages/ida-log.html).
 
 Here's a screenshot of the language:
 

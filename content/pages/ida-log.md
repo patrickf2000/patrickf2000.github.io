@@ -1,8 +1,8 @@
-title: Lila Compiler Development
+title: Ida Compiler Development
 status: hidden
-save_as: pages/lila-log.html
+save_as: pages/ida-log.html
 
-The development logs for my Lila compiler and language.
+The development logs for my Ida compiler and language.
 
 ### 1/5/2021
 
@@ -58,7 +58,7 @@ For the curious, I'm using Qemu emulators to do development. My Arm64 emulator a
 
 Not much today. I started on a very rough draft for a standard library.
 
-Basically, here's the idea. Originally, I was going to make a standard library a more or less optional thing- my idea wasn't to confine the language to a standard other than the language itself. I'm thinking I may change my stance on that. Programming will become a _nightmare_ if the user has to deal with different APIs on every platform, or even the same platform if they want to use the C library vs the Lila library. My solution to that is create a set of standards that any Lila program can use. To the program itself, it won't matter what library, API, or platform they are on; the user can compile and link however they want. In the case of the C library, the function calls will be to equivalent C functions. Maybe eventually I can implement inlining to eliminate function call overheads. Or maybe explicit inlining- that's an idea. Otherwise, the calls may be pure Lila functions, or even something else.
+Basically, here's the idea. Originally, I was going to make a standard library a more or less optional thing- my idea wasn't to confine the language to a standard other than the language itself. I'm thinking I may change my stance on that. Programming will become a _nightmare_ if the user has to deal with different APIs on every platform, or even the same platform if they want to use the C library vs the Ida library. My solution to that is create a set of standards that any Ida program can use. To the program itself, it won't matter what library, API, or platform they are on; the user can compile and link however they want. In the case of the C library, the function calls will be to equivalent C functions. Maybe eventually I can implement inlining to eliminate function call overheads. Or maybe explicit inlining- that's an idea. Otherwise, the calls may be pure Ida functions, or even something else.
 
 This week is the last week of school, so I'm not sure how much time I'll have to develop this. But I'll post if I do either decide on something or do it.
 
