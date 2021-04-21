@@ -29,7 +29,40 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 05, 2020</h4>
+        <div id="content">            <h4 class="date">Dec 09, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/vintage-os.html" rel="bookmark" title="Permanent Link to &quot;Vintage OS&quot;">Vintage OS</a>
+                </h2>
+
+                
+                
+
+                <p>So I was cleaning house earlier... Or rather, cleaning the computer. You know, when there gets to be a million things on your desktop? Anyway.</p>
+<p>I have a small collection of vintage operating systems, some of which I've been able to get running in virtual machines. When I say vintage, I don't necessarily mean the ones everyone has heard about; there's a few obscure you may never have heard of. But anyway, I forgot I had screenshots of them because they are with the OSes and not the rest of my pictures. I only have three OSes photographed at the moment, but they are worth seeing.</p>
+<h2>IBM OS/2</h2>
+<p>The only truly vintage one here. The history behind this operating system is interesting. It runs without any issues in Virtualbox, but as I remember it was a little tricky to get running. I lost the article, but if I ever decide to run it again, I'll be sure to post.</p>
+<p><img alt="Photo" src="/images/os2.png"></p>
+<h2>Sky OS</h2>
+<p>Sky OS was a fairly complete operating system written mainly by Robert Szeleney from 1997 until 2009. It was a Unix-like OS with a graphical desktop, and even got to the point of being able to run real applications such as the GNU Toolchain and Firefox. The OS was meant to be a commerical product, but it never aquired a sufficient developer/user base, and eventually, Szeleney couldn't keep up with development. You can still find disk images and a key and boot it up in Virtualbox. Its a rather nice OS, its a shame it never went further.</p>
+<p>The desktop:</p>
+<p><img alt="Photo" src="/images/skyos1.png"></p>
+<p>Some applications running:</p>
+<p><img alt="Photo" src="/images/skyos2.png"></p>
+<h2>Syllable OS</h2>
+<p>Another free OS from the early 2000s. Unlike Sky OS, Syllable was actually open source. It eventually stagnated and development ended in 2012. There wasn't a huge team behind this one either, and it got really far in terms of capabilities. Its a shame neither this nor Sky OS ever became viable alternatives to Windows because they really had potential.</p>
+<p>The desktop:</p>
+<p><img alt="Photo" src="/images/syllable1.png"></p>
+<p>The file explorer:</p>
+<p><img alt="Photo" src="/images/syllable2.png"></p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/vintage-os.html">posted at 12:30</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
+                </div>
+            </article>            <h4 class="date">Dec 05, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -212,189 +245,6 @@ qemu-img create ubuntu-image.img 20G
                     &nbsp;<a href="/tag/assembly.html" class="tags">Assembly</a>
                     &nbsp;<a href="/tag/x86.html" class="tags">x86</a>
                     &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
-                </div>
-            </article>            <h4 class="date">Sep 26, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/adventures-with-vhdl.html" rel="bookmark" title="Permanent Link to &quot;Adventures with VHDL&quot;">Adventures with VHDL</a>
-                </h2>
-
-                
-                
-
-                <p>As part of one of my classes I'm taking this semester, I'm learning about VHDL. Actually, I think VHDL is the optional part (so far, I've been learning it pretty much on my own, though the introduction came from the class). I've wanted to learn a hardware descriptor language for some time. I tried Verilog, but I had a hard time finding good tutorials on how to use it, and for some reason I never really looked at VHDL (maybe Verilog scared me away). This may be a slightly unpopular opinion, but I really like VHDL. The reason is the reason why most people dislike it: its basically a subset of Ada, which is a language I'm familiar with.</p>
-<p>Anyway, I finally managed to get a simple circuit to run: a full adder, which I eventually made into an 8-bit adder. Its signed, meaning you can use it as either an adder or a subtractor. I'll come back to this in a minute. Here's what it looks like:</p>
-<div class="highlight"><pre><span></span><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">-- A single bit full adder</span>
-<span class="k">entity</span> <span class="nc">full_adder</span> <span class="k">is</span>
-    <span class="k">port</span> <span class="p">(</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ci</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-        <span class="n">s</span><span class="p">,</span> <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-    <span class="p">);</span>
-<span class="k">end</span> <span class="nc">full_adder</span><span class="p">;</span>
-
-<span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">-- An 8-bit adder</span>
-<span class="k">entity</span> <span class="nc">adder</span> <span class="k">is</span>
-    <span class="k">port</span> <span class="p">(</span>
-        <span class="n">vec1</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">vec2</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">out_vec</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-    <span class="p">);</span>
-<span class="k">end</span> <span class="nc">adder</span><span class="p">;</span>
-
-<span class="c1">-- The logic for the single-bit adder</span>
-<span class="k">architecture</span> <span class="nc">rtl_full_adder</span> <span class="k">of</span> <span class="nc">full_adder</span> <span class="k">is</span>
-<span class="k">begin</span>
-    <span class="n">s</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">a</span> <span class="k">xor</span> <span class="n">b</span><span class="p">)</span> <span class="k">xor</span> <span class="n">ci</span><span class="p">;</span>
-    <span class="n">co</span> <span class="o">&lt;=</span> <span class="p">((</span><span class="n">a</span> <span class="k">xor</span> <span class="n">b</span><span class="p">)</span> <span class="k">and</span> <span class="n">ci</span><span class="p">)</span> <span class="k">or</span> <span class="p">(</span><span class="n">a</span> <span class="k">and</span> <span class="n">b</span><span class="p">);</span>
-<span class="k">end</span> <span class="nc">rtl_full_adder</span><span class="p">;</span>
-
-<span class="c1">-- The logic for the 8-bit adder</span>
-<span class="k">architecture</span> <span class="nc">rtl_adder</span> <span class="k">of</span> <span class="nc">adder</span> <span class="k">is</span>
-    <span class="k">component</span> <span class="nc">full_adder</span>
-        <span class="k">port</span> <span class="p">(</span>
-            <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ci</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">s</span><span class="p">,</span> <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
-
-    <span class="k">signal</span> <span class="n">c</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">8</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-<span class="k">begin</span>
-    <span class="n">op1</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-    <span class="n">op2</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
-    <span class="n">op3</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
-    <span class="n">op4</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
-    <span class="n">op5</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
-    <span class="n">op6</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
-    <span class="n">op7</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">));</span>
-    <span class="n">op8</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span>
-    <span class="n">co</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-<span class="k">end</span> <span class="nc">rtl_adder</span><span class="p">;</span>
-</pre></div>
-
-
-<p>Its actually not as scary as it looks; even without the background, its pretty easy to understand how it works. Binary addition works the same way we humans add numbers- we start with the digit on the right, and work left. The full adder is the smaller circuit that performs the logic operation to add two bits (three if you have carry). In base-2, 0+0 = 0, 0 + 1 = 1, 1 + 0 = 1, 1 + 1 = 0 carry 1, and 1 + 1 + 1 = 1 carry 1 (that extra 1 would be the carry; in all other cases, you can assume its zero). In the 8-bit adder, we simply use the full adder on each bit.</p>
-<p>As I mentioned earlier, this implements a signed adder. That means the first bit will be treated as the sign bit. Like all other adders, this uses the 2's complement representation of negative numbers. Because its a signed adder, it also works as a subtractor. Although we often think of subtraction as a separate operation, to a computer there is no such thing. Computers perform addition on signed numbers. So if you wanted to do 10 - 5, to a computer it would be 10 + (-5). For our use, its a complicated way to do it, but it yields the same result.</p>
-<p>I think the idea with VHDL testbenches is to test all values, but I wanted to try something once I found VHDL had text IO like other languages. If you use the IEEE standard logic types, you can convert integers to and from the bit vectors. Connect this with some input and output, and you have a simple calculator:</p>
-<p><img alt="Photo" src="/images/vhdl_calc.png"></p>
-<p>And below is the code if you want to try it out. I am using GHDL to build and run this, so here's also the commands I used. Also note, because its 8-bit, you can add numbers until their sum is less than or equal to 127 (binary: 01111111). Anything greater will invert the most significant bit, which will result in a negative number.</p>
-<div class="highlight"><pre><span></span>ghdl -a adder.vhdl
-
-ghdl -a --ieee<span class="o">=</span>synopsys test.vhdl
-ghdl -e --ieee<span class="o">=</span>synopsys adder_tb
-ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span class="o">=</span>disable
-</pre></div>
-
-
-<div class="highlight"><pre><span></span><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_signed.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_arith.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.numeric_std.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std.textio.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">--  A testbench has no ports.</span>
-<span class="k">entity</span> <span class="nc">adder_tb</span> <span class="k">is</span>
-<span class="k">end</span> <span class="nc">adder_tb</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">behav</span> <span class="k">of</span> <span class="nc">adder_tb</span> <span class="k">is</span>
-    <span class="k">constant</span> <span class="n">WIDTH</span> <span class="o">:</span> <span class="kt">integer</span> <span class="o">:=</span> <span class="mi">8</span><span class="p">;</span>
-
-    <span class="c1">--  Declaration of the component that will be instantiated.</span>
-    <span class="k">component</span> <span class="nc">adder</span>
-        <span class="k">port</span> <span class="p">(</span>
-            <span class="n">vec1</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">vec2</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">out_vec</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
-
-    <span class="c1">--  Specifies which entity is bound with the component.</span>
-    <span class="k">for</span> <span class="n">add0</span><span class="o">:</span> <span class="n">adder</span> <span class="k">use</span> <span class="k">entity</span> <span class="nn">work</span><span class="p">.</span><span class="n">adder</span><span class="p">;</span>
-    <span class="k">signal</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">out_vec</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">signal</span> <span class="n">co</span> <span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
-
-<span class="k">begin</span>
-    <span class="c1">--  Component instantiation.</span>
-    <span class="n">add0</span><span class="o">:</span> <span class="n">adder</span> <span class="k">port</span> <span class="k">map</span> <span class="p">(</span><span class="n">vec1</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">out_vec</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">,</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">co</span><span class="p">);</span>
-
-    <span class="c1">--  This process does the real job.</span>
-    <span class="k">process</span>
-
-        <span class="c1">-- For input</span>
-        <span class="k">variable</span> <span class="n">in_buf1</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">in_buf2</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">in_num1</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">in_num2</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
-
-        <span class="k">variable</span> <span class="n">val1</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="k">variable</span> <span class="n">val2</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-
-        <span class="c1">-- For output</span>
-        <span class="k">variable</span> <span class="n">l</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">out_num</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
-    <span class="k">begin</span>
-
-        <span class="c1">-- Get all the input</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Enter two numbers&quot;</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="n">readline</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">in_buf1</span><span class="p">);</span>
-        <span class="n">read</span><span class="p">(</span><span class="n">in_buf1</span><span class="p">,</span> <span class="n">in_num1</span><span class="p">);</span>
-
-        <span class="n">readline</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">in_buf2</span><span class="p">);</span>
-        <span class="n">read</span><span class="p">(</span><span class="n">in_buf2</span><span class="p">,</span> <span class="n">in_num2</span><span class="p">);</span>
-
-        <span class="n">val1</span> <span class="o">:=</span> <span class="n">conv_std_logic_vector</span><span class="p">(</span><span class="n">in_num1</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>
-        <span class="n">val2</span> <span class="o">:=</span> <span class="n">conv_std_logic_vector</span><span class="p">(</span><span class="n">in_num2</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>
-
-        <span class="k">wait</span> <span class="k">for</span> <span class="mi">50</span> <span class="n">ns</span><span class="p">;</span>
-
-        <span class="c1">-- Do the calculations</span>
-        <span class="n">vec1</span> <span class="o">&lt;=</span> <span class="n">val1</span><span class="p">;</span>
-        <span class="n">vec2</span> <span class="o">&lt;=</span> <span class="n">val2</span><span class="p">;</span>
-        <span class="k">wait</span> <span class="k">for</span> <span class="mi">50</span> <span class="n">ns</span><span class="p">;</span>
-
-        <span class="c1">-- Output everything</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Num1: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">val1</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot; | Num2: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">val2</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="n">out_num</span> <span class="o">:=</span> <span class="n">conv_integer</span><span class="p">(</span><span class="n">out_vec</span><span class="p">);</span>
-
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Result: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">out_num</span><span class="p">);</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Output: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">out_vec</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="k">wait</span><span class="p">;</span>
-    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="k">end</span> <span class="nc">behav</span><span class="p">;</span>
-</pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/adventures-with-vhdl.html">posted at 15:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                    &nbsp;&middot;
-                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
-                    &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
                 </div>
             </article>
 
