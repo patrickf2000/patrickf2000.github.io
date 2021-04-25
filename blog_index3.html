@@ -29,7 +29,75 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 09, 2020</h4>
+        <div id="content">            <h4 class="date">Dec 13, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/memory-and-counting-in-hardware.html" rel="bookmark" title="Permanent Link to &quot;Memory and Counting in Hardware&quot;">Memory and Counting in Hardware</a>
+                </h2>
+
+                
+                
+
+                <p>Electronics have been a secondary hobby of mine for a little while now... though I admit, I'm not too great at it. Actually, its more like an on-and-off thing. I'm trying to make it more of an on thing because its an interesting thing to do. I've written a few posts here on VHDL, which is a start.</p>
+<p>Depending on what you want to do, having some sort of memory is an ideal start. I don't have any memory elements other than shift registers, but they can be used like regular set-and-release memory just as easily. And the other nice thing about them is that you can chain them together, which means you can basically make your memory as big or small as you want. For a starter project, I made a 16-bit binary counter. Okay, its really not <em>that</em> impressive; basically, the microcontroller does the counting and math, and the shift registers and a bunch of LED's are used to display the current number.</p>
+<p>Here's an image of it running:</p>
+<p><img alt="Photo" src="/images/arduino_counter.jpg"></p>
+<p>Know what the number is? 663. 2^9 + 2^7 + 2^4 + 2^2 + 2^1 + 2^0 = 663. The counter is big-endian.</p>
+<p>And for the curious, that's a cell phone charger powering it. Yes, I had to program it at my computer, but the computer was in a room with horrible lighting.</p>
+<p>Okay, so as far as parts list goes, here's what I used:   </p>
+<ul>
+<li>Arduino- any model is fine, but I only have a Micro   </li>
+<li>(x2) SN74HC595N (8-bit shift register)   </li>
+<li>(x16) LED lights   </li>
+<li>(x16) 220 ohm resistors (this doesn't have to be exact, but it shouldn't be much if any lower)   </li>
+<li>Wires   </li>
+</ul>
+<p>As you can see, I have two types of wire- the regular jumper wires and some thicker doorbell wire. The doorbell wire is great. Its not too hard to work with, and you can buy this huge strand from Lowe's for $10 that will last forever.</p>
+<h3>Building the Circuit</h3>
+<p>Here's a diagram of the shift register pinout:</p>
+<p><img alt="Photo" src="/images/74HC595_pinout.png"></p>
+<p>Unfortunately, I don't have a drawing or anything of my circuit, so I will describe it as best as I can.</p>
+<p>For the first shift register:</p>
+<ul>
+<li>Connect VCC and GND to voltage and ground, respectively   </li>
+<li>Connect OE to to ground   </li>
+<li>Connect SRCLR to voltage   </li>
+<li>Connect SER to the arduino (on mine, its pin 2). This is the data pin.   </li>
+<li>Connect RCLK to the arduino (on mine, pin 3). This is the latch pin.   </li>
+<li>Connect SRCLK to the arduino (on mine, pin 4). This is the clock pin.   </li>
+</ul>
+<p>The second shift register is similar. But because we want to control both at once, there are a few important differences.</p>
+<ul>
+<li>Connect SER to the Qh' pin on the first register   </li>
+<li>Connect the RCLK and SRCLK to the RCLK and SRCLK of the first register   </li>
+</ul>
+<p>On both registers, pins Qa - Qh will connect to LEDs. The overall connect for the LEDs will be <code>shift register pin -&gt; resistor -&gt; LED -&gt; ground</code>.</p>
+<h3>Programming</h3>
+<p>I'm going to assume you know the basics of Arduino programming. If you have the program installed and know you to compile and upload the example program for making the onboard LED blink, you're good to continue.</p>
+<p>I'll post the entire code on another page, but this is the general idea for programming a shift register. A single shift register works with 1 byte, or 8 bits, which corresponds to the <code>byte</code> type in the Arduino language.</p>
+<ol>
+<li>Set the latch pin to 0.   </li>
+<li>Enter a loop and write out the byte of data.   </li>
+<li>Set the latch pin to 1.   </li>
+</ol>
+<p>And the algorithm for the loop is (each loop iteration):</p>
+<ol>
+<li>Set the clock pin to low.   </li>
+<li>Set the data pin to the current bit. The current bit is the <code>data &amp; (1 &lt;&lt; i)</code> where <code>data</code> is your byte value, and <code>i</code> is your loop index.   </li>
+<li>Set the clock pin to high.   </li>
+<li>Set the data pin to low (so we can have a stable signal).   </li>
+</ol>
+<p>The principle is exactly the same whether you have one shift register or 10. In our case we have two, which means we can display 16 bits of data, which corresponds to a <code>short</code> in the Arduino language (and all other languages that have it...). The easiest way to do this is first put the algorithm in a separate function, which we will call <code>writeOut(byte shiftData)</code>. Then, after you set the latch pin to 0, make two calls to <code>writeOut</code>, the first call with one half of the data, the second call with the other half. Then raise the latch pin. Both shift registers will be populated. If you have 10 shift registers, you would make 10 function calls in between lowering and raising the latch.</p>
+<p>If you're wondering about order, think of it as a top-down thing. The first function call will the be the last shift register, and the last function call will be the first shift register. Get it? Shift register...</p>
+<p>Okay. Here's the code. I put it on a separate page since its long. You can find it <a href="pages/shift-register-program.html">here</a>.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/memory-and-counting-in-hardware.html">posted at 12:15</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/electronics.html" rel="tag">Electronics</a>
+                </div>
+            </article>            <h4 class="date">Dec 09, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -212,39 +280,6 @@ qemu-img create ubuntu-image.img 20G
                     &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
                     &nbsp;<a href="/tag/hardware.html" class="tags">Hardware</a>
                     &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
-                </div>
-            </article>            <h4 class="date">Sep 29, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/writing-an-assembler.html" rel="bookmark" title="Permanent Link to &quot;Writing an Assembler&quot;">Writing an Assembler</a>
-                </h2>
-
-                
-                
-
-                <p>This will be a little bit longer of a post, and forgive me if it seems a little abbreviated despite its length. I'm going to write about my journey to get a working x86-64 assembler. I'm writing this in hopes that maybe you can learn about computer architecture and executables, and maybe interest you into this rather forgotten area of computer science.</p>
-<p>Writing an assembler has been a goal of mine for a little while- almost since I got into compilers and computer architecture. However, it was about four compilers later before I got one fully working (I tried on two previous occasions before this one).</p>
-<p>From a parsing perspective, writing an assembler is much easier than a compiler. As you may know, assembly language is nothing more than the symbolic form of the CPU's instruction set. Each assembly instruction has a 1:1 correlation to a binary instruction that the CPU executes. If this is all you do in your assembler, than writing one is super easy.</p>
-<p>However, the reality is different. Compiled and assembled executable programs contain way more than just the CPU instructions. Programs exist in executable formats- ELF on Linux, EXE on Windows, and I forget what on Mac OS. An executable format is separated into sections, containing information about the program itself, its memory, constants (especially string constants), libraries it links to, and finally, the code itself. The information in an executable format is used by the operating system to set up the environment to run the program. Executable formats are also used even before this stage by a special program called the linker, which links libraries the program will use when its run. In addition to translating assembly code into executable code, assemblers are expected to also generate this executable format for linking, and later for execution.</p>
-<p>Another source of difficulty is the complexity of the Intel x86-64 architecture. x86-64 is a CISC CPU- complex instruction set computer (compared to other CPUs, such as Arm, RISC-V, and MIPS- these are RISC CPUs- reduced instruction set computers. More on this later). While CISC is very powerful, it can also be challenging to work with at first. My first challenge was learning the register encoding, and later the instruction prefixes when I moved into 64-bit mode. Another big challenge was calculating the location as you moved over each instruction. Allow me to go into more detail on each.</p>
-<p>If you're familiar with x86, you probably know it has eight general purpose registers: eax, ebx, ecx, edx, esp, ebp, esi, and edi. In 16-bit mode, these registers become ax, bx, cx, ..., and in 64-bit mode, these registers become rax, rbx, rcx, ..., and additionally, you get access to eight more registers: r8-r15. The registers build on to each other- RAX is 64 bits wide, EAX represents the lower 32 bits, and AX represents the lower 16 bits. In all cases, the registers are identified by a 3-bit sequence (000-111 -&gt; 0 through 7). To specify which mode you want to access the registers, x86 uses prefixes. To access a register or execute an instruction in 16-bit mode, you use 0x66 prefix, and to access a register and execute and instruction in 64-bit mode, use use a 2-byte prefix with generally seems to start with 0x4. This prefix is also used to access the new extended registers, even in 32-bit and 16-bit mode (you can do that- for r8 it would be r8d and r8w respectively).</p>
-<p>The whole register system took a while to learn, and I didn't even cover all it of it. There's another whole system behind memory addressing and offsets with the registers which I'm still working to fully understand (I understand it enough for things such as <code>rbp-4</code> to work). Maybe I'm missing something, but I feel like the Intel manual is a little vague in places. Also fun fact: When you look at the register encoding, the encoding doesn't go in order. If you count in binary- using only 3 bits- for the first four registers, it would be 000, 001, 010, and 011. This corresponds to EAX, EBX, ECX, and EDX right? NO!! It corresponds to EAX, ECX, EDX, and EBX respectively. I can't tell you the number of times I messed this up in the code. I'm sorry Intel, but that's HUGELY annoying.</p>
-<p>The other challenge I mentioned had to do with location counting. When you're writing in assembly, you often work with strings and other constants. These constants usually end up in the .data or .rodata section in the generated ELF file. This is denoted by the assembly programmer, and referenced throughout the actual code with names, much like variables in ordinary languages. Assemblers generally make at least two passes over the assembly code; the first pass looks for these variables, and the second pass replaces them with numbers as the binary code is generated (the numbers represent the actual location of the constants). If I was doing an assembler for a RISC CPU, this would be super easy. All instructions are the same length, so I could simply count the number of lines and multiply by the instruction length. Not so on CISC. Each instruction has a different length. I'm not saying this is a negative, but it was an interesting challenge to work around. Variable instruction length can often be an asset as it often results in a smaller code density than on a RISC machine.</p>
-<p>Once I understood the architecture sufficiently, I was able to begin working on the executable format- ELF on Linux. I'm not going to go too deeply into ELF here simply because once I begin explaining it, it will take me a while to get back out of it. ELF is actually fairly easy once you know what you're doing, and using the elf.h header is really helpful (its on all Linux systems). The hard part is calculating size and offsets. And the symbol table was really challenging until I found some good resources. The ELF portion of my assembly is the part I'm quite frankly least happiest about. I'm really happy that it works so well, but I feel its a little hacked together as far as the code goes, and there are some known bugs with the symbol and string tables.</p>
-<p>My decision to use C was somewhat accidental, though in other ways it was also intentional. I really like how easy C makes it to write structures and binary to files, I like how fast it compiles, and honestly I think it approaches enum's in a much more sane way than C++ does. That said, I also find trying to use strings and build maps and tables to be a major pain in C. At some point I want to redo it in C++ (and hopefully that will not mean starting from scratch). I thought about Rust or another language, but the ability to use elf.h and write them directly to a file is a big thing for me. If you're interested in exploring architecture to that level, C or C++ really are good options.</p>
-<p>Once I got things working, for the most part the workflow went pretty well. If you're developing an assembler, the most important thing is the instruction set reference for your CPU (Intel's reference is really good by the way. I do feel there are some gray areas, but for the most part its excellent). Hexdump or any hex editor is really useful until you get to the ELF stage. Once you're there, the readelf tool is really helpful- its good at helping you find most of your ELF issues. Also, once you are at the ELF stage, objdump is really helpful. It shows you the binary and the corresponding assembly (this was a huge help with my location counting errors and my register/prefix mistakes). Another good tool throughout the entire process is the NASM assembler. NASM has an option to generate flat binary files, so using this with hexdump, you can do things such as see how a particular instruction translates. Finally, it helps to have a working knowledge of hexadecimal. Although I've been talking about binary, in the C code and in all the tools I mentioned, you will actually be working with hex.</p>
-<p>This has been a long post, and hopefully you found it interesting (congratulations if you made this far :) ). This has honestly been one of my favorite projects mainly because it was a big goal (including in a learning sense) for me, especially after I got my compilers working. I'm currently working on a new compiler, and although it targets multiple platforms, I'm using this project to assemble the code on the x86 platform. More on this later, however.</p>
-<p>In the future I'm going to try to write more detailed articles on the Intel architecture, and later the Arm (meaning AArch64- not Arm 7).</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/writing-an-assembler.html">posted at 19:45</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                    &nbsp;&middot;
-                    &nbsp;<a href="/tag/assembly.html" class="tags">Assembly</a>
-                    &nbsp;<a href="/tag/x86.html" class="tags">x86</a>
-                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
                 </div>
             </article>
 
