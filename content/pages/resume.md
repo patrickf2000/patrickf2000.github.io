@@ -21,7 +21,7 @@ For an official resume, please email me or contact me on LinkedIn (LinkedIn woul
     - BS in Computer Science (anticipated graduation in Spring 2022)   
     - Major: Computer science with software engineering concentration   
     - Minor: Computer engineering   
-    - GPA: 3.57   
+    - GPA: 3.60   
 
 ### Technical Skills
 
@@ -31,7 +31,7 @@ For an official resume, please email me or contact me on LinkedIn (LinkedIn woul
 
 * *Operating Systems:* Linux (I use it for everyday life and work); also familiar with FreeBSD, Solaris, and Windows 10
 
-* *Architectures (assembly):* x86-64, Arm64
+* *Architectures (assembly):* x86-64, Arm64, RISC-V
 
 * *Digital Systems:* Familiar with digital systems and their design, including binary and hexadecimal systems; digital logic; VHDL
 

@@ -10,10 +10,8 @@ My computer interests lie in compilers, programming languages, computer architec
 Things to check out:
 
 * To see my resume, check out my [LinkedIn profile](https://www.linkedin.com/in/patrick-flynn4664/) or view it here: [Resume](resume.html)
-* Some information on my [Software Projects](software-projects.html).
 * My [Github Profile](https://github.com/patrickf2000).
-* My [Medium Profile](https://medium.com/@patrickf2000) where you can find my more in-depth writing.
-* My [Flickr Profile](https://www.flickr.com/photos/patrickf2000/) where you can find some of my photos (still a work-in-progress).
+* My [various projects](pages/projects.html).
 * Or, feel free to drop an [email](mailto:pflynn4664@pm.me)!
 
 And last but not least, my favorite quote:
