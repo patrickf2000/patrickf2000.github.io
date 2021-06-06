@@ -15,6 +15,7 @@ I do a lot of software projects:
 
 * [Raspberry Pi Router](/howto/rpi-router.html)
 * [Installing Pi-Hole](/howto/pihole-install.html)
+* [Arm-64 Linux on Qemu](/arm64-on-qemu.html)
 
 ### Other
 
