@@ -6,7 +6,9 @@ For an official resume, please email me or contact me on LinkedIn (LinkedIn woul
 
 ### Experience
 
-* *Research Assistant- UNC Charlotte*. Fall 2019-Present. Work includes:
+* *Student Intern- Los Alamos National Laboratory*. May 2021-Present. Work includes code generation for the Kokkos framework on the LANL fork of LLVM.
+
+* *Research Assistant- UNC Charlotte*. Fall 2019-Spring 2021. Work includes:
     - Writing a transformation for vectorizing loops on the AST level in the Rex OpenMP compiler   
     - General help with Rex development   
     - Benchmarking the Intel AVX and Arm SVE extensions against different compilers using auto-vectorization techniques, vendor intrinsics, and assembly   
@@ -21,7 +23,7 @@ For an official resume, please email me or contact me on LinkedIn (LinkedIn woul
     - BS in Computer Science (anticipated graduation in Spring 2022)   
     - Major: Computer science with software engineering concentration   
     - Minor: Computer engineering   
-    - GPA: 3.60   
+    - GPA: 3.62   
 
 ### Technical Skills
 

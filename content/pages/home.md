@@ -3,9 +3,9 @@ URL:
 save_as: index.html
 status: hidden
 
-Hello everyone! My name is Patrick Flynn; I am a computer science student and research assistant at the University of North Carolina Charlotte. This is my personal corner of the internet where I have some professional information and post things that I find interesting (which are mainly technical).
+Hello everyone! My name is Patrick Flynn; I am a computer science student at the University of North Carolina Charlotte, and a research intern at the Los Alamos National Laboratory. This is my personal corner of the internet where I have some professional information and post things that I find interesting (which are mainly technical).
 
-My computer interests lie in compilers, programming languages, computer architecture, and high-performance computing. However, I have experimented with some other areas as well. I've written desktop applications, a few Android apps, a simple chat application, and a few other things. Although a lot of what I do is computer related, I also enjoy tinkering with electronics, flying radio control airplanes, reading, writing, photography, and when I can, exploring.
+My computer interests lie in compilers, programming languages, computer architecture, and high-performance computing. However, I have experimented with some other areas as well. I've written desktop applications, a few Android apps, a simple chat application, and a few other things. Although a lot of what I do is computer related, I also enjoy tinkering with electronics, flying radio control airplanes, reading, writing, photography, learning about languages, and when I can, exploring.
 
 Things to check out:
 
