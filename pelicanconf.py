@@ -18,12 +18,6 @@ DEFAULT_LANG = 'en'
 
 DEFAULT_PAGINATION = 5
 
-#PAGE_URL = '{slug}/'
-#PAGE_SAVE_AS = '{slug}.html'
-
-# Uncomment following line if you want document-relative URLs when developing
-#RELATIVE_URLS = True
-
 ARTICLE_PATHS = [
     'july2020', 'august2020', 'september2020', 'october2020', 'december2020',
     'january2021', 'february2021', 'march2021', 'april2021', 'june2021',
