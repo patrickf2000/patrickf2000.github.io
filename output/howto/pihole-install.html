@@ -18,9 +18,10 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
+                <li><a href="blog_index.html">Blog</a></li>
                 <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/blog_index.html">Blog</a></li>
-                <li><a href="/categories">Categories</a></li>
+                <li><a href="/pages/contact-me.html">Contact</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
             </ul>
         </nav>
         <div class="header_box">
@@ -63,16 +64,15 @@
 <p><img alt="Photo" src="/howto/images/pihole-blacklist.png"></p>
 <h4>Blocking DNS Bypassing</h4>
 <p>This step is only necessary if you are trying to set this up as a parental control device. Remember the step where we chose our DNS server? In some cases, you can go around Pi-hole by changing this setting. The following commands will prevent this from happening and make sure that any requests go through the Pi.</p>
-<div class="highlight"><pre><span></span>sudo iptables -A PREROUTING -t nat -p udp --destination-port 53 -j REDIRECT --to-ports 53
+<div class="highlight"><pre><span></span><code>sudo iptables -A PREROUTING -t nat -p udp --destination-port 53 -j REDIRECT --to-ports 53
 sudo iptables -A PREROUTING -t nat -p tcp --destination-port 53 -j REDIRECT --to-ports 53
 sudo iptables-save | sudo tee /etc/iptables/rules.v4
-</pre></div>
-
+</code></pre></div>
 
 <h4>Clearing DNS Cache</h4>
 <p>In some cases, you may notice that sites are still not blocked even after blacklisting them. This occurs because of DNS caching. Your computer caches the corresponding IP addresses for a DNS lookup so it can avoid this extra step on future vists. Sometimes restarting will do the trick, but not always. At least on Linux. If you're on something other than Linux, you'll have to Google "How to flush the DNS cache for Windows". Or whatever you're on.</p>
 <p>If you are on Linux, these commands may do the trick:</p>
-<div class="highlight"><pre><span></span><span class="c1"># This seems to work for Debian-based systems</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># This seems to work for Debian-based systems</span>
 <span class="c1"># Run this:</span>
 sudo systemctl is-active systemd-resolved.service
 
@@ -88,8 +88,7 @@ sudo service nscd restart
 <span class="c1"># If all else fails, try one of these:</span>
 sudo systemctl restart dnsmasq.service
 sudo service dnsmasq restart
-</pre></div>
-
+</code></pre></div>
 
 <h4>Final Notes</h4>
 <p>Once you are done with all the configuration, I would reboot just to be sure that all is working. You may have to reboot the Pi every now and then, but it shouldn't be too often. I ran mine 10 days straight before rebooting it... And I actually didn't have to, it turned out to be the computers fault :) I would login every now and then and install updates.</p>

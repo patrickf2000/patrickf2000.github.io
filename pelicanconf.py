@@ -36,18 +36,16 @@ CATEGORIES_SAVE_AS = 'categories/index.html'
 ARCHIVES_URL       = 'archives'
 ARCHIVES_SAVE_AS   = 'archives/index.html'
 
-# use those if you want pelican standard pages to appear in your menu
-MENU_INTERNAL_PAGES = (
-    ('Blog', INDEX_SAVE_AS, INDEX_SAVE_AS),
-    ('Categories', CATEGORIES_URL, CATEGORIES_SAVE_AS),
-)
+DISPLAY_CATEGORIES_ON_MENU = False
+DISPLAY_PAGES_ON_MENU = False
 
 # additional menu items
-#MENUITEMS = (
-#    ( 'Contact Me', 'contact-me.html'),
-#    ( 'Projects', 'projects.html'),
-#    ('GitHub', 'https://github.com/patrickf2000'),
-#)
+MENUITEMS = (
+    ('Blog', INDEX_SAVE_AS),
+    ('Projects', '/pages/projects.html'),
+    ('Contact', '/pages/contact-me.html'),
+    ('GitHub', 'https://github.com/patrickf2000'),
+)
 
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None

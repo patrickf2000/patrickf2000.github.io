@@ -19,9 +19,10 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
+                <li><a href="blog_index.html">Blog</a></li>
                 <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/blog_index.html">Blog</a></li>
-                <li><a href="/categories">Categories</a></li>
+                <li><a href="/pages/contact-me.html">Contact</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
             </ul>
         </nav>
         <div class="header_box">
@@ -44,38 +45,37 @@
 <p>The other day, I published my <a href="https://github.com/patrickf2000/lila">Lila</a> compiler and language, and today, some <a href="https://github.com/patrickf2000/lila-programs">example programs</a> (still a work in progress). Its not an official release; I published it because I felt like the syntax was concrete enough to safely do so. The compiler had been capable of doing some non-trivial things for a while now.</p>
 <p>I'm not going to do a huge post on the language; I'll eventually write some documentation. I want to share some of the story behind it.</p>
 <p>For the curious, here's a small example I wrote earlier. Basically, it calls "ls -l" in the current directory.</p>
-<div class="highlight"><pre><span></span># An example of calling fork-exec on Linux
+<div class="highlight"><pre><span></span><code><span class="c1"># An example of calling fork-exec on Linux</span>
 
-const int linux_fork = 57;
-const int linux_exec = 59;
+<span class="k">const</span> <span class="nb nb-Type">int</span> <span class="n">linux_fork</span> <span class="o">=</span> <span class="mi">57</span><span class="p">;</span>
+<span class="k">const</span> <span class="nb nb-Type">int</span> <span class="n">linux_exec</span> <span class="o">=</span> <span class="mi">59</span><span class="p">;</span>
 
-use std.text_io;
-use std.os;
+<span class="n">use</span> <span class="n">std</span><span class="o">.</span><span class="n">text_io</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">std</span><span class="o">.</span><span class="n">os</span><span class="p">;</span>
 
-func main -&gt; int
-    pid : int64 = 0;
-    exe_args : str[3];
-begin
-    pid = fork();
+<span class="k">func</span> <span class="n">main</span> <span class="o">-&gt;</span> <span class="nb nb-Type">int</span>
+    <span class="n">pid</span> <span class="p">:</span> <span class="n">int64</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">exe_args</span> <span class="p">:</span> <span class="nb">str</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">begin</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
 
-    if pid == -1
-        println(&quot;Error calling fork.&quot;);
-        return pid;
-    elif pid == 0
-        exe_args[0] = &quot;/bin/ls&quot;;
-        exe_args[1] = &quot;-l&quot;;
-        exe_args[2] = 0;
-        syscall(linux_exec, &quot;/bin/ls&quot;, exe_args, 0);
+    <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error calling fork.&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="k">elif</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">exe_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/bin/ls&quot;</span><span class="p">;</span>
+        <span class="n">exe_args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-l&quot;</span><span class="p">;</span>
+        <span class="n">exe_args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">syscall</span><span class="p">(</span><span class="n">linux_exec</span><span class="p">,</span> <span class="s2">&quot;/bin/ls&quot;</span><span class="p">,</span> <span class="n">exe_args</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
-        println(&quot;Error&quot;);
+        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">);</span>
 
-        return 0;
-    end
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">end</span>
 
-    return 0;
-end
-</pre></div>
-
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">end</span>
+</code></pre></div>
 
 <h3>Why Compilers?</h3>
 <p>If you scroll through my Github profile, you will notice several compilers and other related tools (I think I have four compilers, an assembler, two VM programs, and a partial C parser on Github at the time of writing). I've been writing compilers for about a year and half now; if you include the interpreters, its probably been over two years. And I currently have a job working on a compiler. So yeah, its reasonable to infer I enjoy this field.</p>
