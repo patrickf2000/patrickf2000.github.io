@@ -32,7 +32,61 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 30, 2020</h4>
+        <div id="content">            <h4 class="date">Dec 31, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/moving-to-github.html" rel="bookmark" title="Permanent Link to &quot;Moving to Github&quot;">Moving to Github</a>
+                </h2>
+
+                
+                
+
+                <p>This post is actually a little overdue. I did this about a month ago, I just never had gotten around to writing it...</p>
+<p>A few months ago, I wrote a post on my overall website structure. That since has changed. But for those who didn't see it, I will briefly cover it.</p>
+<h3>In The Beginning...</h3>
+<p>I've been in and out of blogging for about a year and a half now. Originally, I created a Wordpress blog. I had to buy hosting from a company, and it really wasn't that expensive at the time. Fast forward a year later, I didn't feel like it had gotten anywhere, and when renewal came around, it was like double what it was originally. So yeah, couldn't afford that.</p>
+<p>I looked at some other hosting providers, but then I read about static websites. I've known about those for a while, but I didn't know much about static site generators. A few similar blogs that I followed used them, and they looked really nice, so I decided to give it a try. There are several out there, but the one I use is called <a href="https://docs.getpelican.com/en/stable/">Pelican</a>. Its really easy to use and configure, and there are plenty of themes. I actually really like how I can write my pages and posts in Markdown, and then just push it when I'm ready to publish.</p>
+<p>For hosting, this site has actually moved around three times now. I originally used Surge (surge.sh), and it worked really well, but I didn't like how you had to upgrade to get HTTPS support. Also, when I installed surge on my Linux system, it dragged in a lot of crap. Pelican only uses Python, which I have anyway, so I don't mind that so much. After that, I moved it over to Gitlab. And then a month ago, I moved it to Github.</p>
+<p>The reason for the second move was because the website is important to me, but the Gitlab account is not. I use Gitlab for smaller or half-finished projects that I don't really care about. All my important stuff is on Github, in part because I've used it for all my computer science jobs. I personally think getting Github to work is easier than surge or Gitlab.</p>
+<h3>Setting Up Github</h3>
+<p>Github's website hosting is called Github Pages. To create a pages site, simply create a repository named <code>&lt;your username&gt;.github.io</code>:</p>
+<p><img alt="Photo" src="/images/github_header.png"></p>
+<p>The initial address of your site will be (in my case) "patrickf2000.github.io". Anything in the master branch will be hosted as the website.</p>
+<p>I already had a custom domain that I wanted to use; the good news is that Github lets you do that as well. In my opinion, this is the hardest part. Github has better documentation than I could provide on the subject, but basically the gist is that you change it in the repository's settings, and then update the DNS settings for whoever your domain provider is.</p>
+<p>For the curious, I use Namecheap for my domain name. As the name implies, its cheap... Yeah. I only pay like $10 yearly for it. Some of their names are cheaper than that.</p>
+<h3>Publishing</h3>
+<p>The master branch cannot contain anything except the website- so in my case, the output of Pelican. Ideally though, you would want to store your sources, so there is two ways you can do that. The first is to create a separate repository; the second is to create a branch.</p>
+<p>For my site, I have the master branch which has the site output, and a branch named <code>sources</code> which contains the Markdown and Pelican configuration. On my computer, I have two folders, one for each branch (you can do that...). In the sources folder, I write my post or update whatever, and then use a script to copy the output to the folder set on the master branch. It's really easy actually.</p>
+<p>Here's the script; it will work on Linux and Mac OS. Windows users, you're on your own :)</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+rm -rf ./output 
+pelican content
+
+rm -r ../patrickf2000.github.io/*
+cp -r ./output/* ../patrickf2000.github.io
+cp CNAME ../patrickf2000.github.io
+
+<span class="nb">cd</span> ../patrickf2000.github.io
+git add .
+git commit
+git push -u origin master
+
+<span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
+</code></pre></div>
+
+<p>If you want to automate the process even further, you can change the line that says <code>git commit</code> to something like <code>git commit -m "Post update"</code>. In my case, I actually care about commit messages, so this forces me to write one.</p>
+<h3>Conclusion</h3>
+<p>As you can see, publishing a simple blog that still looks nice is really easy. The only thing I haven't figured out is how to get Google Analytics working so I can track page views. (I do care about privacy, but I also am curious if anyone actually looks at this). If you know how, let me know.</p>
+<p>Finally, everything is public on Github, so feel free to look through the sources if you're curious about setting something similar up.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/moving-to-github.html">posted at 08:00</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/blogging.html" rel="tag">Blogging</a>
+                </div>
+            </article>            <h4 class="date">Dec 30, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -252,37 +306,6 @@
                     <a href="/arm64-on-qemu.html">posted at 12:45</a>
                     &nbsp;&middot;&nbsp;<a href="/category/virtualization.html" rel="tag">Virtualization</a>
                 </div>
-            </article>            <h4 class="date">Dec 04, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/android-and-planning.html" rel="bookmark" title="Permanent Link to &quot;Android and Planning&quot;">Android and Planning</a>
-                </h2>
-
-                
-                
-
-                <p>When I got my Android smartphone back in early 2018, one of the first things I did was look for a decent notepad. You may not think much about it, but this is a really nice feature to have- you want it at unexpected moments. For some reason Android doesn't provide one. That's something I really have to give Apple devices.</p>
-<p>This may upset some people, but honestly, the app store is kind of a trash pit. Especially the Google Play store. All I needed was a simple notepad, and really, every one of them seemed to be either this huge thing with a trillion features I'd never use, tons or ads, or looking like it was from Android 2. This is with a lot of things. I always find it hard to find a decent app for what I need to do, and even if I find something decent (and there are some), a lot of things either have tons of adds or require an account. And I also don't always trust that an app will stick around because the good ones tend to more obscure.</p>
-<p>For my non-technical readers, F-Droid is a really good option to find simple, easy-to-use, bloat-free, ad-free applications. While I do use several apps from there, if all else fails, I take an unorthodox approach: I write my own apps.</p>
-<p>Okay, I've actually only written three, including the most recent. My first was Notepad (original, huh?). I'll admit it, it wasn't fully annoyance with the app store that I wrote this, I did want to see what Android development was like. Now, almost three years later, I'm still using Notepad. Its simple, and does the job perfectly. Here's a screenshot:</p>
-<p><img alt="Photo" src="/images/notepad.jpg"></p>
-<p>This past week, I started a new project (I actually only spent a day on it... I also only spent like a day on the Notepad come to think of it). Even though I'm part of the technology generation and work in computer science, I still use paper for a lot of things, including daily planning. My planning system is basically a calendar/day planner where I write things like due dates and general tasks, and an old composition book where I plan out the day itself. I use a method called block planning. Basically, the idea is that you break down your day into blocks, where you do something like work, maybe school, maybe lunch hour, free time, whatever. Its a lesser known but still popular planning system, and its really efficient (fun fact: Benjamin Franklin used it).</p>
-<p>For the curious, I only spend like 10-15 minutes each evening planning, and then use a little more time Saturday or Sunday (usually 30ish minutes) to write down all the tasks for the upcoming week. Here's the paper version:</p>
-<p><img alt="Photo" src="/images/planners.jpg"></p>
-<p>I'm trying to start migrating more things to digital because honestly I find using a notebook for the daily planning a little wasteful. Actually the notebook in question was actually recycled from something else... So maybe not completely a waste. But you know. For some reason, I could find absolutely nothing like what I had in mind after scouring the app store. I did find a few that met the requirements of simplicity and ad-free, but they weren't too suited to time block.</p>
-<p>Solution. I wrote my own to run on my tablet:</p>
-<p><img alt="Photo" src="/images/block_planner.jpg"></p>
-<p>If you understand even basic programming, Android is pretty easy to pick up. You will need a fairly decent computer to run Android Studio, but other than that, you can get started with app development pretty quickly. Google has really good documentation and a simple web search will fix pretty much any problem you have or anything you want to do. So yeah... I kind of Googled my way through it. I'm a compiler guy.</p>
-<p>The design is pretty straight forward. Choose your starting template, and Android Studio sets up the code and everything. The main layout is a two-column grid layout; each row corresponds to a particular hour of the day (I use 24-hour format). Then use the bottom below and you can create a block spanning as many hours as you need. The task is only recorded on the first hour of your block. Finally, I use the key-value storage for colors and text. When you're done for the day, just clear it out and plan the next.</p>
-<p>I will admit its not the most elegant thing ever. The dialog for adding blocks isn't great, and there's no error handling for wrong input (but it doesn't completely crash). In the near future, I will have to add a second screen for writing down any notes/lists for the day (sometimes I just write "work" for a block, then at the bottom of the page, write the list of things I want to get done).</p>
-<p>The app isn't on the app store and probably never will be. I did upload APK's to the downloads page, so if you're interested you can try it here. Feel free to email me about it if you want.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/android-and-planning.html">posted at 19:38</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -290,7 +313,7 @@
 
                     <a href="/blog_index2" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="/blog_index4" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 3 of 6</span>
+                    <span>Page 3 of 7</span>
                 </div>
 
             <div class="clear"></div>

@@ -32,7 +32,45 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 30, 2021</h4>
+        <div id="content">            <h4 class="date">Feb 20, 2021</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/journey-through-distro-land.html" rel="bookmark" title="Permanent Link to &quot;Journey Through Distro Land&quot;">Journey Through Distro Land</a>
+                </h2>
+
+                
+                
+
+                <p>I spent a good part of today trying out different Linux distros on my lab machine, a Dell XPS desktop. Because I spent quite a bit of time on my computers (sometimes not entirely by choice...), when I need a change, switching my Linux distros is one of the best starting points. And even with that aside, knowing different distros is a good learning experience.</p>
+<p>Linux Mint has consistently been my most used distro for the past six years. I tend to always come back to that. Linux Mint is based on Ubuntu, and has a very pretty, functional user interface. Its absolutely rock solid, and I like how the developers follow a "when-its-ready", but still regular enough release cycle.</p>
+<p>However, I find that Linux Mint isn't always the best for development because the packages are often outdated. I mean, its usable for the vast majority of purposes, but there are times it becomes a real annoyance to me. For a while, I used Manjaro, which is also rather rock solid and very nice to use. It uses a rolling release cycle, which means you always have the latest packages. However, for reasons I will discuss below, I tend to use Fedora as my development distro. Fedora tends to have the latest packages, and is equally as rock solid and stable.</p>
+<p>My Dell XPS, while being my lab machine, is also my archive and office machine. I have three drives, an M.2, an SSD, and a 1 TB regular hard drive. I really don't like using regular hard drives for development of any kind, and on second thoughts I didn't want to keep records and pictures on my laptop, so I use this to store stuff. The other two drives are development. So dual booting is an essential requirement (or is it tri-booting I guess...).</p>
+<h3>OpenSUSE</h3>
+<p>I've heard very good things about OpenSUSE, and I've used it a long time ago, though never in depth. I really wanted to try it, but I never got past the LiveCDs. One of them did boot and look really nice, but as a whole they gave me nothing but grief. The first time I tried it, it took <em>forever</em> to boot, and when it finally did, it was slow as hell. The other booted the first time, and looked rather nice, but for some reason never booted again.</p>
+<p>I don't know, maybe I should have just installed it and tried it out, but the LiveCD experience was a significant turnoff.</p>
+<h3>Solus</h3>
+<p>Solus looks really, really nice. I like the Budgie desktop and the fact its rolling release. I did actually install it, only to find out that in EFI mode, it doesn't use Grub (and there's no option as far as I'm aware to enable it). I have a rule that Linux Mint is the booting distro, so if it doesn't work from Linux Mint, its out.</p>
+<p>Its too bad. Solus looks very promising. Maybe I'll try it on my laptop...</p>
+<h3>ElementaryOS</h3>
+<p>I didn't do this on my desktop, but I installed it earlier in the week on my laptop. I have to say I really love this.</p>
+<p>In a lot of ways its similar to Linux Mint in that its based on Ubuntu with its own desktop environment. As a result, it looks really nice and is stable and compatible with most stuff. The downsides are the same though: older packages. With ElementaryOS, I'm not sure of their release cycle yet, it follows the "when-ready" approach which I think is good, but it there doesn't seem to be a pattern. Maybe I'm wrong. Hopefully they get the Ubuntu 20 -based version before long.</p>
+<p>ElementaryOS by design looks and feels like MacOS, which is a nice change for someone who generally lives by Windows-like interfaces.</p>
+<h3>Manjaro</h3>
+<p>I've used Manjaro many times in the past, and I <em>love</em> it. Its based on Arch Linux, and therefore follows the rolling-release model. Its seems more bleeding-edge than Solus, but I've never had any stability issues with it (at the same time though, I would never use it as my archive OS). I've never used it much on my desktop, but quite a lot on the laptop. Manjaro is really fast, and comes with the widest selection of desktops I've seen.</p>
+<p>The problem is that it won't boot from the Linux Mint bootloader; it just hangs. At some point I may break down and just have to use it, but for now that is a sufficient annoyance for me not to use it.</p>
+<h3>GhostBSD and FreeBSD</h3>
+<p>I know, I know, this isn't Linux. I've always been intrigued with the other non-Unix systems, and BSD is no exception. The only problem is that I have yet to own a machine it actually works on.</p>
+<p>When I say "actually works", its always booted and installed on the machines I've had, but there's always a network driver or graphics error that requires more sysadmin skills than I honestly have the patience for. At the end of the day, I'm programmer and like working with interesting problems, and sysadmin is neither. That's why I use these beginner distros like Linux Mint: they just work. I've actually had more luck with Solaris than the BSDs.</p>
+<h3>Conclusion</h3>
+<p>This wasn't meant to be all negative. As you can see, two hits (Solus and ElementaryOS), two flops (*BSD and OpenSUSE), and one kind of both (Manjaro). For now I'm probably going to just stick to Fedora. I don't love how Fedora is a short-term point release, but its rock solid, everything works with it, and its recent enough to be a good development tool.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/journey-through-distro-land.html">posted at 18:54</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
+                </div>
+            </article>            <h4 class="date">Jan 30, 2021</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -173,60 +211,6 @@
                     <a href="/lila-v01.html">posted at 19:38</a>
                     &nbsp;&middot;&nbsp;<a href="/category/lila.html" rel="tag">Lila</a>
                 </div>
-            </article>            <h4 class="date">Dec 31, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/moving-to-github.html" rel="bookmark" title="Permanent Link to &quot;Moving to Github&quot;">Moving to Github</a>
-                </h2>
-
-                
-                
-
-                <p>This post is actually a little overdue. I did this about a month ago, I just never had gotten around to writing it...</p>
-<p>A few months ago, I wrote a post on my overall website structure. That since has changed. But for those who didn't see it, I will briefly cover it.</p>
-<h3>In The Beginning...</h3>
-<p>I've been in and out of blogging for about a year and a half now. Originally, I created a Wordpress blog. I had to buy hosting from a company, and it really wasn't that expensive at the time. Fast forward a year later, I didn't feel like it had gotten anywhere, and when renewal came around, it was like double what it was originally. So yeah, couldn't afford that.</p>
-<p>I looked at some other hosting providers, but then I read about static websites. I've known about those for a while, but I didn't know much about static site generators. A few similar blogs that I followed used them, and they looked really nice, so I decided to give it a try. There are several out there, but the one I use is called <a href="https://docs.getpelican.com/en/stable/">Pelican</a>. Its really easy to use and configure, and there are plenty of themes. I actually really like how I can write my pages and posts in Markdown, and then just push it when I'm ready to publish.</p>
-<p>For hosting, this site has actually moved around three times now. I originally used Surge (surge.sh), and it worked really well, but I didn't like how you had to upgrade to get HTTPS support. Also, when I installed surge on my Linux system, it dragged in a lot of crap. Pelican only uses Python, which I have anyway, so I don't mind that so much. After that, I moved it over to Gitlab. And then a month ago, I moved it to Github.</p>
-<p>The reason for the second move was because the website is important to me, but the Gitlab account is not. I use Gitlab for smaller or half-finished projects that I don't really care about. All my important stuff is on Github, in part because I've used it for all my computer science jobs. I personally think getting Github to work is easier than surge or Gitlab.</p>
-<h3>Setting Up Github</h3>
-<p>Github's website hosting is called Github Pages. To create a pages site, simply create a repository named <code>&lt;your username&gt;.github.io</code>:</p>
-<p><img alt="Photo" src="/images/github_header.png"></p>
-<p>The initial address of your site will be (in my case) "patrickf2000.github.io". Anything in the master branch will be hosted as the website.</p>
-<p>I already had a custom domain that I wanted to use; the good news is that Github lets you do that as well. In my opinion, this is the hardest part. Github has better documentation than I could provide on the subject, but basically the gist is that you change it in the repository's settings, and then update the DNS settings for whoever your domain provider is.</p>
-<p>For the curious, I use Namecheap for my domain name. As the name implies, its cheap... Yeah. I only pay like $10 yearly for it. Some of their names are cheaper than that.</p>
-<h3>Publishing</h3>
-<p>The master branch cannot contain anything except the website- so in my case, the output of Pelican. Ideally though, you would want to store your sources, so there is two ways you can do that. The first is to create a separate repository; the second is to create a branch.</p>
-<p>For my site, I have the master branch which has the site output, and a branch named <code>sources</code> which contains the Markdown and Pelican configuration. On my computer, I have two folders, one for each branch (you can do that...). In the sources folder, I write my post or update whatever, and then use a script to copy the output to the folder set on the master branch. It's really easy actually.</p>
-<p>Here's the script; it will work on Linux and Mac OS. Windows users, you're on your own :)</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-
-rm -rf ./output 
-pelican content
-
-rm -r ../patrickf2000.github.io/*
-cp -r ./output/* ../patrickf2000.github.io
-cp CNAME ../patrickf2000.github.io
-
-<span class="nb">cd</span> ../patrickf2000.github.io
-git add .
-git commit
-git push -u origin master
-
-<span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
-</code></pre></div>
-
-<p>If you want to automate the process even further, you can change the line that says <code>git commit</code> to something like <code>git commit -m "Post update"</code>. In my case, I actually care about commit messages, so this forces me to write one.</p>
-<h3>Conclusion</h3>
-<p>As you can see, publishing a simple blog that still looks nice is really easy. The only thing I haven't figured out is how to get Google Analytics working so I can track page views. (I do care about privacy, but I also am curious if anyone actually looks at this). If you know how, let me know.</p>
-<p>Finally, everything is public on Github, so feel free to look through the sources if you're curious about setting something similar up.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/moving-to-github.html">posted at 08:00</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/blogging.html" rel="tag">Blogging</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -234,7 +218,7 @@ git push -u origin master
 
                     <a href="/" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="/blog_index3" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 2 of 6</span>
+                    <span>Page 2 of 7</span>
                 </div>
 
             <div class="clear"></div>

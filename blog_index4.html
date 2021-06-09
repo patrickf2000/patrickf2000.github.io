@@ -30,7 +30,38 @@
         </div>
     </header>
     <div id="wrapper">
-        <div id="content">            <h4 class="date">Oct 19, 2020</h4>
+        <div id="content">            <h4 class="date">Dec 04, 2020</h4>
+
+            <article class="post">
+                <h2 class="title">
+                    <a href="/android-and-planning.html" rel="bookmark" title="Permanent Link to &quot;Android and Planning&quot;">Android and Planning</a>
+                </h2>
+
+                
+                
+
+                <p>When I got my Android smartphone back in early 2018, one of the first things I did was look for a decent notepad. You may not think much about it, but this is a really nice feature to have- you want it at unexpected moments. For some reason Android doesn't provide one. That's something I really have to give Apple devices.</p>
+<p>This may upset some people, but honestly, the app store is kind of a trash pit. Especially the Google Play store. All I needed was a simple notepad, and really, every one of them seemed to be either this huge thing with a trillion features I'd never use, tons or ads, or looking like it was from Android 2. This is with a lot of things. I always find it hard to find a decent app for what I need to do, and even if I find something decent (and there are some), a lot of things either have tons of adds or require an account. And I also don't always trust that an app will stick around because the good ones tend to more obscure.</p>
+<p>For my non-technical readers, F-Droid is a really good option to find simple, easy-to-use, bloat-free, ad-free applications. While I do use several apps from there, if all else fails, I take an unorthodox approach: I write my own apps.</p>
+<p>Okay, I've actually only written three, including the most recent. My first was Notepad (original, huh?). I'll admit it, it wasn't fully annoyance with the app store that I wrote this, I did want to see what Android development was like. Now, almost three years later, I'm still using Notepad. Its simple, and does the job perfectly. Here's a screenshot:</p>
+<p><img alt="Photo" src="/images/notepad.jpg"></p>
+<p>This past week, I started a new project (I actually only spent a day on it... I also only spent like a day on the Notepad come to think of it). Even though I'm part of the technology generation and work in computer science, I still use paper for a lot of things, including daily planning. My planning system is basically a calendar/day planner where I write things like due dates and general tasks, and an old composition book where I plan out the day itself. I use a method called block planning. Basically, the idea is that you break down your day into blocks, where you do something like work, maybe school, maybe lunch hour, free time, whatever. Its a lesser known but still popular planning system, and its really efficient (fun fact: Benjamin Franklin used it).</p>
+<p>For the curious, I only spend like 10-15 minutes each evening planning, and then use a little more time Saturday or Sunday (usually 30ish minutes) to write down all the tasks for the upcoming week. Here's the paper version:</p>
+<p><img alt="Photo" src="/images/planners.jpg"></p>
+<p>I'm trying to start migrating more things to digital because honestly I find using a notebook for the daily planning a little wasteful. Actually the notebook in question was actually recycled from something else... So maybe not completely a waste. But you know. For some reason, I could find absolutely nothing like what I had in mind after scouring the app store. I did find a few that met the requirements of simplicity and ad-free, but they weren't too suited to time block.</p>
+<p>Solution. I wrote my own to run on my tablet:</p>
+<p><img alt="Photo" src="/images/block_planner.jpg"></p>
+<p>If you understand even basic programming, Android is pretty easy to pick up. You will need a fairly decent computer to run Android Studio, but other than that, you can get started with app development pretty quickly. Google has really good documentation and a simple web search will fix pretty much any problem you have or anything you want to do. So yeah... I kind of Googled my way through it. I'm a compiler guy.</p>
+<p>The design is pretty straight forward. Choose your starting template, and Android Studio sets up the code and everything. The main layout is a two-column grid layout; each row corresponds to a particular hour of the day (I use 24-hour format). Then use the bottom below and you can create a block spanning as many hours as you need. The task is only recorded on the first hour of your block. Finally, I use the key-value storage for colors and text. When you're done for the day, just clear it out and plan the next.</p>
+<p>I will admit its not the most elegant thing ever. The dialog for adding blocks isn't great, and there's no error handling for wrong input (but it doesn't completely crash). In the near future, I will have to add a second screen for writing down any notes/lists for the day (sometimes I just write "work" for a block, then at the bottom of the page, write the list of things I want to get done).</p>
+<p>The app isn't on the app store and probably never will be. I did upload APK's to the downloads page, so if you're interested you can try it here. Feel free to email me about it if you want.</p>
+                <div class="clear"></div>
+
+                <div class="info">
+                    <a href="/android-and-planning.html">posted at 19:38</a>
+                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
+                </div>
+            </article>            <h4 class="date">Oct 19, 2020</h4>
 
             <article class="post">
                 <h2 class="title">
@@ -299,27 +330,6 @@ ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span clas
                     <a href="/a-night-with-an-old-printer.html">posted at 08:30</a>
                     &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
                 </div>
-            </article>            <h4 class="date">Sep 24, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/assemblers-raspberry-pis-and-school.html" rel="bookmark" title="Permanent Link to &quot;Assemblers, Raspberry Pis, and School&quot;">Assemblers, Raspberry Pis, and School</a>
-                </h2>
-
-                
-                
-
-                <p>This site has been kind of quiet lately. I've been trying to keep up with it, but August and September thus far has been kind of busy. I've been wrapping up my internship at Lawrence Livermore Laboratory, and I'm transitioning back into my job as a research assistant. I'm really happy with how the internship went, and this semester looks like it will be exciting as far as research goes.</p>
-<p>Its probably been about a month- maybe two actually- but I pushed a new project to my GitHub page: Asmx86. I know it may be hard to tell from the name, but its an assembler for the x86-64 platform. This honestly is one of my favorite projects, moreso because its been a long time coming. I've been wanting to write an assembler for a while, and I've tried a few times, but this is the first time its actually worked. Compared to compilers, assemblers are much easier (there's a 1:1 translation between the source and the target), but in many ways its harder because it requires a deep knowledge of the architecture you're targeting. Additionally, if you want to make something useful, you have to generate code in your operating system's executable format (in my case, its ELF).</p>
-<p>I wrote Asmx86 in C and used Flex and Bison for the parser. Everything else I wrote myself. Generating ELF was easy- I just used the structures in /usr/include/elf.h and wrote this to the binary file (which is easy to do in C). Getting all the different ELF parts and calculating the offsets and everything was challenging. I also had issues getting my string tables to work; I've been spoiled by C++'s string and vector classes. The result has been well worth it. My assembler can generate fully working and linkable ELF objects, which you can link into an executable, a static library, a dynamic library, or objects from a C compiler. I've tested linking with the C standard library and the start-up object files, and everything seems to be working, which is super exciting. Obviously the entire x86 instruction is not supported, but enough is working for non-trivial programs (adding new instructions is easy).</p>
-<p>I'll have to write more about the entire learning process later. As far as side projects go, I recently started a re-implementation of Quik using the Rust programming language. So far its off to a good start; I have a goal of targeting multiple architectures. On the x86 side, I'll be using my custom assembler.</p>
-<p>As part of that project (and for other reasons as well), I finally upgraded to a Raspberry Pi 4. I have a Pi 3, but I've been having a hard time getting into the whole hobby electronics thing (partly because I have absolutely no idea what I'm doing), so I started using it to learn the Arm architecture. The problem is that its too slow, and its only usable if you use the 32-bit Raspberry Pi OS. So, I got the Pi 4 with 4gb of RAM, and its been really nice. I've started on the code generation for Arm64 in the new Quik compiler. More on this later.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/assemblers-raspberry-pis-and-school.html">posted at 09:38</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
-                </div>
             </article>
 
                 <div class="clear"></div>
@@ -327,7 +337,7 @@ ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span clas
 
                     <a href="/blog_index3" class="prev_page">&larr;&nbsp;Previous</a>
                     <a href="/blog_index5" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 4 of 6</span>
+                    <span>Page 4 of 7</span>
                 </div>
 
             <div class="clear"></div>
