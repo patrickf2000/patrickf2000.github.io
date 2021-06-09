@@ -18,9 +18,10 @@
         <nav>
             <ul>
                 <li><a href="/">Home</a></li>
+                <li><a href="blog_index.html">Blog</a></li>
                 <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/blog_index.html">Blog</a></li>
-                <li><a href="/categories">Categories</a></li>
+                <li><a href="/pages/contact-me.html">Contact</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
             </ul>
         </nav>
         <div class="header_box">
@@ -48,34 +49,30 @@
 <p>After you plug the Pi in and boot it up, you can log in. To log in over ssh, use <code>ssh pi@raspberrypi.local</code>. It may take a few minutes (and a few tries) if its still booting. If it doesn't work after a long time, you may need to figure out the IP address. The default password is <code>raspberry</code>.</p>
 <p>If you want to change the default password, run this command: <code>sudo passwd pi</code>.</p>
 <p>First, make sure Pi OS is update to date. These commands will do the trick:</p>
-<div class="highlight"><pre><span></span>sudo apt update
+<div class="highlight"><pre><span></span><code>sudo apt update
 sudo apt upgrade
-</pre></div>
-
+</code></pre></div>
 
 <p>Reboot when you're done (the command is <code>sudo reboot</code>...).</p>
 <p>After applying any updates, we can install our needed software. We need three packages. First, <code>hostapd</code> provides the wireless access point. <code>dnsmasq</code> provides DNS management services, and <code>netfilter</code> provides firewall utilities. You can install with these commands:</p>
-<div class="highlight"><pre><span></span>sudo apt install hostapd
-sudo apt install dnsmasq
-sudo DEBIAN_FRONTEND=noninteractive apt install -y netfilter-persistent iptables-persistent
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">hostapd</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">dnsmasq</span>
+<span class="n">sudo</span> <span class="n">DEBIAN_FRONTEND</span><span class="o">=</span><span class="n">noninteractive</span> <span class="n">apt</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">netfilter</span><span class="o">-</span><span class="n">persistent</span> <span class="n">iptables</span><span class="o">-</span><span class="n">persistent</span>
+</code></pre></div>
 
 <p>After installation, make sure the services are enabled on boot:</p>
-<div class="highlight"><pre><span></span>sudo systemctl unmask hostapd
+<div class="highlight"><pre><span></span><code>sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
-</pre></div>
-
+</code></pre></div>
 
 <h4>Router Configuration (Router == Pi)</h4>
 <p>Okay, now we can configure it to act as a router. We will be assigning the Pi the <code>192.168.4.1</code> IP address. All devices connected to the Pi will be within the <code>192.168.4</code> range.</p>
 <p>Open the configuration file: <code>sudo nano /etc/dhcpcd.conf</code>.</p>
 <p>You will see a lot of stuff. Scroll to the very end and add this:</p>
-<div class="highlight"><pre><span></span><span class="kr">interface</span> <span class="nx">wlan0</span>
-    <span class="kr">static</span> <span class="nx">ip_address</span><span class="o">=</span><span class="mf">192.168</span><span class="p">.</span><span class="mf">4.1</span><span class="o">/</span><span class="mi">24</span>
-    <span class="nx">nohook</span> <span class="nx">wpa_supplicant</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>interface wlan0
+    static ip_address=192.168.4.1/24
+    nohook wpa_supplicant
+</code></pre></div>
 
 <p>Type <code>Crtl-S</code> to save and <code>Ctrl-X</code> to exit.</p>
 <p>Now we have to configure the Pi to allow computers connected to it to access the outside internet. Basically, what happens is that all requests go through the Pi, and are then sent to the home router, and then the internet as a whole. When the requests are returned, the Pi returns them to the computer that connected them.</p>
@@ -86,17 +83,16 @@ sudo systemctl enable hostapd
 <p>First, backup the original configuration: <code>sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.old</code>.</p>
 <p>Now, create and open a new configuration file: <code>sudo nano /etc/dnsmasq.conf</code>.</p>
 <p>And add these lines:</p>
-<div class="highlight"><pre><span></span># Interface to listen on
-interface=wlan0
+<div class="highlight"><pre><span></span><code># <span class="nv">Interface</span> <span class="nv">to</span> <span class="nv">listen</span> <span class="nv">on</span>
+<span class="nv">interface</span><span class="o">=</span><span class="nv">wlan0</span>
 
-# Available IP addresses
-dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
-domain=wlan
+# <span class="nv">Available</span> <span class="nv">IP</span> <span class="nv">addresses</span>
+<span class="nv">dhcp</span><span class="o">-</span><span class="nv">range</span><span class="o">=</span><span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">4</span>.<span class="mi">2</span>,<span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">4</span>.<span class="mi">20</span>,<span class="mi">255</span>.<span class="mi">255</span>.<span class="mi">255</span>.<span class="mi">0</span>,<span class="mi">24</span><span class="nv">h</span>
+<span class="nv">domain</span><span class="o">=</span><span class="nv">wlan</span>
 
-# Alias for the router
-address=/gw.wlan/192.168.4.1
-</pre></div>
-
+# <span class="nv">Alias</span> <span class="k">for</span> <span class="nv">the</span> <span class="nv">router</span>
+<span class="nv">address</span><span class="o">=/</span><span class="nv">gw</span>.<span class="nv">wlan</span><span class="o">/</span><span class="mi">192</span>.<span class="mi">168</span>.<span class="mi">4</span>.<span class="mi">1</span>
+</code></pre></div>
 
 <h4>Configure Wireless</h4>
 <p>By default, the wireless radio (WiFi) is turned off until a country code is specified. You can turn it on with this command: <code>sudo rfkill unblock wlan</code>.</p>
@@ -110,7 +106,7 @@ address=/gw.wlan/192.168.4.1
 </ul>
 <p>Again, if you change the frequency, you will likely need to change the channel.</p>
 <p>Open <code>/etc/hostapd/hostapd.conf</code> and add these lines:</p>
-<div class="highlight"><pre><span></span>country_code=US
+<div class="highlight"><pre><span></span><code>country_code=US
 interface=wlan0
 ssid=my_network
 hw_mode=g
@@ -123,8 +119,7 @@ wpa_passphrase=my_password
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
-</pre></div>
-
+</code></pre></div>
 
 <p>At this point, all the initial router configure is done. Reboot the Pi, and try connecting to your new network. If all goes well, you should be able to connect to websites.</p>
 <h4>Conclusion</h4>

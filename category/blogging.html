@@ -20,9 +20,10 @@
 
                 <li class="ephemeral selected"><a href="/category/blogging.html">Blogging</a></li>
                 <li><a href="/">Home</a></li>
+                <li><a href="blog_index.html">Blog</a></li>
                 <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/blog_index.html">Blog</a></li>
-                <li><a href="/categories">Categories</a></li>
+                <li><a href="/pages/contact-me.html">Contact</a></li>
+                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
             </ul>
         </nav>
         <div class="header_box">
@@ -58,7 +59,7 @@
 <p>The master branch cannot contain anything except the website- so in my case, the output of Pelican. Ideally though, you would want to store your sources, so there is two ways you can do that. The first is to create a separate repository; the second is to create a branch.</p>
 <p>For my site, I have the master branch which has the site output, and a branch named <code>sources</code> which contains the Markdown and Pelican configuration. On my computer, I have two folders, one for each branch (you can do that...). In the sources folder, I write my post or update whatever, and then use a script to copy the output to the folder set on the master branch. It's really easy actually.</p>
 <p>Here's the script; it will work on Linux and Mac OS. Windows users, you're on your own :)</p>
-<div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 rm -rf ./output 
 pelican content
@@ -73,8 +74,7 @@ git commit
 git push -u origin master
 
 <span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>If you want to automate the process even further, you can change the line that says <code>git commit</code> to something like <code>git commit -m "Post update"</code>. In my case, I actually care about commit messages, so this forces me to write one.</p>
 <h3>Conclusion</h3>
