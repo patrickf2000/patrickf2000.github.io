@@ -1,80 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | articles in the "Books" category</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Patrick's Website - Books</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
 
-                <li class="ephemeral selected"><a href="/category/books.html">Books</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Jan 18, 2021</h4>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/book-review-unix-a-history-and-a-memoir.html" rel="bookmark" title="Permanent Link to &quot;Book Review: "Unix: A History and a Memoir"&quot;">Book Review: "Unix: A History and a Memoir"</a>
-                </h2>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
 
-                
-                
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-                <p>Last week, I stumbled upon this very recently published book (2019) by Brian Kernighan. It was a short read, but one I vastly enjoyed. The book is about the evolution of Unix and the accompanying languages and tools which basically shaped the entire field of computer science as we know it today. In addition to providing valuable Unix history, its also a memoir on Kernighan's time at Bell Labels.</p>
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="/book-review-unix-a-history-and-a-memoir.html"><h3 class="article-title">Book Review: "Unix: A History and a Memoir"</h3></a>
+<h6 class="subheader" title="2021-01-18T07:09:00-05:00">Mon 18 January 2021
+</h6>
+
+
+<p>Last week, I stumbled upon this very recently published book (2019) by Brian Kernighan. It was a short read, but one I vastly enjoyed. The book is about the evolution of Unix and the accompanying languages and tools which basically shaped the entire field of computer science as we know it today. In addition to providing valuable Unix history, its also a memoir on Kernighan's time at Bell Labels.</p>
 <p>I'm not going to tell the story, but I will provide some background.</p>
 <p>Bell Labs was AT&amp;T's research arm through much of the 1900s. Because of AT&amp;T's interest in computerizing elements of the telephone system, an enormous amount of computer innovation originated here (along with innovation in many other fields). Because of the lab's size and environment, innovation flourished that benefited many areas beyond AT&amp;T. Bell Labs was broken up with AT&amp;T in the 1980s and 90s, but still exists today as Nokia Bell Labs.</p>
 <p>Unix is the grandfather of the majority of operating systems today, which includes Linux, MacOS, iOS, Android, the BSDs, and the commercial systems like Solaris and HP-UX- basically everything except Windows and DOS. The birth of Unix basically led to the birth of computer as we know it today, and many of the tools we take for granted, such as the C language and compilers, programmable shells like Bash, tools like make, cat, grep, and many, many others. Unix (and C for that matter) were so successful because of their highly innovate yet simple design; Unix provides building blocks which allow for very complex yet manageable systems to be created.</p>
 <p>The history of computer science, and especially Unix, has always intrigued me. And honestly, this is one of the best histories I've read of this period. I think the design principles that went into Unix, C, and other tools are very underappreciated and under taught. Good software does not equal more features, and high productivity does not equal more lines of code. Good software uses a simple approach, reduces special cases, and doesn't have bloat or useless features. And when I say simple, that does not mean easy. Creating a simple design like Unix's is hard and requires genius (something its original creators, Ken Thompson and Dennis Richie had).</p>
 <p>The other thing I really liked was how much Kernighan described the working environment at Bell Labs. There is a lot of discussion on productivity and collaboration in this day and age, and I think that the environment at Bell Labs captures the ideal scenario- allowing for long-term thinking, and a physical layout that encourages encounters and collaborations, but still gives the researchers their own private space to think and work quietly. In other words, the obsession with quarterly progress and constant collaboration needs to go.</p>
-<p>This is certainly one of the better memoirs I've read in a while, and I highly recommend anyone in a technical field to read it. If you're in computer science, I especially recommend it. You should know your history :)</p>
-                <div class="clear"></div>
+<p>This is certainly one of the better memoirs I've read in a while, and I highly recommend anyone in a technical field to read it. If you're in computer science, I especially recommend it. You should know your history :)</p><p class="subheader">Category: <a href="/category/books.html">Books</a>
 
-                <div class="info">
-                    <a href="/book-review-unix-a-history-and-a-memoir.html">posted at 07:09</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/books.html" rel="tag">Books</a>
-                </div>
+</p>
+
+
+
             </article>
 
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>

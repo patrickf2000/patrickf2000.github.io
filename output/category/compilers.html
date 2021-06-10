@@ -1,96 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | articles in the "Compilers" category</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Patrick's Website - Compilers</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
 
-                <li class="ephemeral selected"><a href="/category/compilers.html">Compilers</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 30, 2020</h4>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/corelib-vs-nolib.html" rel="bookmark" title="Permanent Link to &quot;Corelib vs Nolib&quot;">Corelib vs Nolib</a>
-                </h2>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
 
-                
-                
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-                <p>I've been working on my new programming language and compiler quite a bit over the past two weeks since school has finished. This is an idea I've been working on... I don't know, maybe someone will find this interesting.</p>
-<p>One of the goals of my new language is to create a safe environment, meaning (among other things) the programmer doesn't have to worry about things like allocation and deallocation. That is a big problem with C in that you have to remember to deallocate anything you allocate. It makes sense, and in some cases you need this level of control, but for your average userspace application, its so easy to forget this extra step. And when you do, bad things happen.</p>
-<p>Originally, my approach was to use Linux system calls. I figured out how to allocate and free memory using the mmap syscall; when the compiler did not use the C library, it would generate this call. You can probably see the problem with this however: its not portable. I also had this problem in a few other areas. For instance, when the program exists, everything needs to be deallocated first (the approach was similar: have a keyword for exit, then generate a system call). Strings were the most problematic. There's no system call for that, and it would be way to complicated to arbitrarily generate code for a string comparison or a string length function (another goal is to make string handling builtin and much easier to work with).</p>
-<p>A standard library like most languages have is a good idea, but if its not on the user's system, or its the wrong version, or whatever, bad things can happen.</p>
-<p>I think a good compromise around this is to have two libraries: a core library, and a standard library.</p>
-<h3>Nolib</h3>
-<p>Nolib (aka, no library) is the C approach. In some cases, it makes sense to have absolutely no overhead. A good case is with operating systems or stuff that interacts directly with the hardware. But when it comes to userland, having no easy library is the wrong approach.</p>
-<p>This is basically the reason why I don't love using C, especially for compiler work. A lot of what I like to do deals with parsing strings, which can really be a pain in C. The C library has some basic functions to get you started, but when it comes to resizing and all that, its just too much.</p>
-<h3>What About Go?</h3>
-<p>Go's approach is to statically link the entire standard library to the smallest application.</p>
-<p>This is a <em>horrible</em> idea.</p>
-<p>If you look at Go's standard library, it has a lot of stuff. Everything from dealing with different types of text to compressed archives to networking. If I'm writing a compiler, I don't need the networking interface compiled into the executable. This approach results in huge executables. On the upside, you never have to worry about DLL hell and APIs breaking, but honestly, when it comes to a programming language's standard library, you really shouldn't have this issue.</p>
-<h3>The Corelib</h3>
-<p>As I said, the approach I'm trying out is to create a core library and a standard library. I'm sure I'm not the inventor of this, but off the top of my head, I can't think of anything that does this. Here's the idea.</p>
-<p>The core library contains the most basic functions, such as malloc, free, strcmp, strlen, exit, and maybe a printing function (for just strings, not printf). These functions are all small and self-contained. The string functions are written purely in the implementation language. All the others make appropriate system calls (so they are basically just wrappers). There is header that defines all the system call numbers for the current architecture, which can be conditionally included.</p>
-<p>The core library is built as a static library; that way, any library or executable will have these basic functions already in them. It may create slightly larger binaries, but in today's world the extra space is negligible (especially if Go is a good idea...). It would also be faster since you don't have the extra step of dynamically loading a library.</p>
-<p>The standard library contains all the nice functions like printf, string conversion, file system, and so forth. This is built as a shared library since it will probably get to be pretty big.</p>
-<h3>Static vs Shared Libraries</h3>
-<p>So what's the difference between a static and a shared library?</p>
-<p>A static library is compiled into the executable when it is linked. When you build the static library, you are basically just creating an archive of the object files, which are copied into the user's executable when it is built.</p>
-<p>A shared library is a separate entity on the disk. When the executable is built, information is included that points to the shared libraries location. When the program is run, both the program and the shared library are loaded into memory, and any linkages are resolved.</p>
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="/lila-v01.html"><h3 class="article-title">Lila v0.1</h3></a>
+<h6 class="subheader" title="2021-01-03T19:38:00-05:00">Sun 03 January 2021
+</h6>
+
+
+<p>What's one of the coolest things you can do with computers? There are a lot of answers to this, but for me, its programming them in your own programming language.</p>
+<p>The other day, I published my <a href="https://github.com/patrickf2000/lila">Lila</a> compiler and language, and today, some <a href="https://github.com/patrickf2000/lila-programs">example programs</a> (still a work in progress). Its not an official release; I published it because I felt like the syntax was concrete enough to safely do so. The compiler had been capable of doing some non-trivial things for a while now.</p>
+<p>I'm not going to do a huge post on the language; I'll eventually write some documentation. I want to share some of the story behind it.</p>
+<p>For the curious, here's a small example I wrote earlier. Basically, it calls "ls -l" in the current directory.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># An example of calling fork-exec on Linux</span>
+
+<span class="k">const</span> <span class="nb nb-Type">int</span> <span class="n">linux_fork</span> <span class="o">=</span> <span class="mi">57</span><span class="p">;</span>
+<span class="k">const</span> <span class="nb nb-Type">int</span> <span class="n">linux_exec</span> <span class="o">=</span> <span class="mi">59</span><span class="p">;</span>
+
+<span class="n">use</span> <span class="n">std</span><span class="o">.</span><span class="n">text_io</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">std</span><span class="o">.</span><span class="n">os</span><span class="p">;</span>
+
+<span class="k">func</span> <span class="n">main</span> <span class="o">-&gt;</span> <span class="nb nb-Type">int</span>
+    <span class="n">pid</span> <span class="p">:</span> <span class="n">int64</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">exe_args</span> <span class="p">:</span> <span class="nb">str</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">begin</span>
+    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error calling fork.&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">pid</span><span class="p">;</span>
+    <span class="k">elif</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">exe_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/bin/ls&quot;</span><span class="p">;</span>
+        <span class="n">exe_args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-l&quot;</span><span class="p">;</span>
+        <span class="n">exe_args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">syscall</span><span class="p">(</span><span class="n">linux_exec</span><span class="p">,</span> <span class="s2">&quot;/bin/ls&quot;</span><span class="p">,</span> <span class="n">exe_args</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">end</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">end</span>
+</code></pre></div>
+
+<h3>Why Compilers?</h3>
+<p>If you scroll through my Github profile, you will notice several compilers and other related tools (I think I have four compilers, an assembler, two VM programs, and a partial C parser on Github at the time of writing). I've been writing compilers for about a year and half now; if you include the interpreters, its probably been over two years. And I currently have a job working on a compiler. So yeah, its reasonable to infer I enjoy this field.</p>
+<p>I enjoy this for a few reasons. First, I find programming languages really interesting. Take any compiled language- C, C++, Rust, D, Ada, Pascal, Haskell, Swift, OCaml, or anything else. I can use all these languages on the same computer, and they all compile to the same instructions and the same format. But the way you get work done in each is significantly different. And by virtue of that, each language is suitable for a certain domain. I find this really interesting. And for this reason, I've also enjoyed designing my own. And then implementing it.</p>
+<p>Compilers are really interesting machines, and honestly one of the most underrated areas of computer science. Maybe because GCC scares a lot of people away. When you write a compiler, you basically create your own little world. You make the rules for the language, you decide what's right and wrong, and eventually, you decide how its translated and how the final instructions are generated. And once you get enough of the language implemented, you can create your own libraries, and eventually your own programs in your own language.</p>
+<p>What is more cool than that?</p>
+<h3>The Origins of Lila</h3>
+<p>Earlier this year, I was working on two compilers: first, Quik 3, and second, extcc. The former was the last compiler I wrote for my Quik language, and the latter was a fork that was meant to be an extensible C compiler. Both got fairly far, and I'm still proud of them. But the reason I stopped was because I made some bad design choices early on, and because of the nature of C++, the only solution to fixing that was to basically start over.</p>
+<p>And I did start over a few times. Originally, I wanted to make my own C compiler so I could have something with a small language surface I could hack. But let me be honest, I'm not a huge fan of C. Around this time, I began playing with Ada some, and I fell in love with it. I really like Ada and the Wirth-family of programming languages. Ada wasn't the only thing I tried; I was experimenting with other programming languages as well because I was getting tired of C++ and the issues that go with it. I'll save this exploration for a different post. But fast forward to September, I began looking at Rust again. I did a simple project to see if I could create the necessary IR's in Rust, and that project eventually evolved into Lila.</p>
+<p>Lila wasn't originally the name. In fact, the Lila language is significantly different from when I started the project. Originally, the language was really close to Quik, and I named the project Dash (somewhat similar to Quik...). In November, I made the mistake of releasing it too soon; I didn't get much feedback, and when I started writing some simple programs in it, it became evident that it needed work. I took the project down, and began a significant redesign through late November and most of December. Originally, I wanted to name the language something different, but for certain reasons, I couldn't. Lila was fairly close to what I originally wanted to name it, and I like that name anyway.</p>
+<p>Currently, this is my biggest project in terms of lines of code: a little under 9500 lines of Rust. The next biggest was extcc, which got to around 5000 I think. The project is honestly one of my favorite of all time.</p>
+<h3>Some Features</h3>
+<p>I'll save a lot of this for the documentation, but I just want to cover a few things here.</p>
+<p>One of my favorite features is the array and string handling features. This has always been one of my biggest gripes with C. But I do not think the solution is to use a garbage collector. Basically, what I do is handle all memory allocations and deallocations at compile time. There is a statically-linked core library with (among other things) malloc and free functions, which are inserted by the compiler. So when you create an array, and leave a function, memory is allocated and deallocated behind the scenes.</p>
+<p>Array sizes are stored next to the array pointers themselves, and can be retrieved at any point with the <code>sizeof</code> operator. This is especially useful in cases where you have to pass arrays to functions and for the for-each loops. There's also base utilities for managing strings in the core library. Strings are their own data types. At this point in history, I very strongly believe that strings should be an essential type of any language.</p>
+<p>The syntax is inspired by the Wirth languages. Its still fairly verbose, but much less so than Pascal or Ada. Probably the most defining characteristic you will see is the variable block at the top of each function. I really like this, and I believe it encourages better programming. Rather than strewing variables all over the place, you can see all your variables and manage them accordingly.</p>
+<p>As far as architectures go, x86-64 is fully supported, and RISC-V supports a lot of the integer-related elements. The basic hello-world Arm64 tests pass, but that's about it. Lila is meant to be easy to port to other architectures, which is something I plan on doing in the near future. I also have a fairly decent standard library underway. Text IO functions such as printf and console input are supported, a few string functions, file functions, and OS functions are all supported. One of the things I got working today was process management (fork and exec on Linux).</p>
 <h3>Conclusion</h3>
-<p>As I said at the beginning, this post was meant to be more of random thought. My current project has been an interesting journey, especially now that I'm at the stage where I can start implementing the core libraries. When you get to that point, you know you've come a long way :)</p>
-                <div class="clear"></div>
+<p>I'll write more as interesting progress is made. In the immediate future, I plan on working on the standard library and just general testing by writing some non-trivial programs. If you decide the try it out, please let me know how it goes!</p><p class="subheader">Category: <a href="/category/compilers.html">Compilers</a>
 
-                <div class="info">
-                    <a href="/corelib-vs-nolib.html">posted at 08:00</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/compilers.html" rel="tag">Compilers</a>
-                </div>
+</p>
+
+
+
             </article>
 
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="/corelib-vs-nolib.html"><h3 class="article-title">Corelib vs Nolib</h3></a>
+<h6 class="subheader" title="2020-12-30T08:00:00-05:00">Wed 30 December 2020
+</h6>
+
+
+<p>I've been working on my new programming language and compiler quite a bit over the past two weeks since school has finished. This is an idea I've been working on... I don't know, maybe someone will find this interesting.</p>
+<p>One of the goals of my new language is to create …</p><p class="subheader">Category: <a href="/category/compilers.html">Compilers</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/corelib-vs-nolib.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>

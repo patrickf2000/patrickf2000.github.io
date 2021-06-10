@@ -1,17 +1,20 @@
 {% extends "base.html" %}
-
-{% block head %}
-    {{ super() }}
-    {% if article.tags %}
-    <meta name="keywords" content="{{ article.tags|join(",") }}" />
-    {% endif %}
-    {% if article.description %}
-    <meta name="description" content="{{ article.description }}" />
-    {% endif %}
-{% endblock %}
-
-{% block title %}{{ SITENAME }} | {{ article.title }}{% endblock %}
-
+{% block title %}{{ article.title|striptags }}{% endblock %}
 {% block content %}
-{% include "article_stub.html" %}
+<article>
+    <header>
+        <h3 class="article-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+        title="Permalink to {{ article.title|striptags }}">{{ article.title}}</a></h3>
+        {% include 'twitter.html' %}
+    </header>
+
+    {% include 'article_infos.html' %}
+    {{ article.content }}
+    {% include 'article_infos_bottom.html' %}
+
+    {% if DISQUS_SITENAME and SITEURL and article.status != "draft" %}
+	<h4>Comments</h4>
+    {% include 'disqus_script.html' %}
+    {% endif %}
+</article>
 {% endblock %}

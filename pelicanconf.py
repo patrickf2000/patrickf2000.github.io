@@ -35,8 +35,11 @@ DISPLAY_PAGES_ON_MENU = False
 
 # additional menu items
 MENUITEMS = (
-    ('Blog', INDEX_SAVE_AS),
+    #('Blog', INDEX_SAVE_AS),
+    ('Home', '/index.html'),
+    ('Blog', '/blog_index.html'),
     ('Projects', '/pages/projects.html'),
+    ('Resume', '/resume.html'),
     ('Contact', '/pages/contact-me.html'),
     ('GitHub', 'https://github.com/patrickf2000'),
 )
