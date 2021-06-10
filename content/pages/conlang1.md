@@ -2,9 +2,17 @@ Title: Dakkar Conlang
 status: hidden
 save_as: pages/conlang1.html
 
-Welcome!
+This was a fun hobby project from about a month ago, and as the title says, it's a constructed language. For the curious, the name is really just a working name. I was reading Jules Verne's _Mysterious Island_ when I started working on this project, so the name came from Captain Nemo's real name, Prince Dakkar. I know, its kind of cheesy. Usually I text friends when I need a decent name for something.
+
+But anyway, this was a theoretical exercise at constructing a language. It is inspired in some ways by [Ithkuil](http://www.ithkuil.net/), another hypothetical language I stumbled across a while back. Basically, my goal was to make a language that could express more ideas and thoughts in fewer words. But its not just about being concise; it was also about being deep, or precise.
+
+This project is not dead; I started working on a second version, which has much more extensive grammar and allows for more ideas. I actually have all the notes and everything formulated for it, I just have yet to finish organizing and refining it. Oh, and coming up with a new name as well.
+
+The lexicon is by no means complete. There's also not really any rules for how words are constructed. I'm not about to type it right now, so you can see the PDF [here]({static}/pdfs/Dakkar_lexicon.pdf).
 
 ## Phonology
+
+If you're an English speaker, you'll have little issue trying to pronounce the language.
 
 Vowels:
 
@@ -207,7 +215,7 @@ Below is a list. The order is "mood -> yes/no"
 
 Below is an explanation of each mood:
 
-* The neutral mood is for a simple yes/no response.
+* The neutral mood is for a simple yes/no response
 * The tentative mood is when you're not entirely sure of the answer
 * The definite mood is when you are certain of the answer
 * The firm mood is like the definite mood, but implies you have a point
@@ -395,7 +403,7 @@ Y melon ĉî jō Y lēru -> Until I am a man, I will run.
 
 #### Cases
 
-There are two cases: the ablative case, and the locative case. The ablative case expresses direction, while the locative case expresses proximatiy (or location).
+There are two cases: the ablative case, and the locative case. The ablative case expresses direction, while the locative case expresses proximity (or location).
 
 <ins>Ablative Case</ins>
 

@@ -23,4 +23,5 @@ I really like photography and writing. This website is meant to be the main sour
 
 * My [Medium Profile](https://medium.com/@patrickf2000) where you can find my more in-depth writing.
 * My [Flickr Profile](https://www.flickr.com/photos/patrickf2000/) where you can find some of my photos.
+* [A Simple Constructed Language](/pages/conlang1.html)
 

@@ -23,6 +23,8 @@ ARTICLE_PATHS = [
     'january2021', 'february2021', 'march2021', 'april2021', 'june2021',
 ]
 
+STATIC_PATHS = [ 'internal', 'pdfs' ]
+
 INDEX_SAVE_AS = 'blog_index.html'
 
 CATEGORIES_URL     = 'categories'
