@@ -1,48 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | articles in the "Programming" category</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Patrick's Website - Programming</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
 
-                <li class="ephemeral selected"><a href="/category/programming.html">Programming</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 04, 2020</h4>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/android-and-planning.html" rel="bookmark" title="Permanent Link to &quot;Android and Planning&quot;">Android and Planning</a>
-                </h2>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
 
-                
-                
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-                <p>When I got my Android smartphone back in early 2018, one of the first things I did was look for a decent notepad. You may not think much about it, but this is a really nice feature to have- you want it at unexpected moments. For some reason Android doesn't provide one. That's something I really have to give Apple devices.</p>
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
+
+            <article>
+                <a href="/android-and-planning.html"><h3 class="article-title">Android and Planning</h3></a>
+<h6 class="subheader" title="2020-12-04T19:38:00-05:00">Fri 04 December 2020
+</h6>
+
+
+<p>When I got my Android smartphone back in early 2018, one of the first things I did was look for a decent notepad. You may not think much about it, but this is a really nice feature to have- you want it at unexpected moments. For some reason Android doesn't provide one. That's something I really have to give Apple devices.</p>
 <p>This may upset some people, but honestly, the app store is kind of a trash pit. Especially the Google Play store. All I needed was a simple notepad, and really, every one of them seemed to be either this huge thing with a trillion features I'd never use, tons or ads, or looking like it was from Android 2. This is with a lot of things. I always find it hard to find a decent app for what I need to do, and even if I find something decent (and there are some), a lot of things either have tons of adds or require an account. And I also don't always trust that an app will stick around because the good ones tend to more obscure.</p>
 <p>For my non-technical readers, F-Droid is a really good option to find simple, easy-to-use, bloat-free, ad-free applications. While I do use several apps from there, if all else fails, I take an unorthodox approach: I write my own apps.</p>
 <p>Okay, I've actually only written three, including the most recent. My first was Notepad (original, huh?). I'll admit it, it wasn't fully annoyance with the app store that I wrote this, I did want to see what Android development was like. Now, almost three years later, I'm still using Notepad. Its simple, and does the job perfectly. Here's a screenshot:</p>
@@ -56,312 +75,173 @@
 <p>If you understand even basic programming, Android is pretty easy to pick up. You will need a fairly decent computer to run Android Studio, but other than that, you can get started with app development pretty quickly. Google has really good documentation and a simple web search will fix pretty much any problem you have or anything you want to do. So yeah... I kind of Googled my way through it. I'm a compiler guy.</p>
 <p>The design is pretty straight forward. Choose your starting template, and Android Studio sets up the code and everything. The main layout is a two-column grid layout; each row corresponds to a particular hour of the day (I use 24-hour format). Then use the bottom below and you can create a block spanning as many hours as you need. The task is only recorded on the first hour of your block. Finally, I use the key-value storage for colors and text. When you're done for the day, just clear it out and plan the next.</p>
 <p>I will admit its not the most elegant thing ever. The dialog for adding blocks isn't great, and there's no error handling for wrong input (but it doesn't completely crash). In the near future, I will have to add a second screen for writing down any notes/lists for the day (sometimes I just write "work" for a block, then at the bottom of the page, write the list of things I want to get done).</p>
-<p>The app isn't on the app store and probably never will be. I did upload APK's to the downloads page, so if you're interested you can try it here. Feel free to email me about it if you want.</p>
-                <div class="clear"></div>
+<p>The app isn't on the app store and probably never will be. I did upload APK's to the downloads page, so if you're interested you can try it here. Feel free to email me about it if you want.</p><p class="subheader">Category: <a href="/category/programming.html">Programming</a>
 
-                <div class="info">
-                    <a href="/android-and-planning.html">posted at 19:38</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                </div>
-            </article>            <h4 class="date">Oct 19, 2020</h4>
+</p>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/building-an-alu.html" rel="bookmark" title="Permanent Link to &quot;Building an ALU&quot;">Building an ALU</a>
-                </h2>
 
-                
-                
 
-                <p>VHDL has been a fun new toy for me :) . I find how computers work down on the hardware level really interesting- meaning the underlying logic by which they do operations. This is part of the reason I got into compilers. I love seeing how programming constructs translate into CPU instructions, and then how the CPU instructions are translated into logical operations (or rather, the logic behind these operations).</p>
-<p>Integer math and bitwise operations are some of the most fundamental instructions to a computer. While modern CPU's can do tons of different operations, the most commonly used instructions are data moves, jumps, and the integer operations. The x86 instruction set is huge, but the majority of programs only use around 15-20 of them (if you don't count the different variants, its really like 10-15). Of these 10-15 instructions, probably about two thirds of them are in the arithmetic logic unit (ALU). Because I find binary math interesting, I decided to try making one in VHDL.</p>
-<p>I'm not going to describe my actually code here, I'm just going to go into the theory behind it. If you want to see some code, take a look at my "simple-alu" project on Github.</p>
-<p>An ALU is actually quite simple. The ALU I built works with 8-bit signed integers, and can do addition, subtraction, 2's complement, and/or/xor/not, increments, and decrements. Much of the ALU is built around the adder circuit. I wrote about my 8-bit adder in a fairly recent post; I reused the code here. Once you have that piece done, you can do the rest pretty easily.</p>
-<p>An adder in the sense I talk about here is a sequence of full adders, which work on two bits and return a sum and a carry. A full adder takes the exclusive-or (xor) of inputs A and B, xor's that with a carry-in, which produces the sum. The carry-out is ((a xor b) and carry-in) or'ed with (a and b). To work with numbers larger than one bit, you simply use a bunch of these full adders, with the carry-out connected to the carry-in of the next adder in the sequence (in the case of the first adder, the carry-in is set to 0). You can use the same adder circuit for signed and unsigned numbers.</p>
-<p>As I said, much of the ALU is built around the adder. Once you have the adder done, you can do addition, subtraction, 2's complement, increments, and decrements. The and/xor/xor/not gates are simply that operation applied to each bit of the input (the not gate only requires one input, as it just flips the bits of each input). I won't cover those here, as that should be pretty easy to understand. Let's move on to the other components.</p>
-<p>In order to understand the other operations, you must understand how negative or signed numbers are represented in binary. A negative number is represented as the 2's complement of the absolute value (or the positive number). To find the 2's complement, you invert all the bits of the original number and add 1. So for 3, the binary in four bits is 0011. You probably know that in binary, each digit corresponds to a power of 2, starting with 2 ^ 0 on the far right. So for our binary number above, to convert to decimal, you add 2 ^ 0 + 2 ^ 1 = 3 (you ignore the first two digits because they are zero). To get -3, invert the bits- so 1100- and add 1- so 1101. How do we know this equals -3? Use the same conversion method as above; however, the number to the far left (the most significant bit) is negative two raised to whatever power. So -2 ^ 3 + 2 ^ 2 + 2 ^ 0, which equals -8 + 4 + 1, which equals -3. Kind of cool right? In case you're wondering, you know that the number is negative because the MSB equals 1.</p>
-<p>Now that we understand 2's complement, we can finish the other operations. First, the 2's complement unit. This unit is super simple. You can use the 8-bit NOT unit to flip all the bits, and then add 1 to it using our adder. All done.</p>
-<p>Now for the subtractor. Computers don't have the concept of subtraction in the way you might think of it. Consider 5 - 3. The answer is 2. Now, think of it as an addition operation with negative numbers. The problem becomes 5 + (-3). What's the answer? Still 2. This is how computers do subtraction. They negate the second number, and add it to the first. Let's do this in binary. 5 in binary is 0101. 3 is 0011. 3 negated (or -3) is 1101. Let's add it together: 0101 + 1101. The answer is 0010 with a carry of 1. However, because we are dealing with 4-bit numbers, we can drop the carry, leaving us only with 0010. What's that in decimal? 2 ^ 1 (for the second digit place) = 2, so our answer is correct.</p>
-<p>So the subtractor unit simply uses the 2's complement unit to negate the second input, and then adds that result to the first input, which yields our result.</p>
-<p>After that, we only have the increment and decrement units left. These only take one input, and internally use the adder and subtractor units hardwired with 1 to calculate the result. </p>
-<p>The only two components left at the moment are the left and right shifters. I have a high-level understanding of how those work, but not enough to generate the VHDL code. I honestly think these are the most complex components in the circuit. I may write about them once I get them implemented.</p>
-<p>You're probably wondering how the ALU decides which operation to perform. An ALU takes two integer inputs and an opcode input. The opcode decides the operation, and the opcode is decoded using a multiplexer. I'll probably reserve a more detailed discussion on multiplexers for later when I can draw a diagram, but for now here's a hopefully somewhat clear explanation of how it works in our case.</p>
-<p>A multiplexer takes several inputs, and based on the value of one or more selector inputs, produces a single output (which is one of the inputs). Our ALU has a 4-bit selector input, meaning that we can choose from 16 inputs (in reality, I think I only use 12). The two numerical inputs of the ALU are connected to each of the ALU's operations. Depending on the opcode, the result of that operation is the one allowed to move through the bus to the output. Basically, all the operations are computed once the ALU is invoked, but depending on the opcode, only one of the results is allowed through the bus into the output.</p>
-<p>That concludes our walk-though on a basic integer ALU. Other than the left and right shifts, I'm not sure if I'll do much more to this project. I am thinking about drawing out a schematic for it, maybe even building it. I'll write if I do.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/building-an-alu.html">posted at 08:38</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                    &nbsp;&middot;
-                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
-                    &nbsp;<a href="/tag/hardware.html" class="tags">Hardware</a>
-                    &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
-                </div>
-            </article>            <h4 class="date">Sep 29, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/writing-an-assembler.html" rel="bookmark" title="Permanent Link to &quot;Writing an Assembler&quot;">Writing an Assembler</a>
-                </h2>
-
-                
-                
-
-                <p>This will be a little bit longer of a post, and forgive me if it seems a little abbreviated despite its length. I'm going to write about my journey to get a working x86-64 assembler. I'm writing this in hopes that maybe you can learn about computer architecture and executables, and maybe interest you into this rather forgotten area of computer science.</p>
-<p>Writing an assembler has been a goal of mine for a little while- almost since I got into compilers and computer architecture. However, it was about four compilers later before I got one fully working (I tried on two previous occasions before this one).</p>
-<p>From a parsing perspective, writing an assembler is much easier than a compiler. As you may know, assembly language is nothing more than the symbolic form of the CPU's instruction set. Each assembly instruction has a 1:1 correlation to a binary instruction that the CPU executes. If this is all you do in your assembler, than writing one is super easy.</p>
-<p>However, the reality is different. Compiled and assembled executable programs contain way more than just the CPU instructions. Programs exist in executable formats- ELF on Linux, EXE on Windows, and I forget what on Mac OS. An executable format is separated into sections, containing information about the program itself, its memory, constants (especially string constants), libraries it links to, and finally, the code itself. The information in an executable format is used by the operating system to set up the environment to run the program. Executable formats are also used even before this stage by a special program called the linker, which links libraries the program will use when its run. In addition to translating assembly code into executable code, assemblers are expected to also generate this executable format for linking, and later for execution.</p>
-<p>Another source of difficulty is the complexity of the Intel x86-64 architecture. x86-64 is a CISC CPU- complex instruction set computer (compared to other CPUs, such as Arm, RISC-V, and MIPS- these are RISC CPUs- reduced instruction set computers. More on this later). While CISC is very powerful, it can also be challenging to work with at first. My first challenge was learning the register encoding, and later the instruction prefixes when I moved into 64-bit mode. Another big challenge was calculating the location as you moved over each instruction. Allow me to go into more detail on each.</p>
-<p>If you're familiar with x86, you probably know it has eight general purpose registers: eax, ebx, ecx, edx, esp, ebp, esi, and edi. In 16-bit mode, these registers become ax, bx, cx, ..., and in 64-bit mode, these registers become rax, rbx, rcx, ..., and additionally, you get access to eight more registers: r8-r15. The registers build on to each other- RAX is 64 bits wide, EAX represents the lower 32 bits, and AX represents the lower 16 bits. In all cases, the registers are identified by a 3-bit sequence (000-111 -&gt; 0 through 7). To specify which mode you want to access the registers, x86 uses prefixes. To access a register or execute an instruction in 16-bit mode, you use 0x66 prefix, and to access a register and execute and instruction in 64-bit mode, use use a 2-byte prefix with generally seems to start with 0x4. This prefix is also used to access the new extended registers, even in 32-bit and 16-bit mode (you can do that- for r8 it would be r8d and r8w respectively).</p>
-<p>The whole register system took a while to learn, and I didn't even cover all it of it. There's another whole system behind memory addressing and offsets with the registers which I'm still working to fully understand (I understand it enough for things such as <code>rbp-4</code> to work). Maybe I'm missing something, but I feel like the Intel manual is a little vague in places. Also fun fact: When you look at the register encoding, the encoding doesn't go in order. If you count in binary- using only 3 bits- for the first four registers, it would be 000, 001, 010, and 011. This corresponds to EAX, EBX, ECX, and EDX right? NO!! It corresponds to EAX, ECX, EDX, and EBX respectively. I can't tell you the number of times I messed this up in the code. I'm sorry Intel, but that's HUGELY annoying.</p>
-<p>The other challenge I mentioned had to do with location counting. When you're writing in assembly, you often work with strings and other constants. These constants usually end up in the .data or .rodata section in the generated ELF file. This is denoted by the assembly programmer, and referenced throughout the actual code with names, much like variables in ordinary languages. Assemblers generally make at least two passes over the assembly code; the first pass looks for these variables, and the second pass replaces them with numbers as the binary code is generated (the numbers represent the actual location of the constants). If I was doing an assembler for a RISC CPU, this would be super easy. All instructions are the same length, so I could simply count the number of lines and multiply by the instruction length. Not so on CISC. Each instruction has a different length. I'm not saying this is a negative, but it was an interesting challenge to work around. Variable instruction length can often be an asset as it often results in a smaller code density than on a RISC machine.</p>
-<p>Once I understood the architecture sufficiently, I was able to begin working on the executable format- ELF on Linux. I'm not going to go too deeply into ELF here simply because once I begin explaining it, it will take me a while to get back out of it. ELF is actually fairly easy once you know what you're doing, and using the elf.h header is really helpful (its on all Linux systems). The hard part is calculating size and offsets. And the symbol table was really challenging until I found some good resources. The ELF portion of my assembly is the part I'm quite frankly least happiest about. I'm really happy that it works so well, but I feel its a little hacked together as far as the code goes, and there are some known bugs with the symbol and string tables.</p>
-<p>My decision to use C was somewhat accidental, though in other ways it was also intentional. I really like how easy C makes it to write structures and binary to files, I like how fast it compiles, and honestly I think it approaches enum's in a much more sane way than C++ does. That said, I also find trying to use strings and build maps and tables to be a major pain in C. At some point I want to redo it in C++ (and hopefully that will not mean starting from scratch). I thought about Rust or another language, but the ability to use elf.h and write them directly to a file is a big thing for me. If you're interested in exploring architecture to that level, C or C++ really are good options.</p>
-<p>Once I got things working, for the most part the workflow went pretty well. If you're developing an assembler, the most important thing is the instruction set reference for your CPU (Intel's reference is really good by the way. I do feel there are some gray areas, but for the most part its excellent). Hexdump or any hex editor is really useful until you get to the ELF stage. Once you're there, the readelf tool is really helpful- its good at helping you find most of your ELF issues. Also, once you are at the ELF stage, objdump is really helpful. It shows you the binary and the corresponding assembly (this was a huge help with my location counting errors and my register/prefix mistakes). Another good tool throughout the entire process is the NASM assembler. NASM has an option to generate flat binary files, so using this with hexdump, you can do things such as see how a particular instruction translates. Finally, it helps to have a working knowledge of hexadecimal. Although I've been talking about binary, in the C code and in all the tools I mentioned, you will actually be working with hex.</p>
-<p>This has been a long post, and hopefully you found it interesting (congratulations if you made this far :) ). This has honestly been one of my favorite projects mainly because it was a big goal (including in a learning sense) for me, especially after I got my compilers working. I'm currently working on a new compiler, and although it targets multiple platforms, I'm using this project to assemble the code on the x86 platform. More on this later, however.</p>
-<p>In the future I'm going to try to write more detailed articles on the Intel architecture, and later the Arm (meaning AArch64- not Arm 7).</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/writing-an-assembler.html">posted at 19:45</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                    &nbsp;&middot;
-                    &nbsp;<a href="/tag/assembly.html" class="tags">Assembly</a>
-                    &nbsp;<a href="/tag/x86.html" class="tags">x86</a>
-                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
-                </div>
-            </article>            <h4 class="date">Sep 26, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/adventures-with-vhdl.html" rel="bookmark" title="Permanent Link to &quot;Adventures with VHDL&quot;">Adventures with VHDL</a>
-                </h2>
-
-                
-                
-
-                <p>As part of one of my classes I'm taking this semester, I'm learning about VHDL. Actually, I think VHDL is the optional part (so far, I've been learning it pretty much on my own, though the introduction came from the class). I've wanted to learn a hardware descriptor language for some time. I tried Verilog, but I had a hard time finding good tutorials on how to use it, and for some reason I never really looked at VHDL (maybe Verilog scared me away). This may be a slightly unpopular opinion, but I really like VHDL. The reason is the reason why most people dislike it: its basically a subset of Ada, which is a language I'm familiar with.</p>
-<p>Anyway, I finally managed to get a simple circuit to run: a full adder, which I eventually made into an 8-bit adder. Its signed, meaning you can use it as either an adder or a subtractor. I'll come back to this in a minute. Here's what it looks like:</p>
-<div class="highlight"><pre><span></span><code><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">-- A single bit full adder</span>
-<span class="k">entity</span> <span class="nc">full_adder</span> <span class="k">is</span>
-    <span class="k">port</span> <span class="p">(</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ci</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-        <span class="n">s</span><span class="p">,</span> <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-    <span class="p">);</span>
-<span class="k">end</span> <span class="nc">full_adder</span><span class="p">;</span>
-
-<span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">-- An 8-bit adder</span>
-<span class="k">entity</span> <span class="nc">adder</span> <span class="k">is</span>
-    <span class="k">port</span> <span class="p">(</span>
-        <span class="n">vec1</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">vec2</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">out_vec</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">7</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-    <span class="p">);</span>
-<span class="k">end</span> <span class="nc">adder</span><span class="p">;</span>
-
-<span class="c1">-- The logic for the single-bit adder</span>
-<span class="k">architecture</span> <span class="nc">rtl_full_adder</span> <span class="k">of</span> <span class="nc">full_adder</span> <span class="k">is</span>
-<span class="k">begin</span>
-    <span class="n">s</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="n">a</span> <span class="k">xor</span> <span class="n">b</span><span class="p">)</span> <span class="k">xor</span> <span class="n">ci</span><span class="p">;</span>
-    <span class="n">co</span> <span class="o">&lt;=</span> <span class="p">((</span><span class="n">a</span> <span class="k">xor</span> <span class="n">b</span><span class="p">)</span> <span class="k">and</span> <span class="n">ci</span><span class="p">)</span> <span class="k">or</span> <span class="p">(</span><span class="n">a</span> <span class="k">and</span> <span class="n">b</span><span class="p">);</span>
-<span class="k">end</span> <span class="nc">rtl_full_adder</span><span class="p">;</span>
-
-<span class="c1">-- The logic for the 8-bit adder</span>
-<span class="k">architecture</span> <span class="nc">rtl_adder</span> <span class="k">of</span> <span class="nc">adder</span> <span class="k">is</span>
-    <span class="k">component</span> <span class="nc">full_adder</span>
-        <span class="k">port</span> <span class="p">(</span>
-            <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">ci</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic</span><span class="p">;</span>
-            <span class="n">s</span><span class="p">,</span> <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
-
-    <span class="k">signal</span> <span class="n">c</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">8</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-<span class="k">begin</span>
-    <span class="n">op1</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-    <span class="n">op2</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
-    <span class="n">op3</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
-    <span class="n">op4</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
-    <span class="n">op5</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
-    <span class="n">op6</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">6</span><span class="p">));</span>
-    <span class="n">op7</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">));</span>
-    <span class="n">op8</span> <span class="o">:</span> <span class="n">full_adder</span> <span class="k">port</span> <span class="k">map</span><span class="p">(</span><span class="n">a</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">b</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">ci</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">s</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span>
-    <span class="n">co</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
-<span class="k">end</span> <span class="nc">rtl_adder</span><span class="p">;</span>
-</code></pre></div>
-
-<p>Its actually not as scary as it looks; even without the background, its pretty easy to understand how it works. Binary addition works the same way we humans add numbers- we start with the digit on the right, and work left. The full adder is the smaller circuit that performs the logic operation to add two bits (three if you have carry). In base-2, 0+0 = 0, 0 + 1 = 1, 1 + 0 = 1, 1 + 1 = 0 carry 1, and 1 + 1 + 1 = 1 carry 1 (that extra 1 would be the carry; in all other cases, you can assume its zero). In the 8-bit adder, we simply use the full adder on each bit.</p>
-<p>As I mentioned earlier, this implements a signed adder. That means the first bit will be treated as the sign bit. Like all other adders, this uses the 2's complement representation of negative numbers. Because its a signed adder, it also works as a subtractor. Although we often think of subtraction as a separate operation, to a computer there is no such thing. Computers perform addition on signed numbers. So if you wanted to do 10 - 5, to a computer it would be 10 + (-5). For our use, its a complicated way to do it, but it yields the same result.</p>
-<p>I think the idea with VHDL testbenches is to test all values, but I wanted to try something once I found VHDL had text IO like other languages. If you use the IEEE standard logic types, you can convert integers to and from the bit vectors. Connect this with some input and output, and you have a simple calculator:</p>
-<p><img alt="Photo" src="/images/vhdl_calc.png"></p>
-<p>And below is the code if you want to try it out. I am using GHDL to build and run this, so here's also the commands I used. Also note, because its 8-bit, you can add numbers until their sum is less than or equal to 127 (binary: 01111111). Anything greater will invert the most significant bit, which will result in a negative number.</p>
-<div class="highlight"><pre><span></span><code>ghdl -a adder.vhdl
-
-ghdl -a --ieee<span class="o">=</span>synopsys test.vhdl
-ghdl -e --ieee<span class="o">=</span>synopsys adder_tb
-ghdl -r --ieee<span class="o">=</span>synopsys adder_tb --ieee-asserts<span class="o">=</span>disable
-</code></pre></div>
-
-<div class="highlight"><pre><span></span><code><span class="k">library</span> <span class="nn">IEEE</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_1164.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_signed.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.std_logic_arith.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">IEEE.numeric_std.</span><span class="k">all</span><span class="p">;</span>
-<span class="k">use</span> <span class="nn">std.textio.</span><span class="k">all</span><span class="p">;</span>
-
-<span class="c1">--  A testbench has no ports.</span>
-<span class="k">entity</span> <span class="nc">adder_tb</span> <span class="k">is</span>
-<span class="k">end</span> <span class="nc">adder_tb</span><span class="p">;</span>
-
-<span class="k">architecture</span> <span class="nc">behav</span> <span class="k">of</span> <span class="nc">adder_tb</span> <span class="k">is</span>
-    <span class="k">constant</span> <span class="n">WIDTH</span> <span class="o">:</span> <span class="kt">integer</span> <span class="o">:=</span> <span class="mi">8</span><span class="p">;</span>
-
-    <span class="c1">--  Declaration of the component that will be instantiated.</span>
-    <span class="k">component</span> <span class="nc">adder</span>
-        <span class="k">port</span> <span class="p">(</span>
-            <span class="n">vec1</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">vec2</span> <span class="o">:</span> <span class="k">in</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">out_vec</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-            <span class="n">co</span> <span class="o">:</span> <span class="k">out</span> <span class="kt">std_logic</span>
-        <span class="p">);</span>
-    <span class="k">end</span> <span class="k">component</span><span class="p">;</span>
-
-    <span class="c1">--  Specifies which entity is bound with the component.</span>
-    <span class="k">for</span> <span class="n">add0</span><span class="o">:</span> <span class="n">adder</span> <span class="k">use</span> <span class="k">entity</span> <span class="nn">work</span><span class="p">.</span><span class="n">adder</span><span class="p">;</span>
-    <span class="k">signal</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">out_vec</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-    <span class="k">signal</span> <span class="n">co</span> <span class="o">:</span> <span class="kt">std_logic</span><span class="p">;</span>
-
-<span class="k">begin</span>
-    <span class="c1">--  Component instantiation.</span>
-    <span class="n">add0</span><span class="o">:</span> <span class="n">adder</span> <span class="k">port</span> <span class="k">map</span> <span class="p">(</span><span class="n">vec1</span> <span class="o">=&gt;</span> <span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span> <span class="o">=&gt;</span> <span class="n">vec2</span><span class="p">,</span> <span class="n">out_vec</span> <span class="o">=&gt;</span> <span class="n">out_vec</span><span class="p">,</span> <span class="n">co</span> <span class="o">=&gt;</span> <span class="n">co</span><span class="p">);</span>
-
-    <span class="c1">--  This process does the real job.</span>
-    <span class="k">process</span>
-
-        <span class="c1">-- For input</span>
-        <span class="k">variable</span> <span class="n">in_buf1</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">in_buf2</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">in_num1</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">in_num2</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
-
-        <span class="k">variable</span> <span class="n">val1</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-        <span class="k">variable</span> <span class="n">val2</span> <span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="n">WIDTH</span><span class="o">-</span><span class="mi">1</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">);</span>
-
-        <span class="c1">-- For output</span>
-        <span class="k">variable</span> <span class="n">l</span> <span class="o">:</span> <span class="n">line</span><span class="p">;</span>
-        <span class="k">variable</span> <span class="n">out_num</span> <span class="o">:</span> <span class="kt">integer</span><span class="p">;</span>
-    <span class="k">begin</span>
-
-        <span class="c1">-- Get all the input</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Enter two numbers&quot;</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="n">readline</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">in_buf1</span><span class="p">);</span>
-        <span class="n">read</span><span class="p">(</span><span class="n">in_buf1</span><span class="p">,</span> <span class="n">in_num1</span><span class="p">);</span>
-
-        <span class="n">readline</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="n">in_buf2</span><span class="p">);</span>
-        <span class="n">read</span><span class="p">(</span><span class="n">in_buf2</span><span class="p">,</span> <span class="n">in_num2</span><span class="p">);</span>
-
-        <span class="n">val1</span> <span class="o">:=</span> <span class="n">conv_std_logic_vector</span><span class="p">(</span><span class="n">in_num1</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>
-        <span class="n">val2</span> <span class="o">:=</span> <span class="n">conv_std_logic_vector</span><span class="p">(</span><span class="n">in_num2</span><span class="p">,</span> <span class="n">WIDTH</span><span class="p">);</span>
-
-        <span class="k">wait</span> <span class="k">for</span> <span class="mi">50</span> <span class="n">ns</span><span class="p">;</span>
-
-        <span class="c1">-- Do the calculations</span>
-        <span class="n">vec1</span> <span class="o">&lt;=</span> <span class="n">val1</span><span class="p">;</span>
-        <span class="n">vec2</span> <span class="o">&lt;=</span> <span class="n">val2</span><span class="p">;</span>
-        <span class="k">wait</span> <span class="k">for</span> <span class="mi">50</span> <span class="n">ns</span><span class="p">;</span>
-
-        <span class="c1">-- Output everything</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Num1: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">val1</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot; | Num2: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">val2</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="n">out_num</span> <span class="o">:=</span> <span class="n">conv_integer</span><span class="p">(</span><span class="n">out_vec</span><span class="p">);</span>
-
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;&quot;</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Result: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">out_num</span><span class="p">);</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="kt">String</span><span class="p">&#39;(</span><span class="s">&quot;Output: &quot;</span><span class="p">));</span>
-        <span class="n">write</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">to_bitvector</span><span class="p">(</span><span class="n">out_vec</span><span class="p">));</span>
-        <span class="n">writeline</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
-
-        <span class="k">wait</span><span class="p">;</span>
-    <span class="k">end</span> <span class="k">process</span><span class="p">;</span>
-
-<span class="k">end</span> <span class="nc">behav</span><span class="p">;</span>
-</code></pre></div>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/adventures-with-vhdl.html">posted at 15:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                    &nbsp;&middot;
-                    &nbsp;<a href="/tag/programming.html" class="tags">Programming</a>
-                    &nbsp;<a href="/tag/vhdl.html" class="tags">VHDL</a>
-                </div>
-            </article>            <h4 class="date">Aug 02, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/my-pretty-graph.html" rel="bookmark" title="Permanent Link to &quot;My Pretty Graph&quot;">My Pretty Graph</a>
-                </h2>
-
-                
-                
-
-                <p><img alt="Photo" src="/images/graph1.png"></p>
-<p>I thought this is post worthy. I'll admit this is a little hard to see, but it shouldn't be too bad.</p>
-<p>I've been programming compilers for almost a year now. I have three or four published on Github- two Quik compilers and my extcc compiler. I've also made several other programs that would fall into the general compiler category, including a very basic Java class generator, a pseudo-assembly layer, and two simple assemblers- one written in Haskell that doesn't do too much, and another written in C that does a lot more, but I haven't published yet. Quik is a simple BASIC-like language I devised primarily to learn compilers. The benefit of learning with Quik was that its easy to parse. And then there's the element of creating your own language.</p>
-<p>Quik went through a couple iterations mainly because I didn't know what I was doing at first. Extcc was a fork of the latest version of Quik that eventually became primarily a C compiler. I took a break from my compilers after I got a little tired of extcc, but lately I've picked it up again by starting a new project. Once again, its a custom language but not Quik (though it resembles Quik). I'm not going to say too much since I haven't published the project and its still in its very early stages. The main purpose of this post is that graph above.</p>
-<p>So far, this project has seen two big changes. First, Flex and Bison are used instead of handwritten parsers and scanners (I currently have different priorities). The second is I'm using Graphviz Dot to visualize my abstract syntax tree. Originally, to debug my AST I printed it out in the console. Seriously. If you take a look at the graph, you will notice that it starts with the file, the global scope, and the functions. In my original visualizers, I would simply print the node type, its main arguments (in the case of functions, the function name and return type), and then any children. To make it readable, I did indent, and the indentation was increased recursively on each iteration.</p>
-<p>I knew about Dot graphs for a while, but I was exposed to them recently in my job. My boss was using them to debug a build tool that had to (among other things) recursively determine dependencies, determine the build order, and schedule each part. When I saw the graphs and the code, it clicked that this would be a far superior way for me to debug my AST's. And so I did. My new structure still uses a base AstNode (see either extcc or my latest Quik for an example), and other types are derived from it. The key difference is that each node has a <code>writeDot</code> function, which generates a portion of the Dot file. To generate the file, I only call the <code>writeDot</code> in the top node, and then it calls <code>writeDot</code> on all its children.</p>
-<p>I'll write more about this later, especially if the project matures.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/my-pretty-graph.html">posted at 07:10</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/programming.html" rel="tag">Programming</a>
-                </div>
             </article>
 
-                <div class="clear"></div>
-                <div class="pages">
 
-                    <a href="/blog_index2" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 1 of 2</span>
-                </div>
+                <hr  class="gradient"/>
 
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+
+        
+
+
+            <article>
+                <a href="/building-an-alu.html"><h3 class="article-title">Building an ALU</h3></a>
+<h6 class="subheader" title="2020-10-19T08:38:00-04:00">Mon 19 October 2020
+</h6>
+
+
+<p>VHDL has been a fun new toy for me :) . I find how computers work down on the hardware level really interesting- meaning the underlying logic by which they do operations. This is part of the reason I got into compilers. I love seeing how programming constructs translate into CPU instructions …</p><p class="subheader">Category: <a href="/category/programming.html">Programming</a>
+
+    Tagged: 
+    <a href="/tag/programming.html">Programming </a>
+    <a href="/tag/hardware.html">Hardware </a>
+    <a href="/tag/vhdl.html">VHDL </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/building-an-alu.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/writing-an-assembler.html"><h3 class="article-title">Writing an Assembler</h3></a>
+<h6 class="subheader" title="2020-09-29T19:45:00-04:00">Tue 29 September 2020
+</h6>
+
+
+<p>This will be a little bit longer of a post, and forgive me if it seems a little abbreviated despite its length. I'm going to write about my journey to get a working x86-64 assembler. I'm writing this in hopes that maybe you can learn about computer architecture and executables …</p><p class="subheader">Category: <a href="/category/programming.html">Programming</a>
+
+    Tagged: 
+    <a href="/tag/assembly.html">Assembly </a>
+    <a href="/tag/x86.html">x86 </a>
+    <a href="/tag/programming.html">Programming </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/writing-an-assembler.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/adventures-with-vhdl.html"><h3 class="article-title">Adventures with VHDL</h3></a>
+<h6 class="subheader" title="2020-09-26T15:30:00-04:00">Sat 26 September 2020
+</h6>
+
+
+<p>As part of one of my classes I'm taking this semester, I'm learning about VHDL. Actually, I think VHDL is the optional part (so far, I've been learning it pretty much on my own, though the introduction came from the class). I've wanted to learn a hardware descriptor language for …</p><p class="subheader">Category: <a href="/category/programming.html">Programming</a>
+
+    Tagged: 
+    <a href="/tag/programming.html">Programming </a>
+    <a href="/tag/vhdl.html">VHDL </a>
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/adventures-with-vhdl.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/my-pretty-graph.html"><h3 class="article-title">My Pretty Graph</h3></a>
+<h6 class="subheader" title="2020-08-02T07:10:00-04:00">Sun 02 August 2020
+</h6>
+
+
+<p><img alt="Photo" src="/images/graph1.png"></p>
+<p>I thought this is post worthy. I'll admit this is a little hard to see, but it shouldn't be too bad.</p>
+<p>I've been programming compilers for almost a year now. I have three or four published on Github- two Quik compilers and my extcc compiler. I've also made several other …</p><p class="subheader">Category: <a href="/category/programming.html">Programming</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/my-pretty-graph.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 2</h6>
+
+<p>
+
+        <a href="/category/programming2.html">Next &raquo;</a>
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>

@@ -1,337 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | Page 3</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Patrick's Website</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Dec 31, 2020</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/moving-to-github.html" rel="bookmark" title="Permanent Link to &quot;Moving to Github&quot;">Moving to Github</a>
-                </h2>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
 
-                
-                
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
 
-                <p>This post is actually a little overdue. I did this about a month ago, I just never had gotten around to writing it...</p>
-<p>A few months ago, I wrote a post on my overall website structure. That since has changed. But for those who didn't see it, I will briefly cover it.</p>
-<h3>In The Beginning...</h3>
-<p>I've been in and out of blogging for about a year and a half now. Originally, I created a Wordpress blog. I had to buy hosting from a company, and it really wasn't that expensive at the time. Fast forward a year later, I didn't feel like it had gotten anywhere, and when renewal came around, it was like double what it was originally. So yeah, couldn't afford that.</p>
-<p>I looked at some other hosting providers, but then I read about static websites. I've known about those for a while, but I didn't know much about static site generators. A few similar blogs that I followed used them, and they looked really nice, so I decided to give it a try. There are several out there, but the one I use is called <a href="https://docs.getpelican.com/en/stable/">Pelican</a>. Its really easy to use and configure, and there are plenty of themes. I actually really like how I can write my pages and posts in Markdown, and then just push it when I'm ready to publish.</p>
-<p>For hosting, this site has actually moved around three times now. I originally used Surge (surge.sh), and it worked really well, but I didn't like how you had to upgrade to get HTTPS support. Also, when I installed surge on my Linux system, it dragged in a lot of crap. Pelican only uses Python, which I have anyway, so I don't mind that so much. After that, I moved it over to Gitlab. And then a month ago, I moved it to Github.</p>
-<p>The reason for the second move was because the website is important to me, but the Gitlab account is not. I use Gitlab for smaller or half-finished projects that I don't really care about. All my important stuff is on Github, in part because I've used it for all my computer science jobs. I personally think getting Github to work is easier than surge or Gitlab.</p>
-<h3>Setting Up Github</h3>
-<p>Github's website hosting is called Github Pages. To create a pages site, simply create a repository named <code>&lt;your username&gt;.github.io</code>:</p>
-<p><img alt="Photo" src="/images/github_header.png"></p>
-<p>The initial address of your site will be (in my case) "patrickf2000.github.io". Anything in the master branch will be hosted as the website.</p>
-<p>I already had a custom domain that I wanted to use; the good news is that Github lets you do that as well. In my opinion, this is the hardest part. Github has better documentation than I could provide on the subject, but basically the gist is that you change it in the repository's settings, and then update the DNS settings for whoever your domain provider is.</p>
-<p>For the curious, I use Namecheap for my domain name. As the name implies, its cheap... Yeah. I only pay like $10 yearly for it. Some of their names are cheaper than that.</p>
-<h3>Publishing</h3>
-<p>The master branch cannot contain anything except the website- so in my case, the output of Pelican. Ideally though, you would want to store your sources, so there is two ways you can do that. The first is to create a separate repository; the second is to create a branch.</p>
-<p>For my site, I have the master branch which has the site output, and a branch named <code>sources</code> which contains the Markdown and Pelican configuration. On my computer, I have two folders, one for each branch (you can do that...). In the sources folder, I write my post or update whatever, and then use a script to copy the output to the folder set on the master branch. It's really easy actually.</p>
-<p>Here's the script; it will work on Linux and Mac OS. Windows users, you're on your own :)</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-rm -rf ./output 
-pelican content
 
-rm -r ../patrickf2000.github.io/*
-cp -r ./output/* ../patrickf2000.github.io
-cp CNAME ../patrickf2000.github.io
+<!-- Main Page Content and Sidebar -->
+<div class="row">
 
-<span class="nb">cd</span> ../patrickf2000.github.io
-git add .
-git commit
-git push -u origin master
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
 
-<span class="nb">echo</span> <span class="s2">&quot;Done&quot;</span>
-</code></pre></div>
 
-<p>If you want to automate the process even further, you can change the line that says <code>git commit</code> to something like <code>git commit -m "Post update"</code>. In my case, I actually care about commit messages, so this forces me to write one.</p>
-<h3>Conclusion</h3>
-<p>As you can see, publishing a simple blog that still looks nice is really easy. The only thing I haven't figured out is how to get Google Analytics working so I can track page views. (I do care about privacy, but I also am curious if anyone actually looks at this). If you know how, let me know.</p>
-<p>Finally, everything is public on Github, so feel free to look through the sources if you're curious about setting something similar up.</p>
-                <div class="clear"></div>
+            <article>
+                <a href="/moving-to-github.html"><h3 class="article-title">Moving to Github</h3></a>
+<h6 class="subheader" title="2020-12-31T08:00:00-05:00">Thu 31 December 2020
+</h6>
 
-                <div class="info">
-                    <a href="/moving-to-github.html">posted at 08:00</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/blogging.html" rel="tag">Blogging</a>
-                </div>
-            </article>            <h4 class="date">Dec 30, 2020</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/corelib-vs-nolib.html" rel="bookmark" title="Permanent Link to &quot;Corelib vs Nolib&quot;">Corelib vs Nolib</a>
-                </h2>
+<p>This post is actually a little overdue. I did this about a month ago, I just never had gotten around to writing it...</p>
+<p>A few months ago, I wrote a post on my overall website structure. That since has changed. But for those who didn't see it, I will briefly …</p><p class="subheader">Category: <a href="/category/blogging.html">Blogging</a>
 
-                
-                
+</p>
 
-                <p>I've been working on my new programming language and compiler quite a bit over the past two weeks since school has finished. This is an idea I've been working on... I don't know, maybe someone will find this interesting.</p>
-<p>One of the goals of my new language is to create a safe environment, meaning (among other things) the programmer doesn't have to worry about things like allocation and deallocation. That is a big problem with C in that you have to remember to deallocate anything you allocate. It makes sense, and in some cases you need this level of control, but for your average userspace application, its so easy to forget this extra step. And when you do, bad things happen.</p>
-<p>Originally, my approach was to use Linux system calls. I figured out how to allocate and free memory using the mmap syscall; when the compiler did not use the C library, it would generate this call. You can probably see the problem with this however: its not portable. I also had this problem in a few other areas. For instance, when the program exists, everything needs to be deallocated first (the approach was similar: have a keyword for exit, then generate a system call). Strings were the most problematic. There's no system call for that, and it would be way to complicated to arbitrarily generate code for a string comparison or a string length function (another goal is to make string handling builtin and much easier to work with).</p>
-<p>A standard library like most languages have is a good idea, but if its not on the user's system, or its the wrong version, or whatever, bad things can happen.</p>
-<p>I think a good compromise around this is to have two libraries: a core library, and a standard library.</p>
-<h3>Nolib</h3>
-<p>Nolib (aka, no library) is the C approach. In some cases, it makes sense to have absolutely no overhead. A good case is with operating systems or stuff that interacts directly with the hardware. But when it comes to userland, having no easy library is the wrong approach.</p>
-<p>This is basically the reason why I don't love using C, especially for compiler work. A lot of what I like to do deals with parsing strings, which can really be a pain in C. The C library has some basic functions to get you started, but when it comes to resizing and all that, its just too much.</p>
-<h3>What About Go?</h3>
-<p>Go's approach is to statically link the entire standard library to the smallest application.</p>
-<p>This is a <em>horrible</em> idea.</p>
-<p>If you look at Go's standard library, it has a lot of stuff. Everything from dealing with different types of text to compressed archives to networking. If I'm writing a compiler, I don't need the networking interface compiled into the executable. This approach results in huge executables. On the upside, you never have to worry about DLL hell and APIs breaking, but honestly, when it comes to a programming language's standard library, you really shouldn't have this issue.</p>
-<h3>The Corelib</h3>
-<p>As I said, the approach I'm trying out is to create a core library and a standard library. I'm sure I'm not the inventor of this, but off the top of my head, I can't think of anything that does this. Here's the idea.</p>
-<p>The core library contains the most basic functions, such as malloc, free, strcmp, strlen, exit, and maybe a printing function (for just strings, not printf). These functions are all small and self-contained. The string functions are written purely in the implementation language. All the others make appropriate system calls (so they are basically just wrappers). There is header that defines all the system call numbers for the current architecture, which can be conditionally included.</p>
-<p>The core library is built as a static library; that way, any library or executable will have these basic functions already in them. It may create slightly larger binaries, but in today's world the extra space is negligible (especially if Go is a good idea...). It would also be faster since you don't have the extra step of dynamically loading a library.</p>
-<p>The standard library contains all the nice functions like printf, string conversion, file system, and so forth. This is built as a shared library since it will probably get to be pretty big.</p>
-<h3>Static vs Shared Libraries</h3>
-<p>So what's the difference between a static and a shared library?</p>
-<p>A static library is compiled into the executable when it is linked. When you build the static library, you are basically just creating an archive of the object files, which are copied into the user's executable when it is built.</p>
-<p>A shared library is a separate entity on the disk. When the executable is built, information is included that points to the shared libraries location. When the program is run, both the program and the shared library are loaded into memory, and any linkages are resolved.</p>
-<h3>Conclusion</h3>
-<p>As I said at the beginning, this post was meant to be more of random thought. My current project has been an interesting journey, especially now that I'm at the stage where I can start implementing the core libraries. When you get to that point, you know you've come a long way :)</p>
-                <div class="clear"></div>
 
-                <div class="info">
-                    <a href="/corelib-vs-nolib.html">posted at 08:00</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/compilers.html" rel="tag">Compilers</a>
-                </div>
-            </article>            <h4 class="date">Dec 13, 2020</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/memory-and-counting-in-hardware.html" rel="bookmark" title="Permanent Link to &quot;Memory and Counting in Hardware&quot;">Memory and Counting in Hardware</a>
-                </h2>
-
-                
-                
-
-                <p>Electronics have been a secondary hobby of mine for a little while now... though I admit, I'm not too great at it. Actually, its more like an on-and-off thing. I'm trying to make it more of an on thing because its an interesting thing to do. I've written a few posts here on VHDL, which is a start.</p>
-<p>Depending on what you want to do, having some sort of memory is an ideal start. I don't have any memory elements other than shift registers, but they can be used like regular set-and-release memory just as easily. And the other nice thing about them is that you can chain them together, which means you can basically make your memory as big or small as you want. For a starter project, I made a 16-bit binary counter. Okay, its really not <em>that</em> impressive; basically, the microcontroller does the counting and math, and the shift registers and a bunch of LED's are used to display the current number.</p>
-<p>Here's an image of it running:</p>
-<p><img alt="Photo" src="/images/arduino_counter.jpg"></p>
-<p>Know what the number is? 663. 2^9 + 2^7 + 2^4 + 2^2 + 2^1 + 2^0 = 663. The counter is big-endian.</p>
-<p>And for the curious, that's a cell phone charger powering it. Yes, I had to program it at my computer, but the computer was in a room with horrible lighting.</p>
-<p>Okay, so as far as parts list goes, here's what I used:   </p>
-<ul>
-<li>Arduino- any model is fine, but I only have a Micro   </li>
-<li>(x2) SN74HC595N (8-bit shift register)   </li>
-<li>(x16) LED lights   </li>
-<li>(x16) 220 ohm resistors (this doesn't have to be exact, but it shouldn't be much if any lower)   </li>
-<li>Wires   </li>
-</ul>
-<p>As you can see, I have two types of wire- the regular jumper wires and some thicker doorbell wire. The doorbell wire is great. Its not too hard to work with, and you can buy this huge strand from Lowe's for $10 that will last forever.</p>
-<h3>Building the Circuit</h3>
-<p>Here's a diagram of the shift register pinout:</p>
-<p><img alt="Photo" src="/images/74HC595_pinout.png"></p>
-<p>Unfortunately, I don't have a drawing or anything of my circuit, so I will describe it as best as I can.</p>
-<p>For the first shift register:</p>
-<ul>
-<li>Connect VCC and GND to voltage and ground, respectively   </li>
-<li>Connect OE to to ground   </li>
-<li>Connect SRCLR to voltage   </li>
-<li>Connect SER to the arduino (on mine, its pin 2). This is the data pin.   </li>
-<li>Connect RCLK to the arduino (on mine, pin 3). This is the latch pin.   </li>
-<li>Connect SRCLK to the arduino (on mine, pin 4). This is the clock pin.   </li>
-</ul>
-<p>The second shift register is similar. But because we want to control both at once, there are a few important differences.</p>
-<ul>
-<li>Connect SER to the Qh' pin on the first register   </li>
-<li>Connect the RCLK and SRCLK to the RCLK and SRCLK of the first register   </li>
-</ul>
-<p>On both registers, pins Qa - Qh will connect to LEDs. The overall connect for the LEDs will be <code>shift register pin -&gt; resistor -&gt; LED -&gt; ground</code>.</p>
-<h3>Programming</h3>
-<p>I'm going to assume you know the basics of Arduino programming. If you have the program installed and know you to compile and upload the example program for making the onboard LED blink, you're good to continue.</p>
-<p>I'll post the entire code on another page, but this is the general idea for programming a shift register. A single shift register works with 1 byte, or 8 bits, which corresponds to the <code>byte</code> type in the Arduino language.</p>
-<ol>
-<li>Set the latch pin to 0.   </li>
-<li>Enter a loop and write out the byte of data.   </li>
-<li>Set the latch pin to 1.   </li>
-</ol>
-<p>And the algorithm for the loop is (each loop iteration):</p>
-<ol>
-<li>Set the clock pin to low.   </li>
-<li>Set the data pin to the current bit. The current bit is the <code>data &amp; (1 &lt;&lt; i)</code> where <code>data</code> is your byte value, and <code>i</code> is your loop index.   </li>
-<li>Set the clock pin to high.   </li>
-<li>Set the data pin to low (so we can have a stable signal).   </li>
-</ol>
-<p>The principle is exactly the same whether you have one shift register or 10. In our case we have two, which means we can display 16 bits of data, which corresponds to a <code>short</code> in the Arduino language (and all other languages that have it...). The easiest way to do this is first put the algorithm in a separate function, which we will call <code>writeOut(byte shiftData)</code>. Then, after you set the latch pin to 0, make two calls to <code>writeOut</code>, the first call with one half of the data, the second call with the other half. Then raise the latch pin. Both shift registers will be populated. If you have 10 shift registers, you would make 10 function calls in between lowering and raising the latch.</p>
-<p>If you're wondering about order, think of it as a top-down thing. The first function call will the be the last shift register, and the last function call will be the first shift register. Get it? Shift register...</p>
-<p>Okay. Here's the code. I put it on a separate page since its long. You can find it <a href="pages/shift-register-program.html">here</a>.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/memory-and-counting-in-hardware.html">posted at 12:15</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/electronics.html" rel="tag">Electronics</a>
-                </div>
-            </article>            <h4 class="date">Dec 09, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/vintage-os.html" rel="bookmark" title="Permanent Link to &quot;Vintage OS&quot;">Vintage OS</a>
-                </h2>
-
-                
-                
-
-                <p>So I was cleaning house earlier... Or rather, cleaning the computer. You know, when there gets to be a million things on your desktop? Anyway.</p>
-<p>I have a small collection of vintage operating systems, some of which I've been able to get running in virtual machines. When I say vintage, I don't necessarily mean the ones everyone has heard about; there's a few obscure you may never have heard of. But anyway, I forgot I had screenshots of them because they are with the OSes and not the rest of my pictures. I only have three OSes photographed at the moment, but they are worth seeing.</p>
-<h2>IBM OS/2</h2>
-<p>The only truly vintage one here. The history behind this operating system is interesting. It runs without any issues in Virtualbox, but as I remember it was a little tricky to get running. I lost the article, but if I ever decide to run it again, I'll be sure to post.</p>
-<p><img alt="Photo" src="/images/os2.png"></p>
-<h2>Sky OS</h2>
-<p>Sky OS was a fairly complete operating system written mainly by Robert Szeleney from 1997 until 2009. It was a Unix-like OS with a graphical desktop, and even got to the point of being able to run real applications such as the GNU Toolchain and Firefox. The OS was meant to be a commerical product, but it never aquired a sufficient developer/user base, and eventually, Szeleney couldn't keep up with development. You can still find disk images and a key and boot it up in Virtualbox. Its a rather nice OS, its a shame it never went further.</p>
-<p>The desktop:</p>
-<p><img alt="Photo" src="/images/skyos1.png"></p>
-<p>Some applications running:</p>
-<p><img alt="Photo" src="/images/skyos2.png"></p>
-<h2>Syllable OS</h2>
-<p>Another free OS from the early 2000s. Unlike Sky OS, Syllable was actually open source. It eventually stagnated and development ended in 2012. There wasn't a huge team behind this one either, and it got really far in terms of capabilities. Its a shame neither this nor Sky OS ever became viable alternatives to Windows because they really had potential.</p>
-<p>The desktop:</p>
-<p><img alt="Photo" src="/images/syllable1.png"></p>
-<p>The file explorer:</p>
-<p><img alt="Photo" src="/images/syllable2.png"></p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/vintage-os.html">posted at 12:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
-                </div>
-            </article>            <h4 class="date">Dec 05, 2020</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/arm64-on-qemu.html" rel="bookmark" title="Permanent Link to &quot;Arm64 on Qemu&quot;">Arm64 on Qemu</a>
-                </h2>
-
-                
-                
-
-                <p>I think I wrote a little bit about this at one point, but one of my new low-level interests is Arm. Partly because of my work in the HPC field, I've found the Arm supercomputer in Japan to be really intersting. I find it really interesting how what was the architecture of smartphones is now making its way into other fields. Its even coming into the PC market- look at the new Apple computers. But from an even more personal perspective, I've found RISC architectures really interesting. I grew up (so to speak) on x86- and therefore, CISC architectures. Writing a compiler to generate CISC code is really easy; adapting that same code to RISC is an interesting challenge.</p>
-<p>Out of work and personal needs, I've been trying to get some emulators working for non-x86 architectures. I do have a Raspberry Pi 4, but while it is usable, its a little slow, and doesn't have any SVE support (SVE is Arm's SIMD architecture). So far, I have MIPS32, RiscV64, Power 10, and AArch64 emulators up and running. The MIPS32 and AArch64 work pretty well; the RISC-V is getting there, and the POWER 10 really sucks (I'm working on it though). Today, I'm going to cover how to set up Ubuntu 20.04 on QEMU.</p>
-<h3>Words of Warning</h3>
-<p>Virtualization is always slower than bare metal. Before you start giving me examples on how well Virtualbox works on your computer, yes you're probably right. But the reason why you can run an entire guest system on Virtualbox with really good speed is because the VM and the host system are x86 based. So the VM doesn't have to do as much translation. For different architectures, every single instruction has to be translated to an x86 instruction. On its own, its still really fast, but when you have an entire operating system on top of it, you will start to notice the difference.</p>
-<p>I'm not saying this to scare you off. If you have a powerful computer, you can allocate resources to reduce this overhead quite a bit, but you will notice. Its good enough for real work, but I wouldn't plan on running any huge builds too often, or do things too resource-intensive.</p>
-<p>I'll post updates over time.</p>
-<h3>Words of Credit</h3>
-<p>I like to think I'm a genius, but let's be realistic: I'm not. Therefore, let us give credit where it is due. I initially got things going by following this article: <a href="https://futurewei-cloud.github.io/ARM-Datacenter/qemu/how-to-launch-aarch64-vm/">https://futurewei-cloud.github.io/ARM-Datacenter/qemu/how-to-launch-aarch64-vm/</a>. A lot of stuff is copied from that article, so I wish to emphasize that most credit should be given to that author, not to me.</p>
-<p>The reason why I wrote my own is A) it would be easily accessible for me, and B) I did have to make some changes to warrant a rewrite. The article is a little old, if you follow it, you will end up with Ubuntu 18.04. If you follow mine, you end up with Ubuntu 20.04. You will need this if you want SVE.</p>
-<p>And yes, I do focus on SVE.</p>
-<h3>Getting Started</h3>
-<p>First, you need to install these packages (note: I'm on Linux Mint. If you're not on Linux Mint/Ubuntu/Debian, you may have to change the package names):</p>
-<div class="highlight"><pre><span></span><code>sudo apt-get install qemu-system-arm qemu-efi-aarch64 qemu-utils
-</code></pre></div>
-
-<p>Next, create the boot images and the hard drive:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">dd</span> <span class="k">if</span><span class="o">=/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">zero</span> <span class="nv">of</span><span class="o">=</span><span class="nv">flash1</span>.<span class="nv">img</span> <span class="nv">bs</span><span class="o">=</span><span class="mi">1</span><span class="nv">M</span> <span class="nv">count</span><span class="o">=</span><span class="mi">64</span>
-<span class="nv">dd</span> <span class="k">if</span><span class="o">=/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">zero</span> <span class="nv">of</span><span class="o">=</span><span class="nv">flash0</span>.<span class="nv">img</span> <span class="nv">bs</span><span class="o">=</span><span class="mi">1</span><span class="nv">M</span> <span class="nv">count</span><span class="o">=</span><span class="mi">64</span>
-<span class="nv">dd</span> <span class="k">if</span><span class="o">=/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">share</span><span class="o">/</span><span class="nv">qemu</span><span class="o">-</span><span class="nv">efi</span><span class="o">-</span><span class="nv">aarch64</span><span class="o">/</span><span class="nv">QEMU_EFI</span>.<span class="nv">fd</span> <span class="nv">of</span><span class="o">=</span><span class="nv">flash0</span>.<span class="nv">img</span> <span class="nv">conv</span><span class="o">=</span><span class="nv">notrunc</span>
-
-<span class="nv">qemu</span><span class="o">-</span><span class="nv">img</span> <span class="nv">create</span> <span class="nv">ubuntu</span><span class="o">-</span><span class="nv">image</span>.<span class="nv">img</span> <span class="mi">20</span><span class="nv">G</span>
-</code></pre></div>
-
-<p>To download Ubuntu 20.04: </p>
-<p><code>wget http://ports.ubuntu.com/ubuntu-ports/dists/focal/main/installer-arm64/current/legacy-images/netboot/mini.iso</code></p>
-<p>Note that the site in question is an FTP site. If you want a different image, go for it.</p>
-<h3>Install Ubuntu</h3>
-<p>Use this command to start the installation:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">qemu</span><span class="o">-</span><span class="nv">system</span><span class="o">-</span><span class="nv">aarch64</span> \
-    <span class="o">-</span><span class="nv">nographic</span> \
-    <span class="o">-</span><span class="nv">machine</span> <span class="nv">virt</span>,<span class="nv">gic</span><span class="o">-</span><span class="nv">version</span><span class="o">=</span><span class="nv">max</span> \
-    <span class="o">-</span><span class="nv">m</span> <span class="mi">4</span><span class="nv">G</span> \
-    <span class="o">-</span><span class="nv">cpu</span> <span class="nv">max</span> \
-    <span class="o">-</span><span class="nv">smp</span> <span class="mi">4</span> \
-    <span class="o">-</span><span class="nv">netdev</span> <span class="nv">user</span>,<span class="nv">id</span><span class="o">=</span><span class="nv">vnet</span>,<span class="nv">hostfwd</span><span class="o">=</span>:<span class="mi">127</span>.<span class="mi">0</span>.<span class="mi">0</span>.<span class="mi">1</span>:<span class="mi">0</span><span class="o">-</span>:<span class="mi">22</span> <span class="o">-</span><span class="nv">device</span> <span class="nv">virtio</span><span class="o">-</span><span class="nv">net</span><span class="o">-</span><span class="nv">pci</span>,<span class="nv">netdev</span><span class="o">=</span><span class="nv">vnet</span> \
-    <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">ubuntu</span><span class="o">-</span><span class="nv">image</span>.<span class="nv">img</span>,<span class="k">if</span><span class="o">=</span><span class="nv">none</span>,<span class="nv">id</span><span class="o">=</span><span class="nv">drive0</span>,<span class="nv">cache</span><span class="o">=</span><span class="nv">writeback</span> <span class="o">-</span><span class="nv">device</span> <span class="nv">virtio</span><span class="o">-</span><span class="nv">blk</span>,<span class="nv">drive</span><span class="o">=</span><span class="nv">drive0</span>,<span class="nv">bootindex</span><span class="o">=</span><span class="mi">0</span> \
-    <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">mini</span>.<span class="nv">iso</span>,<span class="k">if</span><span class="o">=</span><span class="nv">none</span>,<span class="nv">id</span><span class="o">=</span><span class="nv">drive1</span>,<span class="nv">cache</span><span class="o">=</span><span class="nv">writeback</span> <span class="o">-</span><span class="nv">device</span> <span class="nv">virtio</span><span class="o">-</span><span class="nv">blk</span>,<span class="nv">drive</span><span class="o">=</span><span class="nv">drive1</span>,<span class="nv">bootindex</span><span class="o">=</span><span class="mi">1</span> \
-    <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">flash0</span>.<span class="nv">img</span>,<span class="nv">format</span><span class="o">=</span><span class="nv">raw</span>,<span class="k">if</span><span class="o">=</span><span class="nv">pflash</span> <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">flash1</span>.<span class="nv">img</span>,<span class="nv">format</span><span class="o">=</span><span class="nv">raw</span>,<span class="k">if</span><span class="o">=</span><span class="nv">pflash</span> 
-</code></pre></div>
-
-<p>Few notes here. First, the <code>-m 4G</code> represents how much memory to allocate to the machine. The original article said to use 512M. That took <em>FOREVER</em> on my computer, so I would highly recommend to scale this up (once I scalled it, it only took like 15 minutes). The <code>-smp 4</code> represents the number of CPU cores to allocate to the machine.</p>
-<p>Just follow the prompts and instructions to install the system. It's really easy, so I'm not going to walk you through. When you get to the end where it asks about additional software, I would only recommend doing the SSH server. Don't install a desktop system unless you're feeling adventerous. It will be slow. And quite frankly, I have no idea how you would run it... Maybe VNC?</p>
-<h3>Boot Ubuntu</h3>
-<p>One you finished installing, you can use this command to launch the VM. You should put this in a script to make it easier to launch each time.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">qemu</span><span class="o">-</span><span class="nv">system</span><span class="o">-</span><span class="nv">aarch64</span> \
-    <span class="o">-</span><span class="nv">nographic</span> \
-    <span class="o">-</span><span class="nv">machine</span> <span class="nv">virt</span>,<span class="nv">gic</span><span class="o">-</span><span class="nv">version</span><span class="o">=</span><span class="nv">max</span> \
-    <span class="o">-</span><span class="nv">m</span> <span class="mi">8</span><span class="nv">G</span> \
-    <span class="o">-</span><span class="nv">cpu</span> <span class="nv">max</span>,<span class="nv">pmu</span><span class="o">=</span><span class="nv">off</span>,<span class="nv">sve</span><span class="o">=</span><span class="nv">on</span>,<span class="nv">sve256</span><span class="o">=</span><span class="nv">on</span> \
-    <span class="o">-</span><span class="nv">smp</span> <span class="mi">6</span> \
-    <span class="o">-</span><span class="nv">netdev</span> <span class="nv">user</span>,<span class="nv">id</span><span class="o">=</span><span class="nv">vnet</span>,<span class="nv">hostfwd</span><span class="o">=</span><span class="nv">tcp</span>::<span class="mi">5556</span><span class="o">-</span>:<span class="mi">22</span> \
-    <span class="o">-</span><span class="nv">device</span> <span class="nv">virtio</span><span class="o">-</span><span class="nv">net</span><span class="o">-</span><span class="nv">pci</span>,<span class="nv">netdev</span><span class="o">=</span><span class="nv">vnet</span> \
-    <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">ubuntu</span><span class="o">-</span><span class="nv">image</span>.<span class="nv">img</span>,<span class="k">if</span><span class="o">=</span><span class="nv">none</span>,<span class="nv">id</span><span class="o">=</span><span class="nv">drive0</span>,<span class="nv">cache</span><span class="o">=</span><span class="nv">writeback</span> <span class="o">-</span><span class="nv">device</span> <span class="nv">virtio</span><span class="o">-</span><span class="nv">blk</span>,<span class="nv">drive</span><span class="o">=</span><span class="nv">drive0</span>,<span class="nv">bootindex</span><span class="o">=</span><span class="mi">0</span> \
-    <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">flash0</span>.<span class="nv">img</span>,<span class="nv">format</span><span class="o">=</span><span class="nv">raw</span>,<span class="k">if</span><span class="o">=</span><span class="nv">pflash</span> <span class="o">-</span><span class="nv">drive</span> <span class="nv">file</span><span class="o">=</span><span class="nv">flash1</span>.<span class="nv">img</span>,<span class="nv">format</span><span class="o">=</span><span class="nv">raw</span>,<span class="k">if</span><span class="o">=</span><span class="nv">pflash</span> 
-</code></pre></div>
-
-<p>Again, I made a few changes from the original article. I scaled the memory and SMP up to my specs, so <em>make sure</em> to check that before you run it. If you scale up more than your computer can handle, it may freeze.</p>
-<p>Notice the "sve" arguments in the "-cpu" line. This is where you can control the SVE vector lane size. SVE vectors start at 128-bits and increment from there by 128 up to 2048-bits. Also notice the line that begins with "-netdev". This allows you to SSH into the VM. For some reason, even if you're terminal is maximized, QEMU doesn't use the whole thing. SSH makes it more usable. The "5556-:22" sets the SSH port. So, to SSH in, you can use the following command:</p>
-<div class="highlight"><pre><span></span><code><span class="n">ssh</span><span class="w"> </span><span class="k">user</span><span class="nv">@localhost</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">5556</span><span class="w"></span>
-</code></pre></div>
-
-<p>Replace "user" with whatever user you created during installation.</p>
-<h3>Conclusion</h3>
-<p>If all goes well, you shouldn't have any issues getting this up and working. So far this seems to run pretty well (even if it makes my computer run up a lot in the process :-). As I get over machines to work, I'll post updates here, and if I do anything interesting I'll try to also post.</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/arm64-on-qemu.html">posted at 12:45</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/virtualization.html" rel="tag">Virtualization</a>
-                </div>
+                <a class="button radius secondary small right" href="/moving-to-github.html">Read More</a>
+                <hr  class="gradient"/>
             </article>
 
-                <div class="clear"></div>
-                <div class="pages">
+        
 
-                    <a href="/blog_index2" class="prev_page">&larr;&nbsp;Previous</a>
-                    <a href="/blog_index4" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 3 of 7</span>
-                </div>
 
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+            <article>
+                <a href="/corelib-vs-nolib.html"><h3 class="article-title">Corelib vs Nolib</h3></a>
+<h6 class="subheader" title="2020-12-30T08:00:00-05:00">Wed 30 December 2020
+</h6>
+
+
+<p>I've been working on my new programming language and compiler quite a bit over the past two weeks since school has finished. This is an idea I've been working on... I don't know, maybe someone will find this interesting.</p>
+<p>One of the goals of my new language is to create …</p><p class="subheader">Category: <a href="/category/compilers.html">Compilers</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/corelib-vs-nolib.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/memory-and-counting-in-hardware.html"><h3 class="article-title">Memory and Counting in Hardware</h3></a>
+<h6 class="subheader" title="2020-12-13T12:15:00-05:00">Sun 13 December 2020
+</h6>
+
+
+<p>Electronics have been a secondary hobby of mine for a little while now... though I admit, I'm not too great at it. Actually, its more like an on-and-off thing. I'm trying to make it more of an on thing because its an interesting thing to do. I've written a few …</p><p class="subheader">Category: <a href="/category/electronics.html">Electronics</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/memory-and-counting-in-hardware.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/vintage-os.html"><h3 class="article-title">Vintage OS</h3></a>
+<h6 class="subheader" title="2020-12-09T12:30:00-05:00">Wed 09 December 2020
+</h6>
+
+
+<p>So I was cleaning house earlier... Or rather, cleaning the computer. You know, when there gets to be a million things on your desktop? Anyway.</p>
+<p>I have a small collection of vintage operating systems, some of which I've been able to get running in virtual machines. When I say vintage …</p><p class="subheader">Category: <a href="/category/random.html">Random</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/vintage-os.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/arm64-on-qemu.html"><h3 class="article-title">Arm64 on Qemu</h3></a>
+<h6 class="subheader" title="2020-12-05T12:45:00-05:00">Sat 05 December 2020
+</h6>
+
+
+<p>I think I wrote a little bit about this at one point, but one of my new low-level interests is Arm. Partly because of my work in the HPC field, I've found the Arm supercomputer in Japan to be really intersting. I find it really interesting how what was the …</p><p class="subheader">Category: <a href="/category/virtualization.html">Virtualization</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/arm64-on-qemu.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 3 of 7</h6>
+
+<p>
+            <a href="/blog_index2.html">&laquo; Prev</a>
+
+        <a href="/blog_index4.html">Next &raquo;</a>
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>

@@ -1,75 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | An Introduction</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>An Introduction</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
+
 <body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
+        <h3 class="article-title"><a href="/an-introduction.html" rel="bookmark"
+        title="Permalink to An Introduction">An Introduction</a></h3>
     </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Jul 18, 2020</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/an-introduction.html" rel="bookmark" title="Permanent Link to &quot;An Introduction&quot;">An Introduction</a>
-                </h2>
+<h6 class="subheader" title="2020-07-18T09:30:00-04:00">Sat 18 July 2020
+</h6>
 
-                
-                
 
-                <p>Hello everyone!</p>
+    <p>Hello everyone!</p>
 <p>So I decided I'm going to give blogging a try... Make that my social media I guess. I've tried it before, but things never really took off- I think I was trying too hard. Not to mention that blogs can be expensive. I got around that by using Pelican to generate my blog, and surge.sh to host the site. All this for free. All I paid for is the domain which I think was like $10. Anyway, I'm going to make this like a journal, then maybe I'll actually write.</p>
 <p>I am rare among people of my generation because I don't use social media. And to add further irony, I am a computer scientist, and enjoy programming in my free time. Yeah, strange. Okay, I actually did have social media for a brief period, but I never could get into it. I got into it more, it made my life miserable, and I deleted all of it three months later. I'll have to write more about this another time. I kind of want this blog to replace that.</p>
 <p>We'll see how it goes... Even if its a journal I can look back upon I'll be happy with it.</p>
-                <div class="clear"></div>
+<p class="subheader">Category: <a href="/category/none.html">None</a>
 
-                <div class="info">
-                    <a href="/an-introduction.html">posted at 09:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/none.html" rel="tag">None</a>
-                </div>
-            </article>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>

@@ -1,47 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | Journey Through Distro Land</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Journey Through Distro Land</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
 
 </head>
+
 <body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
+
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
     <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
+        <h3 class="article-title"><a href="/journey-through-distro-land.html" rel="bookmark"
+        title="Permalink to Journey Through Distro Land">Journey Through Distro Land</a></h3>
     </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Feb 20, 2021</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/journey-through-distro-land.html" rel="bookmark" title="Permanent Link to &quot;Journey Through Distro Land&quot;">Journey Through Distro Land</a>
-                </h2>
+<h6 class="subheader" title="2021-02-20T18:54:00-05:00">Sat 20 February 2021
+</h6>
 
-                
-                
 
-                <p>I spent a good part of today trying out different Linux distros on my lab machine, a Dell XPS desktop. Because I spent quite a bit of time on my computers (sometimes not entirely by choice...), when I need a change, switching my Linux distros is one of the best starting points. And even with that aside, knowing different distros is a good learning experience.</p>
+    <p>I spent a good part of today trying out different Linux distros on my lab machine, a Dell XPS desktop. Because I spent quite a bit of time on my computers (sometimes not entirely by choice...), when I need a change, switching my Linux distros is one of the best starting points. And even with that aside, knowing different distros is a good learning experience.</p>
 <p>Linux Mint has consistently been my most used distro for the past six years. I tend to always come back to that. Linux Mint is based on Ubuntu, and has a very pretty, functional user interface. Its absolutely rock solid, and I like how the developers follow a "when-its-ready", but still regular enough release cycle.</p>
 <p>However, I find that Linux Mint isn't always the best for development because the packages are often outdated. I mean, its usable for the vast majority of purposes, but there are times it becomes a real annoyance to me. For a while, I used Manjaro, which is also rather rock solid and very nice to use. It uses a rolling release cycle, which means you always have the latest packages. However, for reasons I will discuss below, I tend to use Fedora as my development distro. Fedora tends to have the latest packages, and is equally as rock solid and stable.</p>
 <p>My Dell XPS, while being my lab machine, is also my archive and office machine. I have three drives, an M.2, an SSD, and a 1 TB regular hard drive. I really don't like using regular hard drives for development of any kind, and on second thoughts I didn't want to keep records and pictures on my laptop, so I use this to store stuff. The other two drives are development. So dual booting is an essential requirement (or is it tri-booting I guess...).</p>
@@ -63,31 +84,70 @@
 <p>When I say "actually works", its always booted and installed on the machines I've had, but there's always a network driver or graphics error that requires more sysadmin skills than I honestly have the patience for. At the end of the day, I'm programmer and like working with interesting problems, and sysadmin is neither. That's why I use these beginner distros like Linux Mint: they just work. I've actually had more luck with Solaris than the BSDs.</p>
 <h3>Conclusion</h3>
 <p>This wasn't meant to be all negative. As you can see, two hits (Solus and ElementaryOS), two flops (*BSD and OpenSUSE), and one kind of both (Manjaro). For now I'm probably going to just stick to Fedora. I don't love how Fedora is a short-term point release, but its rock solid, everything works with it, and its recent enough to be a good development tool.</p>
-                <div class="clear"></div>
+<p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-                <div class="info">
-                    <a href="/journey-through-distro-land.html">posted at 18:54</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>

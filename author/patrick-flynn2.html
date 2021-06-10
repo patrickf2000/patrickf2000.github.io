@@ -1,244 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Patrick's Website | Articles by Patrick Flynn</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" href="/theme/css/screen.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="/theme/css/print.css" type="text/css" media="print" />
-    <meta name="generator" content="Pelican" />
-    <meta name="description" content="" />
-    <meta name="author" content="Patrick Flynn" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Patrick's Website - Patrick Flynn</title>
+
+    <link rel="stylesheet" href="/theme/css/normalize.css" />
+    <link rel="stylesheet" href="/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="/theme/css/style.css" />
+    <link rel="stylesheet" href="/theme/css/pygments.css" />	
+    <script src="/theme/js/custom.modernizr.js"></script>
+
+    <!-- So Firefox can bookmark->"abo this site" -->
+
 </head>
+
 <body>
-    <header>
-        <nav>
-            <ul>
 
-                <li class="ephemeral selected"><a href="/author/patrick-flynn2.html">Patrick Flynn</a></li>
-                <li><a href="/">Home</a></li>
-                <li><a href="blog_index.html">Blog</a></li>
-                <li><a href="/pages/projects.html">Projects</a></li>
-                <li><a href="/pages/contact-me.html">Contact</a></li>
-                <li><a href="https://github.com/patrickf2000">GitHub</a></li>
-            </ul>
-        </nav>
-        <div class="header_box">
-            <h1><a href="/">Patrick's Website</a></h1>
-            <h2>Computers and life...</h2>
-        </div>
-    </header>
-    <div id="wrapper">
-        <div id="content">            <h4 class="date">Feb 20, 2021</h4>
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <!--<h1><a href="">Patrick's Website</a></h1>-->
+	    <h1><a href="/index.html">Patrick's Website</a></h1>
+    </div>
+</div>
+</div>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/journey-through-distro-land.html" rel="bookmark" title="Permanent Link to &quot;Journey Through Distro Land&quot;">Journey Through Distro Land</a>
-                </h2>
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+    <li><a href="/index.html" class="button secondary small">Home</a></li>
+    <li><a href="/blog_index.html" class="button secondary small">Blog</a></li>
+    <li><a href="/pages/projects.html" class="button secondary small">Projects</a></li>
+    <li><a href="/resume.html" class="button secondary small">Resume</a></li>
+    <li><a href="/pages/contact-me.html" class="button secondary small">Contact</a></li>
+    <li><a href="https://github.com/patrickf2000" class="button secondary small">GitHub</a></li>
 
-                
-                
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
 
-                <p>I spent a good part of today trying out different Linux distros on my lab machine, a Dell XPS desktop. Because I spent quite a bit of time on my computers (sometimes not entirely by choice...), when I need a change, switching my Linux distros is one of the best starting points. And even with that aside, knowing different distros is a good learning experience.</p>
-<p>Linux Mint has consistently been my most used distro for the past six years. I tend to always come back to that. Linux Mint is based on Ubuntu, and has a very pretty, functional user interface. Its absolutely rock solid, and I like how the developers follow a "when-its-ready", but still regular enough release cycle.</p>
-<p>However, I find that Linux Mint isn't always the best for development because the packages are often outdated. I mean, its usable for the vast majority of purposes, but there are times it becomes a real annoyance to me. For a while, I used Manjaro, which is also rather rock solid and very nice to use. It uses a rolling release cycle, which means you always have the latest packages. However, for reasons I will discuss below, I tend to use Fedora as my development distro. Fedora tends to have the latest packages, and is equally as rock solid and stable.</p>
-<p>My Dell XPS, while being my lab machine, is also my archive and office machine. I have three drives, an M.2, an SSD, and a 1 TB regular hard drive. I really don't like using regular hard drives for development of any kind, and on second thoughts I didn't want to keep records and pictures on my laptop, so I use this to store stuff. The other two drives are development. So dual booting is an essential requirement (or is it tri-booting I guess...).</p>
-<h3>OpenSUSE</h3>
-<p>I've heard very good things about OpenSUSE, and I've used it a long time ago, though never in depth. I really wanted to try it, but I never got past the LiveCDs. One of them did boot and look really nice, but as a whole they gave me nothing but grief. The first time I tried it, it took <em>forever</em> to boot, and when it finally did, it was slow as hell. The other booted the first time, and looked rather nice, but for some reason never booted again.</p>
-<p>I don't know, maybe I should have just installed it and tried it out, but the LiveCD experience was a significant turnoff.</p>
-<h3>Solus</h3>
-<p>Solus looks really, really nice. I like the Budgie desktop and the fact its rolling release. I did actually install it, only to find out that in EFI mode, it doesn't use Grub (and there's no option as far as I'm aware to enable it). I have a rule that Linux Mint is the booting distro, so if it doesn't work from Linux Mint, its out.</p>
-<p>Its too bad. Solus looks very promising. Maybe I'll try it on my laptop...</p>
-<h3>ElementaryOS</h3>
-<p>I didn't do this on my desktop, but I installed it earlier in the week on my laptop. I have to say I really love this.</p>
-<p>In a lot of ways its similar to Linux Mint in that its based on Ubuntu with its own desktop environment. As a result, it looks really nice and is stable and compatible with most stuff. The downsides are the same though: older packages. With ElementaryOS, I'm not sure of their release cycle yet, it follows the "when-ready" approach which I think is good, but it there doesn't seem to be a pattern. Maybe I'm wrong. Hopefully they get the Ubuntu 20 -based version before long.</p>
-<p>ElementaryOS by design looks and feels like MacOS, which is a nice change for someone who generally lives by Windows-like interfaces.</p>
-<h3>Manjaro</h3>
-<p>I've used Manjaro many times in the past, and I <em>love</em> it. Its based on Arch Linux, and therefore follows the rolling-release model. Its seems more bleeding-edge than Solus, but I've never had any stability issues with it (at the same time though, I would never use it as my archive OS). I've never used it much on my desktop, but quite a lot on the laptop. Manjaro is really fast, and comes with the widest selection of desktops I've seen.</p>
-<p>The problem is that it won't boot from the Linux Mint bootloader; it just hangs. At some point I may break down and just have to use it, but for now that is a sufficient annoyance for me not to use it.</p>
-<h3>GhostBSD and FreeBSD</h3>
-<p>I know, I know, this isn't Linux. I've always been intrigued with the other non-Unix systems, and BSD is no exception. The only problem is that I have yet to own a machine it actually works on.</p>
-<p>When I say "actually works", its always booted and installed on the machines I've had, but there's always a network driver or graphics error that requires more sysadmin skills than I honestly have the patience for. At the end of the day, I'm programmer and like working with interesting problems, and sysadmin is neither. That's why I use these beginner distros like Linux Mint: they just work. I've actually had more luck with Solaris than the BSDs.</p>
-<h3>Conclusion</h3>
-<p>This wasn't meant to be all negative. As you can see, two hits (Solus and ElementaryOS), two flops (*BSD and OpenSUSE), and one kind of both (Manjaro). For now I'm probably going to just stick to Fedora. I don't love how Fedora is a short-term point release, but its rock solid, everything works with it, and its recent enough to be a good development tool.</p>
-                <div class="clear"></div>
 
-                <div class="info">
-                    <a href="/journey-through-distro-land.html">posted at 18:54</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/linux.html" rel="tag">Linux</a>
-                </div>
-            </article>            <h4 class="date">Jan 30, 2021</h4>
+<!-- Main Page Content and Sidebar -->
+<div class="row">
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/raspberry-pi-router.html" rel="bookmark" title="Permanent Link to &quot;Raspberry Pi Router&quot;">Raspberry Pi Router</a>
-                </h2>
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+        
+        
 
-                
-                
 
-                <p>I heard a while back from a friend that a Raspberry Pi can be used as a router. I never really thought about it until last December, when I was trying to find a more useful anti-distraction method than my browser blocker (it was too easy to get around). I found some guides on how you can use a Raspberry Pi to create a wireless access point within your home network, and from there install a DNS blackhole which can be used to block a lot of things.</p>
-<p>I originally set things up and ran it on a Rasberry Pi 3B+, and it ran for the last 15 days or so of December. Then at the beginning of the year, I took it down and moved everything over to a Raspberry Pi 4. As of today, the Pi 4 has been happily running without a reboot for 28 days (which is now my personal record for the longest uptime of any computer).</p>
-<p>Here's it running:</p>
-<p><img alt="Photo" src="/images/rpi.jpg"></p>
-<p>An anti-distraction mechanism? Doesn't that seem like an extreme method?</p>
-<p>Yes. But its worth it. Even though I love what I do, its just too easy to get distracted when you're researching things. And it can become damaging if you let it happen unchecked too often. If you don't believe me, read <em>The Shallows</em> by Nicholas Carr.</p>
-<p>But seriously though, its super easy to set up, even for a non-technical person, and it actually works. I can safely say this because system and network administration is not one of my strong points in computer science. The DNS blackhole I talked about is called Pi-Hole. Its actually used to block advertistements, but because of how it functions, its equally as well suited as a site blocker. And as far as speed goes, I really don't notice a difference from my home network. Downloads are slightly slower, but its not huge. Uploads aren't bad at all. I have Zoom meetings regularly with it, and again, no issues.</p>
-<p>If you're interested, I have instructions on my site for setting it up: <a href="/howto/rpi-router.html">Raspberry Pi Router</a></p>
-                <div class="clear"></div>
+            <article>
+                <a href="/journey-through-distro-land.html"><h3 class="article-title">Journey Through Distro Land</h3></a>
+<h6 class="subheader" title="2021-02-20T18:54:00-05:00">Sat 20 February 2021
+</h6>
 
-                <div class="info">
-                    <a href="/raspberry-pi-router.html">posted at 09:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
-                </div>
-            </article>            <h4 class="date">Jan 29, 2021</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/hi-tech-02-ranger.html" rel="bookmark" title="Permanent Link to &quot;Hi-Tech '02 Ranger&quot;">Hi-Tech '02 Ranger</a>
-                </h2>
+<p>I spent a good part of today trying out different Linux distros on my lab machine, a Dell XPS desktop. Because I spent quite a bit of time on my computers (sometimes not entirely by choice...), when I need a change, switching my Linux distros is one of the best …</p><p class="subheader">Category: <a href="/category/linux.html">Linux</a>
 
-                
-                
+</p>
 
-                <p>I drive a 2002 Ford Ranger, and I have been for over a year now (I bought it back in summer 2019). </p>
-<p><img alt="Photo" src="/images/ranger.jpg"></p>
-<p>Rangers are great cars for people who like to drive trucks but don't want something huge. One of my few gripes with it was the radio system. It wasn't completely awful- it was actually an upgrade from my first car, a 2001 Ford Expedition (it was actually my dad's). Because of the Expedition, I've never been able to use my phone- I use CDs. But even though the Ranger can play more CDs, it struggles to actually play them.</p>
-<p>So, for my birthday, I got an upgrade. And I tried to install it myself, and I got as far as getting the old one out:</p>
-<p><img alt="Photo" src="/images/radio-attempt.jpg"></p>
-<p>Being the mechanical genius I am, it never occurred to me that you needed an adaptor for the connectors. I don't know, I thought they were all the same... But it turned out that Best Buy where my dad bought the radio had free installation, so I went there yesterday and had someone who knew what they were doing install it.</p>
-<p>And its <em>awesome</em>. In addition to CDs and radio, it has Bluetooth, AUX plugin, and a USB charger. And because the radio was a little small, they used a mounting kit, so there's a little slot below, which will be nice for storing things... Just look below :)</p>
-<p><img alt="Photo" src="/images/new-radio.jpg"></p>
-                <div class="clear"></div>
 
-                <div class="info">
-                    <a href="/hi-tech-02-ranger.html">posted at 07:30</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/random.html" rel="tag">Random</a>
-                </div>
-            </article>            <h4 class="date">Jan 18, 2021</h4>
 
-            <article class="post">
-                <h2 class="title">
-                    <a href="/book-review-unix-a-history-and-a-memoir.html" rel="bookmark" title="Permanent Link to &quot;Book Review: "Unix: A History and a Memoir"&quot;">Book Review: "Unix: A History and a Memoir"</a>
-                </h2>
-
-                
-                
-
-                <p>Last week, I stumbled upon this very recently published book (2019) by Brian Kernighan. It was a short read, but one I vastly enjoyed. The book is about the evolution of Unix and the accompanying languages and tools which basically shaped the entire field of computer science as we know it today. In addition to providing valuable Unix history, its also a memoir on Kernighan's time at Bell Labels.</p>
-<p>I'm not going to tell the story, but I will provide some background.</p>
-<p>Bell Labs was AT&amp;T's research arm through much of the 1900s. Because of AT&amp;T's interest in computerizing elements of the telephone system, an enormous amount of computer innovation originated here (along with innovation in many other fields). Because of the lab's size and environment, innovation flourished that benefited many areas beyond AT&amp;T. Bell Labs was broken up with AT&amp;T in the 1980s and 90s, but still exists today as Nokia Bell Labs.</p>
-<p>Unix is the grandfather of the majority of operating systems today, which includes Linux, MacOS, iOS, Android, the BSDs, and the commercial systems like Solaris and HP-UX- basically everything except Windows and DOS. The birth of Unix basically led to the birth of computer as we know it today, and many of the tools we take for granted, such as the C language and compilers, programmable shells like Bash, tools like make, cat, grep, and many, many others. Unix (and C for that matter) were so successful because of their highly innovate yet simple design; Unix provides building blocks which allow for very complex yet manageable systems to be created.</p>
-<p>The history of computer science, and especially Unix, has always intrigued me. And honestly, this is one of the best histories I've read of this period. I think the design principles that went into Unix, C, and other tools are very underappreciated and under taught. Good software does not equal more features, and high productivity does not equal more lines of code. Good software uses a simple approach, reduces special cases, and doesn't have bloat or useless features. And when I say simple, that does not mean easy. Creating a simple design like Unix's is hard and requires genius (something its original creators, Ken Thompson and Dennis Richie had).</p>
-<p>The other thing I really liked was how much Kernighan described the working environment at Bell Labs. There is a lot of discussion on productivity and collaboration in this day and age, and I think that the environment at Bell Labs captures the ideal scenario- allowing for long-term thinking, and a physical layout that encourages encounters and collaborations, but still gives the researchers their own private space to think and work quietly. In other words, the obsession with quarterly progress and constant collaboration needs to go.</p>
-<p>This is certainly one of the better memoirs I've read in a while, and I highly recommend anyone in a technical field to read it. If you're in computer science, I especially recommend it. You should know your history :)</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/book-review-unix-a-history-and-a-memoir.html">posted at 07:09</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/books.html" rel="tag">Books</a>
-                </div>
-            </article>            <h4 class="date">Jan 03, 2021</h4>
-
-            <article class="post">
-                <h2 class="title">
-                    <a href="/lila-v01.html" rel="bookmark" title="Permanent Link to &quot;Lila v0.1&quot;">Lila v0.1</a>
-                </h2>
-
-                
-                
-
-                <p>What's one of the coolest things you can do with computers? There are a lot of answers to this, but for me, its programming them in your own programming language.</p>
-<p>The other day, I published my <a href="https://github.com/patrickf2000/lila">Lila</a> compiler and language, and today, some <a href="https://github.com/patrickf2000/lila-programs">example programs</a> (still a work in progress). Its not an official release; I published it because I felt like the syntax was concrete enough to safely do so. The compiler had been capable of doing some non-trivial things for a while now.</p>
-<p>I'm not going to do a huge post on the language; I'll eventually write some documentation. I want to share some of the story behind it.</p>
-<p>For the curious, here's a small example I wrote earlier. Basically, it calls "ls -l" in the current directory.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># An example of calling fork-exec on Linux</span>
-
-<span class="k">const</span> <span class="nb nb-Type">int</span> <span class="n">linux_fork</span> <span class="o">=</span> <span class="mi">57</span><span class="p">;</span>
-<span class="k">const</span> <span class="nb nb-Type">int</span> <span class="n">linux_exec</span> <span class="o">=</span> <span class="mi">59</span><span class="p">;</span>
-
-<span class="n">use</span> <span class="n">std</span><span class="o">.</span><span class="n">text_io</span><span class="p">;</span>
-<span class="n">use</span> <span class="n">std</span><span class="o">.</span><span class="n">os</span><span class="p">;</span>
-
-<span class="k">func</span> <span class="n">main</span> <span class="o">-&gt;</span> <span class="nb nb-Type">int</span>
-    <span class="n">pid</span> <span class="p">:</span> <span class="n">int64</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">exe_args</span> <span class="p">:</span> <span class="nb">str</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
-<span class="n">begin</span>
-    <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
-
-    <span class="k">if</span> <span class="n">pid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span>
-        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error calling fork.&quot;</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">pid</span><span class="p">;</span>
-    <span class="k">elif</span> <span class="n">pid</span> <span class="o">==</span> <span class="mi">0</span>
-        <span class="n">exe_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/bin/ls&quot;</span><span class="p">;</span>
-        <span class="n">exe_args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-l&quot;</span><span class="p">;</span>
-        <span class="n">exe_args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="n">syscall</span><span class="p">(</span><span class="n">linux_exec</span><span class="p">,</span> <span class="s2">&quot;/bin/ls&quot;</span><span class="p">,</span> <span class="n">exe_args</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-
-        <span class="n">println</span><span class="p">(</span><span class="s2">&quot;Error&quot;</span><span class="p">);</span>
-
-        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">end</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="n">end</span>
-</code></pre></div>
-
-<h3>Why Compilers?</h3>
-<p>If you scroll through my Github profile, you will notice several compilers and other related tools (I think I have four compilers, an assembler, two VM programs, and a partial C parser on Github at the time of writing). I've been writing compilers for about a year and half now; if you include the interpreters, its probably been over two years. And I currently have a job working on a compiler. So yeah, its reasonable to infer I enjoy this field.</p>
-<p>I enjoy this for a few reasons. First, I find programming languages really interesting. Take any compiled language- C, C++, Rust, D, Ada, Pascal, Haskell, Swift, OCaml, or anything else. I can use all these languages on the same computer, and they all compile to the same instructions and the same format. But the way you get work done in each is significantly different. And by virtue of that, each language is suitable for a certain domain. I find this really interesting. And for this reason, I've also enjoyed designing my own. And then implementing it.</p>
-<p>Compilers are really interesting machines, and honestly one of the most underrated areas of computer science. Maybe because GCC scares a lot of people away. When you write a compiler, you basically create your own little world. You make the rules for the language, you decide what's right and wrong, and eventually, you decide how its translated and how the final instructions are generated. And once you get enough of the language implemented, you can create your own libraries, and eventually your own programs in your own language.</p>
-<p>What is more cool than that?</p>
-<h3>The Origins of Lila</h3>
-<p>Earlier this year, I was working on two compilers: first, Quik 3, and second, extcc. The former was the last compiler I wrote for my Quik language, and the latter was a fork that was meant to be an extensible C compiler. Both got fairly far, and I'm still proud of them. But the reason I stopped was because I made some bad design choices early on, and because of the nature of C++, the only solution to fixing that was to basically start over.</p>
-<p>And I did start over a few times. Originally, I wanted to make my own C compiler so I could have something with a small language surface I could hack. But let me be honest, I'm not a huge fan of C. Around this time, I began playing with Ada some, and I fell in love with it. I really like Ada and the Wirth-family of programming languages. Ada wasn't the only thing I tried; I was experimenting with other programming languages as well because I was getting tired of C++ and the issues that go with it. I'll save this exploration for a different post. But fast forward to September, I began looking at Rust again. I did a simple project to see if I could create the necessary IR's in Rust, and that project eventually evolved into Lila.</p>
-<p>Lila wasn't originally the name. In fact, the Lila language is significantly different from when I started the project. Originally, the language was really close to Quik, and I named the project Dash (somewhat similar to Quik...). In November, I made the mistake of releasing it too soon; I didn't get much feedback, and when I started writing some simple programs in it, it became evident that it needed work. I took the project down, and began a significant redesign through late November and most of December. Originally, I wanted to name the language something different, but for certain reasons, I couldn't. Lila was fairly close to what I originally wanted to name it, and I like that name anyway.</p>
-<p>Currently, this is my biggest project in terms of lines of code: a little under 9500 lines of Rust. The next biggest was extcc, which got to around 5000 I think. The project is honestly one of my favorite of all time.</p>
-<h3>Some Features</h3>
-<p>I'll save a lot of this for the documentation, but I just want to cover a few things here.</p>
-<p>One of my favorite features is the array and string handling features. This has always been one of my biggest gripes with C. But I do not think the solution is to use a garbage collector. Basically, what I do is handle all memory allocations and deallocations at compile time. There is a statically-linked core library with (among other things) malloc and free functions, which are inserted by the compiler. So when you create an array, and leave a function, memory is allocated and deallocated behind the scenes.</p>
-<p>Array sizes are stored next to the array pointers themselves, and can be retrieved at any point with the <code>sizeof</code> operator. This is especially useful in cases where you have to pass arrays to functions and for the for-each loops. There's also base utilities for managing strings in the core library. Strings are their own data types. At this point in history, I very strongly believe that strings should be an essential type of any language.</p>
-<p>The syntax is inspired by the Wirth languages. Its still fairly verbose, but much less so than Pascal or Ada. Probably the most defining characteristic you will see is the variable block at the top of each function. I really like this, and I believe it encourages better programming. Rather than strewing variables all over the place, you can see all your variables and manage them accordingly.</p>
-<p>As far as architectures go, x86-64 is fully supported, and RISC-V supports a lot of the integer-related elements. The basic hello-world Arm64 tests pass, but that's about it. Lila is meant to be easy to port to other architectures, which is something I plan on doing in the near future. I also have a fairly decent standard library underway. Text IO functions such as printf and console input are supported, a few string functions, file functions, and OS functions are all supported. One of the things I got working today was process management (fork and exec on Linux).</p>
-<h3>Conclusion</h3>
-<p>I'll write more as interesting progress is made. In the immediate future, I plan on working on the standard library and just general testing by writing some non-trivial programs. If you decide the try it out, please let me know how it goes!</p>
-                <div class="clear"></div>
-
-                <div class="info">
-                    <a href="/lila-v01.html">posted at 19:38</a>
-                    &nbsp;&middot;&nbsp;<a href="/category/lila.html" rel="tag">Lila</a>
-                </div>
+                <a class="button radius secondary small right" href="/journey-through-distro-land.html">Read More</a>
+                <hr  class="gradient"/>
             </article>
 
-                <div class="clear"></div>
-                <div class="pages">
+        
 
-                    <a href="/" class="prev_page">&larr;&nbsp;Previous</a>
-                    <a href="/blog_index3" class="next_page">Next&nbsp;&rarr;</a>
-                    <span>Page 2 of 7</span>
-                </div>
 
-            <div class="clear"></div>
-            <footer>
-                <p>
-                <a href="https://github.com/jody-frankowski/blue-penguin">Blue Penguin</a> Theme
-                &middot;
-                Powered by <a href="http://getpelican.com">Pelican</a>
-            </footer>
-        </div>
-        <div class="clear"></div>
+            <article>
+                <a href="/raspberry-pi-router.html"><h3 class="article-title">Raspberry Pi Router</h3></a>
+<h6 class="subheader" title="2021-01-30T09:30:00-05:00">Sat 30 January 2021
+</h6>
+
+
+<p>I heard a while back from a friend that a Raspberry Pi can be used as a router. I never really thought about it until last December, when I was trying to find a more useful anti-distraction method than my browser blocker (it was too easy to get around). I …</p><p class="subheader">Category: <a href="/category/random.html">Random</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/raspberry-pi-router.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/hi-tech-02-ranger.html"><h3 class="article-title">Hi-Tech '02 Ranger</h3></a>
+<h6 class="subheader" title="2021-01-29T07:30:00-05:00">Fri 29 January 2021
+</h6>
+
+
+<p>I drive a 2002 Ford Ranger, and I have been for over a year now (I bought it back in summer 2019). </p>
+<p><img alt="Photo" src="/images/ranger.jpg"></p>
+<p>Rangers are great cars for people who like to drive trucks but don't want something huge. One of my few gripes with it was the radio system. It …</p><p class="subheader">Category: <a href="/category/random.html">Random</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/hi-tech-02-ranger.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/book-review-unix-a-history-and-a-memoir.html"><h3 class="article-title">Book Review: "Unix: A History and a Memoir"</h3></a>
+<h6 class="subheader" title="2021-01-18T07:09:00-05:00">Mon 18 January 2021
+</h6>
+
+
+<p>Last week, I stumbled upon this very recently published book (2019) by Brian Kernighan. It was a short read, but one I vastly enjoyed. The book is about the evolution of Unix and the accompanying languages and tools which basically shaped the entire field of computer science as we know …</p><p class="subheader">Category: <a href="/category/books.html">Books</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/book-review-unix-a-history-and-a-memoir.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+        
+
+
+            <article>
+                <a href="/lila-v01.html"><h3 class="article-title">Lila v0.1</h3></a>
+<h6 class="subheader" title="2021-01-03T19:38:00-05:00">Sun 03 January 2021
+</h6>
+
+
+<p>What's one of the coolest things you can do with computers? There are a lot of answers to this, but for me, its programming them in your own programming language.</p>
+<p>The other day, I published my <a href="https://github.com/patrickf2000/lila">Lila</a> compiler and language, and today, some <a href="https://github.com/patrickf2000/lila-programs">example programs</a> (still a work in progress …</p><p class="subheader">Category: <a href="/category/compilers.html">Compilers</a>
+
+</p>
+
+
+
+                <a class="button radius secondary small right" href="/lila-v01.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
+<div class="pagination-centered">
+<h6 class="subheader">Page 2 of 7</h6>
+
+<p>
+            <a href="/author/patrick-flynn.html">&laquo; Prev</a>
+
+        <a href="/author/patrick-flynn3.html">Next &raquo;</a>
+</p>
+</div>
+
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <!--<li><a href="/archives.html">Archives</a>-->
+            <li><a href="/archives/index.html">Archives</a>
+            <li><a href="/tags.html">Tags</a>
+
+
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="/category/blogging.html">Blogging</a></li>
+            <li><a href="/category/books.html">Books</a></li>
+            <li><a href="/category/compilers.html">Compilers</a></li>
+            <li><a href="/category/electronics.html">Electronics</a></li>
+            <li><a href="/category/improvement.html">Improvement</a></li>
+            <li><a href="/category/linux.html">Linux</a></li>
+            <li><a href="/category/none.html">None</a></li>
+            <li><a href="/category/opinion.html">Opinion</a></li>
+            <li><a href="/category/programming.html">Programming</a></li>
+            <li><a href="/category/random.html">Random</a></li>
+            <li><a href="/category/virtualization.html">Virtualization</a></li>
+   
+        </ul>
+
+		
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Patrick's Website by Patrick Flynn</p>
+            </div>
+            </div>
     </div>
     <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-213498014-7']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <script type="text/javascript">
-    try {
-        var pageTracker = _gat._getTracker("UA-213498014-7");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-</body>
-</html>
+</footer>
