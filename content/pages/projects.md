@@ -17,11 +17,4 @@ I do a lot of software projects:
 * [Installing Pi-Hole](/howto/pihole-install.html)
 * [Arm-64 Linux on Qemu](/arm64-on-qemu.html)
 
-### Other
-
-I really like photography and writing. This website is meant to be the main source of that, but I have been (without the greatest of success) trying to do some Medium writing. For the photography, I uploaded some of my pictures to Flickr; I hope to upload some more later.
-
-* My [Medium Profile](https://medium.com/@patrickf2000) where you can find my more in-depth writing.
-* My [Flickr Profile](https://www.flickr.com/photos/patrickf2000/) where you can find some of my photos.
-* [A Simple Constructed Language](/pages/conlang1.html)
 

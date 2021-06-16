@@ -23,8 +23,6 @@ ARTICLE_PATHS = [
     'january2021', 'february2021', 'march2021', 'april2021', 'june2021',
 ]
 
-STATIC_PATHS = [ 'internal', 'pdfs' ]
-
 INDEX_SAVE_AS = 'blog_index.html'
 
 CATEGORIES_URL     = 'categories'
@@ -52,5 +50,4 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-GOOGLE_ANALYTICS="UA-213498014-7"
 
